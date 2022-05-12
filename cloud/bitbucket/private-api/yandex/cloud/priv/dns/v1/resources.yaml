@@ -1,0 +1,7 @@
+resources:
+  dns.zone:
+    parents: [resource-manager.folder]
+    accessBindingsListingPermission: dns.zones.listAccessBindings
+  dns.view:
+    parents: [resource-manager.folder]
+    accessBindingsListingPermission: dns.views.listAccessBindings

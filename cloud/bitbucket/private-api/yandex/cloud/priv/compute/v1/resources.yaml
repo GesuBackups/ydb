@@ -1,0 +1,21 @@
+resources:
+  compute.disk:
+    parents: [resource-manager.folder, compute.diskPlacementGroup]
+  compute.filesystem:
+    parents: [resource-manager.folder]
+  compute.image:
+    parents: [resource-manager.folder]
+  compute.instance:
+    parents: [resource-manager.folder, compute.placementGroup, compute.hostGroup]
+  compute.placementGroup:
+    parents: [resource-manager.folder]
+  compute.diskPlacementGroup:
+    parents: [resource-manager.folder]
+  compute.hostGroup:
+    parents: [resource-manager.folder]
+  compute.snapshot:
+    parents: [resource-manager.folder]
+  compute.zone:
+    parents: [root]
+  compute.node:
+    parents: [resource-manager.folder]

@@ -1,0 +1,332 @@
+permissions:
+
+  resource-manager.clouds.get:
+    description: Returns a single cloud
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - freeTier
+        - billSuspend
+        - fraud
+        - deletingContainer
+        - clientBlocking
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - CREATING
+          - ACTIVE
+          - DELETING
+    resourceType: resource-manager.cloud
+  resource-manager.clouds.update:
+    description: Updates a cloud
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - freeTier
+        - billSuspend
+      cloud:
+        status:
+          - ACTIVE
+    resourceType: resource-manager.cloud
+  resource-manager.clouds.create:
+    description: Create a cloud
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - freeTier
+        - billSuspend
+      organization:
+        status:
+          - ACTIVE
+    resourceType: resource-manager.cloud
+  resource-manager.clouds.delete:
+    description: Deletes a cloud
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - freeTier
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED_BY_BILLING
+          - CREATING
+          - ACTIVE
+          - DELETING
+    resourceType: resource-manager.cloud
+  resource-manager.clouds.deleteInactive:
+    description: Deletes an inactive cloud
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - freeTier
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - CREATING
+          - DELETING
+    resourceType: resource-manager.cloud
+  resource-manager.clouds.listAccessBindings:
+    description: Lists cloud access bindings
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - freeTier
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - CREATING
+          - ACTIVE
+          - DELETING
+    resourceType: resource-manager.cloud
+  resource-manager.clouds.updateAccessBindings:
+    description: Sets or updates cloud access bindings
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - freeTier
+        - billSuspend
+      cloud:
+        status:
+          - BLOCKED_BY_BILLING
+          - CREATING
+          - ACTIVE
+    resourceType: resource-manager.cloud
+  resource-manager.clouds.listRestrictions:
+    description: Lists restrictions assigned to cloud
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - freeTier
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - CREATING
+          - ACTIVE
+          - DELETING
+    resourceType: resource-manager.cloud
+  resource-manager.clouds.updateRestrictions:
+    description: Adds or removes cloud restrictions
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - freeTier
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - CREATING
+          - ACTIVE
+          - DELETING
+    resourceType: resource-manager.cloud
+  resource-manager.clouds.getSettings:
+    description: Returns a single cloud settings
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - freeTier
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - CREATING
+          - ACTIVE
+          - DELETING
+    resourceType: resource-manager.cloud
+  resource-manager.clouds.updateSettings:
+    description: Updates a single cloud settings
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - freeTier
+        - billSuspend
+      cloud:
+        status:
+          - BLOCKED_BY_BILLING
+          - CREATING
+          - ACTIVE
+    resourceType: resource-manager.cloud
+  resource-manager.clouds.listPermissionStages:
+    description: Lists cloud permissionStages
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - freeTier
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED_BY_BILLING
+          - CREATING
+          - ACTIVE
+    resourceType: resource-manager.cloud
+  resource-manager.clouds.updatePermissionStages:
+    description: Updates a single cloud permission stages
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - freeTier
+        - billSuspend
+      cloud:
+        status:
+          - BLOCKED_BY_BILLING
+          - CREATING
+          - ACTIVE
+    resourceType: resource-manager.cloud
+
+  resource-manager.folders.get:
+    description: Returns a single folder
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - freeTier
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - CREATING
+          - ACTIVE
+          - DELETING
+    resourceType: resource-manager.folder
+  resource-manager.folders.create:
+    description: Creates a folder
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - freeTier
+        - billSuspend
+      cloud:
+        status:
+          - ACTIVE
+    resourceType: resource-manager.cloud
+  resource-manager.folders.update:
+    description: Updates a folder
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - freeTier
+        - billSuspend
+      cloud:
+        status:
+          - ACTIVE
+    resourceType: resource-manager.folder
+  resource-manager.folders.delete:
+    description: Deletes a folder
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - freeTier
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - ACTIVE
+          - BLOCKED_BY_BILLING
+          - DELETING
+    resourceType: resource-manager.folder
+  resource-manager.folders.listAccessBindings:
+    description: Lists folder access bingings
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - freeTier
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - CREATING
+          - ACTIVE
+          - DELETING
+    resourceType: resource-manager.folder
+  resource-manager.folders.updateAccessBindings:
+    description: Sets or updates folder access bingings
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - freeTier
+        - billSuspend
+      cloud:
+        status:
+          - BLOCKED_BY_BILLING
+          - CREATING
+          - ACTIVE
+    resourceType: resource-manager.folder
+  resource-manager.folders.getSettings:
+    description: Returns a single folder settings
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - freeTier
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - CREATING
+          - ACTIVE
+          - DELETING
+    resourceType: resource-manager.folder
+  resource-manager.folders.updateSettings:
+    description: Updates a single folder settings
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - freeTier
+        - billSuspend
+      cloud:
+        status:
+          - BLOCKED_BY_BILLING
+          - CREATING
+          - ACTIVE
+    resourceType: resource-manager.folder

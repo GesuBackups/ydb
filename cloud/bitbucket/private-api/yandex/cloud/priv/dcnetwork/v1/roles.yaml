@@ -1,0 +1,32 @@
+role_groups:
+  dcnetwork:
+    name: DoubleCloud Network Service roles
+
+roles:
+  dcnetwork.viewer:
+    groups: [dcnetwork]
+    name: 'Read-only пользователь Network Service'
+    description: 'Роль на чтение объектов сети'
+    visibility: public
+    permissions:
+      - dcnetwork.networks.get
+      - dcnetwork.networkConnections.get
+
+  dcnetwork.editor:
+    groups: [dcnetwork]
+    name: 'Editor пользователь Network Service'
+    description: 'Роль на чтение и редактирование объектов сети'
+    visibility: public
+    includedRoles:
+      - dcnetwork.viewer
+    permissions:
+      - "dcnetwork.networks.{create,delete,update}"
+      - "dcnetwork.networkConnections.{create,delete,update}"
+
+  dcnetwork.admin:
+    groups: [dcnetwork]
+    name: 'Администратор Network Service'
+    description: 'Полный доступ к объектам сети'
+    visibility: public
+    includedRoles:
+      - dcnetwork.editor

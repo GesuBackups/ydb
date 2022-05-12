@@ -1,0 +1,174 @@
+syntax = "proto3";
+
+package yandex.cloud.priv.datatransfer.v1.legacyendpoint;
+
+option go_package = "a.yandex-team.ru/cloud/bitbucket/private-api/yandex/cloud/priv/datatransfer/v1/legacyendpoint;tm_server_legacyendpoint";
+
+import "yandex/cloud/priv/datatransfer/v1/endpoint/common.proto";
+import "yandex/cloud/priv/datatransfer/v1/endpoint/postgres.proto";
+import "yandex/cloud/priv/sensitive.proto";
+
+message OnPremisePostgresSource {
+    // IP or FQDN of the host
+    // 
+    // IP or FQDN database host for making connection with source data base.
+    string host = 1;
+    // Database port
+    // 
+    // Will be used if the cluster ID is not specified. Default: 6432.
+    int64 port = 2;
+    // Database name
+    string database = 4;
+    // Username
+    // 
+    // User for database access.
+    string user = 3;
+    // Password
+    // 
+    // Password for database access.
+    string raw_password = 10 [(sensitive) = true];
+    // PEM Certificate
+    // 
+    // Certificate for database connection.
+    string pem_file_content = 14;
+    // Network interface for endpoint
+    // 
+    // Default: public IPv4.
+    string subnet_id = 30;
+    // List of tables
+    // 
+    // If none or empty list is presented, all tables are replicated. Can contain
+    // regular expression.
+    repeated string tables = 6;
+    // Excluded tables
+    // 
+    // If none or empty list is presented, all tables are replicated. Can contain
+    // regular expression.
+    repeated string exclude_tables = 13;
+    // Maximum WAL size for the replication slot
+    // 
+    // Maximum WAL size held by the replication slot. Exceeding this limit will result
+    // in a replication failure and deletion of the replication slot. Unlimited by
+    // default.
+    int64 slot_byte_lag_limit = 11;
+    // Database schema for service table
+    // 
+    // Default: public. Here created technical tables (__consumer_keeper,
+    // __data_transfer_mole_finder).
+    string service_schema = 8;
+    // Combine inherited tables
+    // 
+    // Allow to combine pg_inherits catalogue into one table.
+    bool collapse_inherit_table = 9;
+    // Schema migration on transfer activation
+    // 
+    // Choose schema parts, which will be created on the start of transfer process.
+    endpoint.PostgresDumpSteps pre_steps = 15;
+    // Schema migration on transfer deactivation
+    // 
+    // Choose schema parts, which will be created on the end of transfer process.
+    endpoint.PostgresDumpSteps post_steps = 16;
+}
+message ManagedPostgresSource {
+    // Cluster ID
+    string cluster_id = 1;
+    // Database name
+    string database = 3;
+    // Username
+    // 
+    // User for database access.
+    string user = 2;
+    // Password
+    // 
+    // Password for database access.
+    string raw_password = 12 [(sensitive) = true];
+    string subnet_id = 30;
+    // List of tables
+    // 
+    // If none or empty list is presented, all tables are replicated. Can contain
+    // regular expression.
+    repeated string tables = 6;
+    // Excluded tables
+    // 
+    // If none or empty list is presented, all tables are replicated. Can contain
+    // regular expression.
+    repeated string exclude_tables = 13;
+    // Maximum WAL size for the replication slot
+    // 
+    // Maximum WAL size held by the replication slot, in bytes. Exceeding this limit
+    // will result in a replication failure and deletion of the replication slot.
+    // Unlimited by default.
+    int64 slot_byte_lag_limit = 10;
+    // Database schema for service table
+    // 
+    // Default: public. Here created technical tables (__consumer_keeper,
+    // __data_transfer_mole_finder).
+    string service_schema = 8;
+    // Combine inherited tables
+    // 
+    // Allow to combine pg_inherits catalogue into one table.
+    bool collapse_inherit_table = 11;
+    // Schema migration on transfer activation
+    // 
+    // Choose schema parts, which will be created on the start of transfer process.
+    endpoint.PostgresDumpSteps pre_steps = 15;
+    // Schema migration on transfer deactivation
+    // 
+    // Choose schema parts, which will be created on the end of transfer process.
+    endpoint.PostgresDumpSteps post_steps = 16;
+    bool auto_activate = 17;
+    bool use_fake_primary_key = 18;
+}
+message ManagedPostgresTarget {
+    // Cluster ID
+    string cluster_id = 1;
+    // Database name
+    string database = 3;
+    // Username
+    // 
+    // User for database access.
+    string user = 2;
+    // Password
+    // 
+    // Password for database access.
+    string raw_password = 7 [(sensitive) = true];
+    string subnet_id = 30;
+    // Cleanup policy
+    // 
+    // Cleanup policy for activate, reactivate and reupload processes. Default is
+    // truncate.
+    endpoint.CleanupPolicy cleanup_policy = 21;
+}
+message OnPremisePostgresTarget {
+    // Database host
+    // 
+    // Will be used if the cluster ID is not specified.
+    string host = 1;
+    // Database port
+    // 
+    // Will be used if the cluster ID is not specified. Default: 6432.
+    int64 port = 2;
+    // Database name
+    string database = 4;
+    // Username
+    // 
+    // User for database access.
+    string user = 3;
+    // Password
+    // 
+    // Password for database access.
+    string raw_password = 7 [(sensitive) = true];
+    // PEM Certificate
+    // 
+    // Certificate for database connection.
+    string pem_file_content = 6;
+    // Network interface for endpoint
+    // 
+    // Default: public IPv4.
+    string subnet_id = 30;
+    // Cleanup policy
+    // 
+    // Cleanup policy for activate, reactivate and reupload processes. Default is
+    // truncate.
+    endpoint.CleanupPolicy cleanup_policy = 21;
+}

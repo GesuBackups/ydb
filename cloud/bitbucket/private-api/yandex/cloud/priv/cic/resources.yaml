@@ -1,0 +1,17 @@
+resources:
+  cic.trunkConnection:
+    parents: [resource-manager.folder]
+  cic.privateConnection:
+    parents: [resource-manager.folder]
+  cic.publicConnection:
+    parents: [resource-manager.folder]
+  cic.partnerJoint:
+    parents: [resource-manager.folder]
+  cic.clientTrunk:
+    parents: [resource-manager.folder]
+  cic.pointOfPresence:
+    parents: [resource-manager.folder]
+  cic.clusterParams:
+    parents: [resource-manager.folder]
+  cic.routeTargetPool:
+    parents: [resource-manager.folder]

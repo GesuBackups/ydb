@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package yandex.cloud.priv.datatransfer.v1.endpoint.airbyte;
+
+option go_package = "a.yandex-team.ru/cloud/bitbucket/private-api/yandex/cloud/priv/datatransfer/v1/endpoint/airbyte;tm_server_airbyte_endpoint";
+
+import "yandex/cloud/priv/sensitive.proto";
+
+message RedshiftSource {
+    // Host
+    // 
+    // Host Endpoint of the Redshift Cluster (must include the cluster-id, region and
+    // end with .redshift.amazonaws.com).
+    string host = 1;
+    // Port
+    // 
+    // Port of the database.
+    int64 port = 2;
+    // Database
+    // 
+    // Name of the database. Example: master
+    string database = 3;
+    // Schemas
+    // 
+    // The list of schemas to sync from. Specify one or more explicitly or keep empty
+    // to process all schemas. Schema names are case sensitive.
+    repeated string schemas = 4;
+    // Username
+    // 
+    // Username to use to access the database.
+    string username = 5;
+    // Password
+    // 
+    // Password associated with the username.
+    string password = 6 [(sensitive) = true];
+}

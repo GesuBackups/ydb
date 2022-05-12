@@ -1,0 +1,116 @@
+role_groups:
+  airflow:
+    name: Airflow roles
+
+roles:
+  airflow.viewer:
+    groups: [airflow]
+    name: Airflow Viewer
+    visibility: public
+    description: доступ к функциям Airflow на чтение
+    permissions:
+      - airflow.clusters.get
+
+  airflow.user:
+    groups: [airflow]
+    name: Airflow User
+    visibility: public
+    description: доступ к веб интерфейсам компонент Airflow
+    includedRoles:
+      - airflow.viewer
+    permissions:
+      - airflow.clusters.accessWebserver
+
+  airflow.editor:
+    groups: [airflow]
+    name: Airflow Editor
+    visibility: public
+    description: доступ ко всем функциям Airflow в режиме чтения и записи
+    includedRoles:
+      - airflow.user
+    permissions:
+      - airflow.clusters.{create,update,delete}
+
+  airflow.admin:
+    groups: [airflow]
+    name: Airflow Admin
+    visibility: public
+    description: доступ ко всем функциям Airflow в режиме чтения и записи
+    includedRoles:
+      - airflow.editor
+
+  # Следующие две роли выдаются на SA, от имени которого создается кластер Airflow.
+  # Для безопасности можно заводить отдельный SA на каждый кластер.
+  airflow.userResourcesConsumer:
+    groups: [airflow]
+    name: (Внешняя) Airflow User resources Consumer
+    visibility: internal
+    description: |
+      Доступ к API в Control plane Облака для использования ресурсов в пространстве пользователя.
+      Выдается в облаке/каталоге пользователя.
+    includedRoles:
+      # Usage of user VPC in service cloud
+      # https://wiki.yandex-team.ru/users/prez/mdb/cross-vpc/#virtualkasdvumjavpc
+      - vpc.publicAdmin
+      # Cloud logging
+      - internal.logging.supplier
+
+  airflow.serviceResourcesProvisioner:
+    groups: [airflow]
+    name: (Внутренняя) Airflow Service resources Provisioner
+    visibility: internal
+    description: |
+      Доступ к API в Control plane Облака для управления ресурсами в сервисном пространстве.
+      Выдается в сервисном облаке/каталоге.
+    includedRoles:
+      # TODO: Gather more specific permissions to manage Airflow clusters
+      - editor
+
+  airflow.clusterAgent:
+    groups: [airflow]
+      name: (Внутренняя) Airflow Cluster Agent
+      visibility: internal
+      description: Роль для SA кластера для управления его внутренними ресурсами.
+      includedRoles:
+        - k8s.clusters.agent
+
+  airflow.nodeAgent:
+    groups: [airflow]
+      name: (Внутренняя) Airflow Node Agent
+      visibility: internal
+      description: Роль для SA группы узлов кластера.
+      includedRoles:
+        - container-registry.images.puller
+
+  airflow.ingressAgent:
+    groups: [airflow]
+      name: (Внутренняя) Airflow Ingress Agent
+      visibility: internal
+      description: |
+        Роль для SA, управляющего Ingress-контроллером.
+        Docs: https://cloud.yandex.ru/docs/managed-kubernetes/tutorials/alb-ingress-controller
+      includedRoles:
+        - alb.editor
+        - vpc.publicAdmin
+        - certificate-manager.certificates.downloader
+        - compute.viewer
+
+
+  airflow.onCall:
+    groups: [mdb, staff]
+    name: On-call Airflow
+    visibility: internal
+    description: Role for Airflow on-call engineers
+    includedRoles:
+      - onCall
+      - airflow.viewer
+      - airflow.user
+
+  airflow.onCallAdmin:
+    groups: [mdb, staff]
+    name: On-call Airflow Admin
+    visibility: internal
+    description: Role for Airflow on-call admins
+    includedRoles:
+      - airflow.onCall
+      - airflow.editor

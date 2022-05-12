@@ -1,0 +1,79 @@
+role_groups:
+  gitlab:
+    name: Managed Gitlab roles
+
+roles:
+  # https://st.yandex-team.ru/CLOUD-81443#617afdec4f23966d86af4f1a
+  internal.gitlab.agent:
+    groups: [gitlab]
+    name: (Внутренняя) Агент Managed Gitlab
+    visibility: internal
+    description: доступ к функциям vpc/compute
+    # todo: add 'includedRoles: vpc.user'?
+    permissions:
+      - vpc.networks.configureExternalAccess
+
+  gitlab.viewer:
+    groups: [gitlab]
+    name: Managed Gitlab viewer
+    visibility: public
+    description: Просмотр информации об инстансах Managed Gitlab
+    permissions:
+      - gitlab.instances.get
+      - gitlab.quotas.get
+
+  gitlab.editor:
+    groups: [gitlab]
+    name: Managed Gitlab editor
+    visibility: public
+    description: Полный доступ к управлению Managed Gitlab
+    includedRoles:
+      - gitlab.viewer
+    permissions:
+      - gitlab.instances.{create,update,delete}
+
+  gitlab.admin:
+    groups: [gitlab]
+    name: Managed Gitlab admin
+    visibility: public
+    description: Полный доступ к управлению Managed Gitlab
+    includedRoles:
+      - gitlab.editor
+
+  gitlab.support:
+    groups: [gitlab, support]
+    name: Managed Gitlab support
+    visibility: internal
+    description: Доступ к методам поддержки Managed Gitlab
+    permissions:
+      - gitlab.quotas.{get,updateLimit}
+
+  gitlab.supportAdmin:
+    groups: [gitlab, support]
+    name: Managed Gitlab support admin
+    description: Privileged operations for Managed Gitlab support engineers
+    visibility: internal
+    includedRoles:
+      - gitlab.support
+      - gitlab.admin
+    permissions: []
+
+  gitlab.onCall:
+    groups: [gitlab, staff]
+    name: On-call Managed Gitlab
+    visibility: internal
+    description: Role for Managed Gitlab on-call engineers
+    includedRoles:
+      - onCall
+      - gitlab.viewer
+    permissions: []
+
+  gitlab.onCallAdmin:
+    groups: [gitlab, staff]
+    name: On-call Managed Gitlab admin
+    visibility: internal
+    description: Role for Managed Gitlab on-call admins
+    includedRoles:
+      - gitlab.onCall
+      - gitlab.admin
+    permissions: []

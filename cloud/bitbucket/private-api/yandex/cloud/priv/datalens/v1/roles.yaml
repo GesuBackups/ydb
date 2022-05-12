@@ -1,0 +1,50 @@
+role_groups:
+  datalens:
+    name: DataLens roles
+
+roles:
+
+  datalens.instances.admin:
+    groups: [datalens]
+    name: 'Администратор Datalens'
+    visibility: public
+    description: ''
+    scopes:
+      - yc.datalens.manage
+    includedRoles:
+      - datalens.instances.user
+
+  datalens.instances.user:
+    groups: [datalens]
+    name: 'Пользователь Datalens'
+    visibility: public
+    description: ''
+    scopes:
+      - yc.datalens.view
+      - yc.datalens.use
+      - yc.resource-manager.folders.get
+
+  internal.datalensagent:
+    groups: [datalens]
+    name: Datalens agent
+    visibility: internal
+    description: 'Datalens service accounts role for internal backend microservices communication'
+    permissions:
+    - datalens.instances.use
+
+  datalens.support:
+    groups: [datalens, support]
+    name: Support DataLens
+    description: role for support engineers
+    visibility: internal
+    scopes:
+      - yc.datalens.view
+
+  datalens.supportAdmin:
+    groups: [datalens, support]
+    name: Support DataLens Admin
+    description: privileged operations for support
+    visibility: internal
+    includedRoles:
+      - datalens.support
+    permissions: []

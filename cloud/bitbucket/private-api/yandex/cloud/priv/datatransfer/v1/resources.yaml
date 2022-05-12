@@ -1,0 +1,6 @@
+resources:
+  data-transfer.transfer:
+    parents: [resource-manager.folder]
+
+  data-transfer.endpoint:
+    parents: [resource-manager.folder]

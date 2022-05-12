@@ -1,0 +1,16 @@
+{
+    "test.test[Translit]": [
+        {
+            "checksum": "bf1a5b91fec5a24b57b2833e80912a00",
+            "size": 696,
+            "uri": "https://storage.yandex-team.ru/get-devtools/1920236/9a5603a12238f6942f3738045b9f93af7e0bf47e/resource.tar.gz#test.test_Translit_/results.txt"
+        }
+    ],
+    "test.test[Unicode]": [
+        {
+            "checksum": "ef86911ec5622dd1d913382d3b3190f2",
+            "size": 4061,
+            "uri": "sbr://2329674748/test.test_Unicode_/results.txt"
+        }
+    ]
+}

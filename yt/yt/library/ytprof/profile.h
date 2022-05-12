@@ -1,0 +1,17 @@
+#pragma once
+
+#include <util/stream/fwd.h>
+
+#include <yt/yt/library/ytprof/profile.pb.h>
+
+namespace NYT::NYTProf {
+
+////////////////////////////////////////////////////////////////////////////////
+
+void WriteProfile(IOutputStream* out, const NProto::Profile& profile);
+
+void ReadProfile(IInputStream* in, NProto::Profile* profile);
+
+////////////////////////////////////////////////////////////////////////////////
+
+} // namespace NYT::NYTProf

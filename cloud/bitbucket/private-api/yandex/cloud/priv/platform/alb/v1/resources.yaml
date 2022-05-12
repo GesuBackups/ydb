@@ -1,0 +1,11 @@
+resources:
+  alb.backendGroup:
+    parents: [resource-manager.folder]
+  alb.targetGroup:
+    parents: [resource-manager.folder]
+  alb.loadBalancer:
+    parents: [resource-manager.folder]
+  alb.httpRouter:
+    parents: [resource-manager.folder]
+  alb.virutalHost:
+    parents: [alb.httpRouter]

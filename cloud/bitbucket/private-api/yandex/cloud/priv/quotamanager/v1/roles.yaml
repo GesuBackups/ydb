@@ -1,0 +1,194 @@
+role_groups:
+  quota-manager:
+    name: Quota Manager roles
+
+roles:
+  internal.quota-manager.configurations.viewer:
+    groups: [quota-manager]
+    name: Quota-Manager configuration viewer
+    visibility: internal
+    description: 'Роль для просмотра конфигурации менеджера квот'
+    permissions:
+      - quota-manager.configurations.get
+
+  internal.quota-manager.configurations.editor:
+    groups: [quota-manager]
+    name: Quota-Manager configuration editor
+    visibility: internal
+    description: 'Роль для изменения конфигурации менеджера квот'
+    permissions:
+      - quota-manager.configurations.update
+    includedRoles:
+      - internal.quota-manager.configurations.viewer
+
+  quota-manager.viewer:
+    groups: [quota-manager]
+    name: Quota-Manager viewer
+    visibility: public
+    description: 'Роль для просмотра квот и запросов на изменение квот'
+    scopes:
+      - yc.quota-manager.quotaRequests.get
+      - yc.resource-manager.clouds.get
+    permissions:
+      - alb.quotas.get
+      - audit-trails.quotas.get
+      - cdn.cloudQuotas.get
+      - certificate-manager.quotas.get
+      - compute.quotas.getCloudLimit
+      - compute.quotas.getFolderLimit
+      - container-registry.quotas.get
+      - data-transfer.quotas.get
+      - datasphere.quotas.get
+      - dns.quotas.get
+      - gitlab.quotas.get
+      - iam.quotas.get
+      - iot.quotas.get
+      - kms.quotas.get
+      - lockbox.quotas.get
+      - logging.quotas.getCloudValue
+      - managed-kubernetes.quotas.get
+      - mdb.quotas.read
+      - monitoring.quota.get
+      - s3.cloudQuotas.get
+      - serverless.quotas.getCloudValue
+      - smart-captcha.quotas.get
+      - vpc.quotas.get
+      - ydb.quotas.get
+      - ylb.quotas.get
+
+  quota-manager.requestOperator:
+    name: 'Оператор запросов на изменение квот'
+    groups: [quota-manager]
+    description: Роль для просмотра квот и создания запросов на изменение квот
+    visibility: public
+    scopes:
+      - yc.quota-manager.quotaRequests.manage
+    includedRoles:
+      - quota-manager.viewer
+
+  quota-manager.editor:
+    groups: [quota-manager]
+    name: Quota-Manager manager
+    visibility: public
+    description: ''
+    includedRoles:
+      - quota-manager.viewer
+    scopes:
+      - yc.quota-manager.quotaRequests.manage
+
+  quota-manager.admin:
+    groups: [quota-manager]
+    name: Quota-Manager admin
+    visibility: public
+    description: ''
+    includedRoles:
+      - quota-manager.editor
+
+  internal.quota-manager.agent:
+    groups: [quota-manager]
+    name: (Внутренняя) Агент Quota Manager
+    visibility: internal
+    description: доступ к квотам в сервисах
+    scopes:
+      - yc.resource-manager.clouds.get
+    includedRoles:
+      - internal.billing.verificationScoreViewer
+      - internal.support.ticketsCreator
+    permissions:
+      - alb.quotas.get
+      - alb.quotas.set
+      - audit-trails.quotas.get
+      - audit-trails.quotas.updateLimit
+      - cdn.cloudQuotas.get
+      - cdn.cloudQuotas.put
+      - certificate-manager.quotas.get
+      - certificate-manager.quotas.updateLimit
+      - compute.quotas.getCloudLimit
+      - compute.quotas.getFolderLimit
+      - compute.quotas.setCloudLimit
+      - compute.quotas.setFolderLimit
+      - container-registry.quotas.get
+      - container-registry.quotas.updateLimit
+      - data-transfer.quotas.get
+      - data-transfer.quotas.update
+      - datasphere.quotas.get
+      - datasphere.quotas.update
+      - dns.quotas.get
+      - dns.quotas.updateLimit
+      - gitlab.quotas.get
+      - gitlab.quotas.updateLimit
+      - iam.quotas.get
+      - iam.quotas.updateLimit
+      - iot.quotas.get
+      - iot.quotas.updateLimit
+      - kms.quotas.get
+      - kms.quotas.updateLimit
+      - lockbox.quotas.get
+      - lockbox.quotas.updateLimit
+      - logging.quotas.getCloudValue
+      - logging.quotas.setCloudLimit
+      - managed-kubernetes.quotas.get
+      - managed-kubernetes.quotas.updateLimit
+      - mdb.all.support
+      - mdb.quotas.read
+      - monitoring.quota.get
+      - monitoring.quota.update
+      - s3.cloudQuotas.get
+      - s3.cloudQuotas.put
+      - serverless.quotas.getCloudValue
+      - serverless.quotas.setCloudLimit
+      - serverless.quotas.setCloudValue
+      - smart-captcha.quotas.get
+      - smart-captcha.quotas.updateLimit
+      - vpc.quotas.get
+      - vpc.quotas.updateLimit
+      - ydb.quotas.get
+      - ydb.quotas.updateLimit
+      - ylb.quotas.get
+      - ylb.quotas.updateLimit
+
+  internal.quota-manager.issueWorkflowNotifier:
+    groups: [quota-manager]
+    name: (Внутренняя) Нотификация об изменении quota request issue
+    visibility: internal
+    description: Доступ к закрытию и переоткрытию
+    permissions:
+      - quota-manager.quotaRequests.close
+      - quota-manager.quotaRequests.reopen
+
+  quota-manager.support:
+    groups: [quota-manager, support]
+    name: Support Quota-Manager
+    description: Role for support engineers
+    visibility: internal
+    includedRoles:
+      - quota-manager.editor
+    permissions:
+      - quota-manager.quotaRequests.update
+
+  quota-manager.supportAdmin:
+    groups: [quota-manager, support]
+    name: Support Quota-Manager Admin
+    description: Privileged operations for support engineers
+    visibility: internal
+    includedRoles:
+      - quota-manager.support
+
+  quota-manager.onCall:
+    groups: [quota-manager, staff]
+    name: On-call Quota-Manager
+    visibility: internal
+    description: Role for Quota-Manager on-call engineers
+    includedRoles:
+      - onCall
+      - quota-manager.support
+
+  quota-manager.onCallAdmin:
+    groups: [quota-manager, staff]
+    name: On-call Quota-Manager Admin
+    visibility: internal
+    description: Role for Quota-Manager on-call admins
+    includedRoles:
+      - internal.quota-manager.configurations.editor
+      - quota-manager.onCall
+      - quota-manager.supportAdmin

@@ -1,0 +1,33 @@
+# Links from these pages should be treated as anonymous,
+# pages themself are removed from search.
+# Yet for link targets there should not be any negative effect
+# (like that from malicious.re.1)
+
+^\.yandex\.[a-z]+/
+^^([^/]+://)?[^/]*vk\.com/
+^^([^/]+://)?[^/]*facebook\.com/
+
++/webalizer/usage_
++/wstat/usage_
++/stats/usage_
++/stat/usage_
++/webstat/usage_
++.stat/usage_
++.stats/usage_
++.usage/usage_
++/usage/usage_
++access/usage_
++logs/usage_
+
+# Some temporary measures against over-repeating
++blogonline.ru/legal
++blogonline.ru/support
++blogonline.ru/tag
+
+# Site search engine quieries
+=search
+=find
+=query
+~^[^/]+/(search|find|query).*((\..*\?)|(\?.*=)|(&.*=))
+
+^/(search|find|query)[-a-z0-9_./]*\?[a-z0-9-_\&]+=[0-9]+(&[a-z0-9-_]+=[0-9]+)*$

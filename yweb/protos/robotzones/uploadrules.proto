@@ -1,0 +1,51 @@
+package NRobotZones;
+
+import "yweb/protos/robotzones/robotzone.proto";
+
+enum EZoneSpecificUploadRule {
+     ZSUR_RUS_UPLOAD_RULE = 0;
+     ZSUR_ENG_UPLOAD_RULE = 1;
+     ZSUR_UKR_UPLOAD_RULE = 2;
+     ZSUR_GEO_UPLOAD_RULE = 3;
+     ZSUR_TUR_UPLOAD_RULE = 4;
+}
+
+enum EUploadRankMapping {
+     URM_NO_MAPPING = 0;
+     URM_SHOWS_MAPPING = 1;
+     URM_EXTDATARANK_MAPPING = 2;
+     URM_SRHACKS_MAPPING = 3;
+     URM_LOG_SUBTRACTION = 4;
+}
+
+message TUploadRuleCondition {
+     repeated uint32 Languages = 1; // supposed that enough any match for Language or Domain
+     repeated string Domains = 2;
+     optional bool   FilterMultilang = 3 [default = true];
+     optional uint32 MinWeeklyShows = 4 [default = 0];
+     optional EZoneSpecificUploadRule SpecificUploadRule = 5;
+     optional string ManualDocIdsFileTemplate = 6;
+     optional uint32 SamplingRate = 7 [default = 0]; // if not set, 0 means to keep everything
+     optional bool   RussianHacksRequired = 8 [default = false];
+     optional bool   ForeignHacksRequired = 9 [default = false];
+     optional uint32 AllGeoAttrsFromCountry = 10;
+     optional string HostMultilanguagePrefix = 11;
+     optional uint32 FreshnessDays = 12;
+     optional string ManualHostsList  = 13;
+     optional uint32 MinExtDataRank = 14 [default = 0];
+     optional bool   CheckDirectUpload = 15 [default = false];
+}
+
+message TUploadRule {
+    optional string Name = 1;
+    optional uint32 Code = 2;
+    optional ESelectionRankFormulaId SelectionRankFormulaId = 3;
+    optional EUploadRankMapping UploadRankMapping = 4 [default = URM_NO_MAPPING];
+    optional float  UploadRankLogSubtractionConstant = 5; // used for URM_LOG_SUBTRACTION
+    optional TUploadRuleCondition Condition = 6;
+    optional bool Active = 7 [default = false];
+}
+
+message TUploadRulesConfig {
+    repeated TUploadRule UploadRules = 1;
+};

@@ -1,0 +1,245 @@
+permissions:
+  cloudai.biometry.exec:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  cloudai.locator.exec:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  cloudai.predictor.exec:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  cloudai.speechkitStt.exec:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  cloudai.speechkitTts.exec:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  cloudai.speller.exec:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  cloudai.translate.exec:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  cloudai.vision.exec:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  cloudai.vocabulary.exec:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  cloudai.projects.get:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - ACTIVE
+        - BLOCKED_BY_BILLING
+        - DELETING
+    resourceType: cloudai.project
+  cloudai.projects.list:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - ACTIVE
+        - BLOCKED_BY_BILLING
+        - DELETING
+    resourceType: resource-manager.folder
+  cloudai.projects.create:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+    resourceType: resource-manager.folder
+  cloudai.projects.update:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+    resourceType: cloudai.project
+  cloudai.projects.delete:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - ACTIVE
+        - BLOCKED_BY_BILLING
+        - DELETING
+    resourceType: cloudai.project
+  cloudai.resources.get:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - ACTIVE
+        - BLOCKED_BY_BILLING
+        - DELETING
+    resourceType: cloudai.resource
+  cloudai.resources.list:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - ACTIVE
+        - BLOCKED_BY_BILLING
+        - DELETING
+    resourceType: resource-manager.folder
+  cloudai.resources.create:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+    resourceType: resource-manager.folder
+  cloudai.resources.update:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+    resourceType: cloudai.resource
+  cloudai.resources.delete:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - ACTIVE
+        - BLOCKED_BY_BILLING
+        - DELETING
+    resourceType: cloudai.resource
+  cloudai.config.quota.listBySubject:
+    description: ''
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  cloudai.config.quota.listByObject:
+    description: ''
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  cloudai.config.quota.get:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - ACTIVE
+        - BLOCKED_BY_BILLING
+        - DELETING
+  cloudai.config.quota.set:
+    description: ''
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  cloudai.config.quota.reset:
+    description: ''
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE

@@ -1,0 +1,54 @@
+scopes:
+  yc.resource-manager.folders.manage:
+    service: resource-manager
+    name: 'создавать и удалять каталоги'
+    description: ''
+    visibility: internal
+    permissions:
+      - iam.folders.{get,create,update,delete}
+      - resource-manager.folders.{get,create,update,delete,updateSettings}
+
+  yc.resource-manager.clouds.manage:
+    service: resource-manager
+    name: 'создавать и удалять облака'
+    description: ''
+    visibility: internal
+    permissions:
+      - resource-manager.clouds.{get,create,update,delete,updateSettings}
+
+  yc.resource-manager.clouds.accessBindings.manage:
+    service: resource-manager
+    name: 'управлять access bindings облака'
+    description: ''
+    visibility: internal
+    permissions:
+      - resource-manager.clouds.{list,update}AccessBindings
+
+  yc.resource-manager.folders.accessBindings.manage:
+    service: resource-manager
+    name: 'управлять access bindings каталога'
+    description: ''
+    visibility: internal
+    permissions:
+      - resource-manager.folders.{list,update}AccessBindings
+
+  yc.resource-manager.folders.get:
+    service: resource-manager
+    name: 'читать информацию о каталогах'
+    description: ''
+    visibility: internal
+    permissions:
+      - iam.folders.{get,list}
+      - resource-manager.folders.get
+      - resource-manager.folders.getSettings
+
+  yc.resource-manager.clouds.get:
+    service: resource-manager
+    name: 'читать информацию об облаках'
+    description: ''
+    visibility: internal
+    permissions:
+      - iam.clouds.{get,list}
+      - resource-manager.clouds.get
+      - resource-manager.clouds.getSettings
+      - resource-manager.clouds.listPermissionStages

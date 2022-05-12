@@ -1,0 +1,17 @@
+roles:
+
+  ##############################################################################
+  # Roles for YC Security team
+  ##############################################################################
+
+  security.onCall:
+    groups: [staff]
+    name: Инженер YC Security on-call
+    visibility: internal
+    description: доступы для инженеров службы безопасности Yandex.Cloud
+    includedRoles:
+      - onCall
+    permissions:
+      - iam.totpProfiles.manage
+      - iam.root.listAccessBindings
+      - iam.gizmo.listAccessBindings

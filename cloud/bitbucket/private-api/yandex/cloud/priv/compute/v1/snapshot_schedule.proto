@@ -1,0 +1,76 @@
+syntax = "proto3";
+
+package yandex.cloud.priv.compute.v1;
+
+import "google/protobuf/duration.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "a.yandex-team.ru/cloud/bitbucket/private-api/yandex/cloud/priv/compute/v1;compute";
+option java_outer_classname = "PSP";
+
+
+message SnapshotSchedule {
+    enum Status {
+        STATUS_UNSPECIFIED = 0;
+        CREATING = 1;
+        ACTIVE = 2;
+        INACTIVE = 3;
+        DELETING = 4;
+        UPDATING = 5;
+    }
+
+    // ID of the snapshot schedule policy.
+    string id = 1;
+
+    // ID of the folder that the scheduler policy belongs to.
+    string folder_id = 2;
+    google.protobuf.Timestamp created_at = 3;
+
+    // Name of the schedule policy.
+    // The name is unique within the folder.
+    string name = 4;
+
+    // Description of the schedule policy.
+    string description = 5;
+
+    // Resource labels as `key:value` pairs.
+    map<string, string> labels = 6;
+
+    Status status = 7;
+  
+    // schedule properties
+    SchedulePolicy schedule_policy = 8;
+    RetentionPolicy retention_policy = 9;
+    oneof matching_policy {
+        ExactDisksPolicy exact_disks_policy = 10;
+    }
+
+    // properties to create snapshot with
+    SnapshotSpec snapshot_spec = 11;
+}
+
+message SchedulePolicy {
+    // start time for the first run
+    google.protobuf.Timestamp start_at = 1;
+
+    // cron format (* * * * *)
+    // TODO: add validation
+    string expression = 2;
+}
+
+message RetentionPolicy {
+    google.protobuf.Duration period = 1;
+    int64 max_count = 2;
+    int64 min_count = 3;
+}
+
+message SnapshotSpec {
+    string description = 1;
+    map<string, string> labels = 2;
+
+    // TODO: add more properties
+}
+
+message ExactDisksPolicy {
+    repeated string disk_ids = 1;
+}

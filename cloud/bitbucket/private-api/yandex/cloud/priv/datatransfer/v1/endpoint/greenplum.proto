@@ -1,0 +1,136 @@
+syntax = "proto3";
+
+package yandex.cloud.priv.datatransfer.v1.endpoint;
+
+option go_package = "a.yandex-team.ru/cloud/bitbucket/private-api/yandex/cloud/priv/datatransfer/v1/endpoint;tm_server_endpoint";
+
+import "yandex/cloud/priv/datatransfer/v1/endpoint/common.proto";
+
+message GreenplumHostPort {
+    // IP or FQDN of the host
+    // 
+    // IP or FQDN of a Greenplum segment host (of a distinct Greenplum cluster
+    // process).
+    string host = 1;
+    // Port
+    // 
+    // A port of a Greenplum segment host (of a distinct Greenplum cluster process).
+    int64 port = 2;
+}
+message GreenplumHAPair {
+    // Primary
+    // 
+    // Connection parameters for the primary-part of a highly available Greenplum
+    // segment pair.
+    GreenplumHostPort primary = 1;
+    // Mirror
+    // 
+    // Connection parameters for the mirror-part of a highly available Greenplum
+    // segment pair.
+    GreenplumHostPort mirror = 2;
+}
+message GreenplumCluster {
+    // Greenplum coordinator
+    // 
+    // Connection parameters for Greenplum cluster coordinator and standby.
+    GreenplumHAPair coordinator = 1;
+    // Greenplum segments
+    // 
+    // Connection parameters for all Greenplum segments and their mirrors.
+    repeated GreenplumHAPair segments = 2;
+}
+message PgAuthenticationProperties {
+    // Password
+    // 
+    // Password for database access.
+    Secret password = 1;
+    // CA certificate
+    // 
+    // X.509 certificate of the certificate authority (in PEM format) which issued the
+    // certificate used to authenticae connections to Greenplum processes. When given,
+    // TLS is used for connections to Greenplum.
+    string ca_certificate = 2;
+}
+message GreenplumAddress {
+    oneof address {
+        // Managed cluster
+        // 
+        // Yandex Cloud Managed Greenplum cluster ID. IMPORTANT: Before using this, access
+        // to the cluster must be explicitly granted for Data Transfer (see cluster
+        // properties)
+        string mdb_cluster_id = 1;
+        // On-premises installation
+        // 
+        // Connection settings for an on-premises installation of Greenplum
+        GreenplumCluster on_premise = 2;
+    }
+}
+message GreenplumConnection {
+    // Connection type
+    GreenplumAddress address = 1;
+    // Database name
+    string database = 2;
+    // Username
+    // 
+    // User for database access.
+    string user = 3;
+    // Authentication properties
+    // 
+    // Properties required to provide access to the Greenplum cluster.
+    PgAuthenticationProperties authentication = 4;
+}
+message GpSourceAdvancedProperties {
+    // Restart transfer on segment failure
+    // 
+    // Reload the whole snapshot on Greenplum segment failure (when primary and mirror
+    // swap roles).
+    bool strong_consistency = 1;
+    // Buffer size limit by number of rows
+    // 
+    // Limits the size of a buffer used to extract data from Greenplum by the given
+    // volume, expressed as the number of rows. Zero value activates fallback to the
+    // default limit.
+    int64 batch_limit_rows = 2;
+    // Buffer size limit by bytes
+    // 
+    // Limits the size of a buffer used to extract data from Greenplum by the given
+    // volume, expressed as bytes. Zero vaue disables the limit.
+    int64 batch_limit_size = 3;
+    // Service objects schema
+    // 
+    // Schema containing Data Transfer service objects. If objects are missing, they
+    // will be created in this schema.
+    string service_schema = 4;
+}
+message GreenplumSource {
+    // Connection settings
+    // 
+    // Database connection settings
+    GreenplumConnection connection = 1;
+    // Included tables
+    // 
+    // Limits the set of tables being transferred by the given one. When not given, all
+    // tables in the source database are copied, except for service ones. May contain
+    // expressions "schema.*" denoting a whole schema.
+    repeated string include_tables = 5;
+    // Excluded tables
+    // 
+    // Excludes the given tables from the transfer. Is prioritized over the included
+    // tables list. May contain expressions "schema.*" denoting a whole schema.
+    repeated string exclude_tables = 6;
+    // Additional properties
+    // 
+    // For fine-tuning and optimization of transfer performance.
+    GpSourceAdvancedProperties advanced_properties = 8;
+}
+message GreenplumTarget {
+    // Connection settings
+    // 
+    // Database connection settings
+    GreenplumConnection connection = 1;
+    // Cleanup policy
+    // 
+    // A rule regulating the erasure of data from the target database at the start of
+    // the transfer. By default, erasure is disabled.
+    CleanupPolicy cleanup_policy = 2;
+}

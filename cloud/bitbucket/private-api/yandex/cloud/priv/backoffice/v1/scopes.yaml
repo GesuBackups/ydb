@@ -1,0 +1,160 @@
+scopes:
+  yc.backoffice.content.view:
+    service: backoffice
+    name: 'Контент сайта в бэкофисе'
+    description: ''
+    visibility: internal
+    permissions:
+      - backoffice.blog.get
+      - backoffice.cases.get
+      - backoffice.forms.get
+      - backoffice.industries.get
+      - backoffice.pages.get
+      - backoffice.regionsCatalogue.get
+      - backoffice.solutions.get
+      - backoffice.useCases.get
+
+  yc.backoffice.content.manage:
+    service: backoffice
+    name: 'Контент сайта в бэкофисе'
+    description: ''
+    visibility: internal
+    permissions:
+      - backoffice.blog.update
+      - backoffice.cases.update
+      - backoffice.forms.update
+      - backoffice.industries.update
+      - backoffice.pages.update
+      - backoffice.regionsCatalogue.update
+      - backoffice.solutions.update
+      - backoffice.useCases.update
+
+      - backoffice.blog.create
+      - backoffice.cases.create
+      - backoffice.forms.create
+      - backoffice.industries.create
+      - backoffice.pages.create
+      - backoffice.regionsCatalogue.create
+      - backoffice.solutions.create
+      - backoffice.useCases.create
+
+      - backoffice.blog.delete
+      - backoffice.cases.delete
+      - backoffice.forms.delete
+      - backoffice.industries.delete
+      - backoffice.pages.delete
+      - backoffice.regionsCatalogue.delete
+      - backoffice.solutions.delete
+      - backoffice.useCases.delete
+
+  yc.backoffice.events.view:
+    service: backoffice
+    name: 'Мероприятия в бэкофисе'
+    description: ''
+    visibility: internal
+    permissions:
+      - backoffice.events.get
+      - backoffice.participants.get
+      - backoffice.eventApplications.get
+      - backoffice.mailLog.get
+
+  yc.backoffice.events.manage:
+    service: backoffice
+    name: 'Мероприятия в бэкофисе'
+    description: ''
+    visibility: internal
+    permissions:
+      - backoffice.events.update
+      - backoffice.events.create
+      - backoffice.events.delete
+      - backoffice.eventApplications.update
+
+  yc.backoffice.services.view:
+    service: backoffice
+    name: 'Сервисы в бэкофисе'
+    description: ''
+    visibility: internal
+    permissions:
+      - backoffice.services.get
+      - backoffice.pseudoServices.get
+      - backoffice.serviceCategories.get
+
+  yc.backoffice.services.manage:
+    service: backoffice
+    name: 'Сервисы в бэкофисе'
+    description: ''
+    visibility: internal
+    permissions:
+      - backoffice.services.update
+      - backoffice.pseudoServices.update
+      - backoffice.serviceCategories.update
+
+      - backoffice.services.create
+      - backoffice.pseudoServices.create
+      - backoffice.serviceCategories.create
+
+      - backoffice.services.delete
+      - backoffice.pseudoServices.delete
+      - backoffice.serviceCategories.delete
+
+  yc.backoffice.features.view:
+    service: backoffice
+    name: 'Идеи в бэкофисе'
+    description: ''
+    visibility: internal
+    permissions:
+      - backoffice.features.get
+
+  yc.backoffice.features.manage:
+    service: backoffice
+    name: 'Идеи в бэкофисе'
+    description: ''
+    visibility: internal
+    permissions:
+      - backoffice.features.update
+
+  yc.backoffice.incidents.view:
+    service: backoffice
+    name: 'Инциденты в бэкофисе'
+    description: ''
+    visibility: internal
+    permissions:
+      - backoffice.incidents.get
+
+  yc.backoffice.incidents.manage:
+    service: backoffice
+    name: 'Инциденты в бэкофисе'
+    description: ''
+    visibility: internal
+    permissions:
+      - backoffice.incidents.update
+      - backoffice.incidents.create
+      - backoffice.incidents.delete
+
+  yc.backoffice.dev.view:
+    service: backoffice
+    name: 'Дев-инструменты бэкофиса'
+    description: ''
+    visibility: internal
+    permissions:
+      - backoffice.regions.get
+      - backoffice.featureFlags.get
+      - backoffice.yandexChats.get
+
+  yc.backoffice.dev.manage:
+    service: backoffice
+    name: 'Дев-инструменты бэкофиса'
+    description: ''
+    visibility: internal
+    permissions:
+      - backoffice.regions.update
+      - backoffice.featureFlags.update
+      - backoffice.yandexChats.update
+
+      - backoffice.regions.create
+      - backoffice.featureFlags.create
+      - backoffice.yandexChats.create
+
+      - backoffice.regions.delete
+      - backoffice.featureFlags.delete
+      - backoffice.yandexChats.delete

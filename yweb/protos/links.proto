@@ -1,0 +1,164 @@
+message TFnvDstData {
+    optional uint64 Fnv = 1;
+    optional uint64 TrueDstHostFnv = 2;  // fnv от истинного имени хоста цели, не приведенного к главному зеркалу
+    optional uint32 Dst = 3;
+    optional uint32 Src = 4;
+    optional uint32 SrcHost = 5;
+    optional uint32 SrcOwner = 6;
+    optional uint32 LFlags = 7;         // LFlags и BFlags выставляются в MergeGlDDFO (gendd.cpp)
+    optional uint32 BFlags = 8;
+    optional uint32 SeoFlags = 9;
+    optional uint32 Pr = 10;
+    optional uint32 Flags = 11;
+    optional uint32 Date = 12;
+    optional uint32 Lang = 13;
+    optional double SourceRank = 14;
+    optional uint32 NationalDomainId = 15;
+    optional uint32 SrcDate = 16;   //  ROBOT-2440
+    optional uint32 GroupSize = 17;
+    optional uint32 SrcSegment = 18; // ROBOT-3425
+}
+
+// structure below describes format in which input links will be stored in KiWi (in binary format)
+
+message TLinkFlags {
+    // TODO: replace fixed32 fields with named fields
+    optional fixed32 Flags    = 1; // Copy of TFnvDstData::Flags
+    optional fixed32 Seo      = 2; // Copy of TFnvDstData::SeoFlags
+    optional uint32  OffTop   = 3;
+    optional uint32  Segments = 4;
+    optional fixed32 BFlags   = 5; // Copy of TFnvDstData::BFlags
+    optional fixed32 LFlags   = 6; // Copy of TFnvDstData::LFlags
+}
+
+message TLinkTextual {
+    message TBlock {
+        enum EType {
+            TEXT        = 0;
+            LOCALURLS   = 1;
+            FOREIGNURLS = 2;
+        }
+
+        enum ECoder {
+            SNAPPY = 0;
+        }
+
+        required EType  Type  = 1;
+        required ECoder Coder = 2;
+        required bytes  Data  = 3;
+    }
+
+    repeated TBlock Data = 1;
+}
+
+message TInputLinksData {
+    message TRanks {
+        optional float  PageRankDmoz    = 1;
+        optional float  PageRankTurkey  = 2;
+        optional double SourceRank      = 3;
+
+        optional float  CatalogWeight   = 4;
+        optional uint64 Score           = 5; // AA dPR
+    }
+
+    message TCutLinks {
+        enum EReason {
+            CROSSCUTTING = 1;
+            TEXTS = 2;
+            HOSTS = 3;
+            OWNERS = 4;
+        }
+
+        optional uint32     NumLinks = 1; // MESH-169: Число отброшенных ссылок
+        optional EReason    Reason = 2; // MESH-169: Причина, по которой отбросили ссылки
+    }
+
+    message TLink {
+        repeated TLink      Link        = 1;
+        optional uint32     UrlKey      = 2;    /// Ключ полного урла (host + path) в векторе Text::Data
+        optional uint32     TextKey     = 3;    /// Ключ строки в векторе Text::Data
+        optional TLinkFlags Flags       = 4;
+        optional string     Language    = 5;
+        //! Source url date in seconds from Unix epoch.
+        optional uint64     SourceDate  = 6;
+        optional TRanks     Ranks       = 7;
+        //! Оригинальная ссылка может указывать на произвольный урл,
+        //! но при хранении все ссылки привязываются к каноническому урлу
+        optional uint32     OriginalKey = 8;    /// Ключ полного урла в векторе Text::Data
+
+        //! Link discovered date in seconds from Unix epoch.
+        optional uint64     LinkDate    = 9;
+
+        optional fixed32    BanFlags     = 10;
+        // UNUSED 11
+        optional uint32     OwnerFromTIC = 12; // ТИЦ владельца, с которого исходит ссылка
+        optional uint32     OwnerGeo     = 13; // Геокатегория источника ссылки; ui16(-1), если геокатегория не определена
+        optional uint32     SeoPrice     = 15; // SEO: Estimated link price
+
+        optional uint32     Catalog      = 16; // Для каталожных ссылок - каталог-источник ссылки (TXMapCatalogInfo::TCatalogName)
+        optional uint32     CatalogField = 17; // Для каталожных ссылок - поле каталожного описания (TXMapCatalogInfo::TFieldType)
+        optional uint32     AspamLinksPessimizations = 18;
+
+        optional uint32     ClicksDay      = 19;
+        optional uint32     ShowsDay       = 20;
+        optional uint32     ClicksWeekly   = 21;
+        optional uint32     ShowsWeekly    = 22;
+
+        repeated TCutLinks  CutLinks       = 23;
+
+        optional uint32     GroupSize      = 24; // Amount of documents linked from the same owner
+        optional uint32     CatMatches     = 25; // Amount of same categs of owners
+
+        optional bool       IsInternal     = 26;
+
+        optional uint32     Clicks3Month   = 27;
+        optional uint32     Shows3Month    = 28;
+
+        // Owner data from walrus. TODO: remove
+        optional uint32     GlobalOwnerId  = 29; // Global source owner id for links from walrus (sourceOwner * segmentsNum + sourceSegment)
+        optional uint32     SourceSegment  = 30; // Source segment for links from walrus
+
+        optional uint32     NationalDomainId = 31;
+        optional bool       NoFollow = 32;
+        optional uint32     SourceLastAccess = 33; // needed for webmaster (UKROP-966)
+        optional uint32     DstLastAccess = 34; // Deprecated (webmaster uses TExternalUrldat.WmDstInfo instead). (ex UKROP-966)
+        optional uint32     DstHttpCode = 35; // Deprecated (webmaster uses TExternalUrldat.WmDstInfo instead). (ex UKROP-966)
+        optional bool       IsFakeLink = 36; // needed for antispam (UKROP-1033)
+
+        optional float      LinkRank = 37; // Rank used to select best links. Meaning is not specified, may be it's SelectionRank of link source.
+
+        message TXMapTextFeatures {
+            optional float WordsIdfSum = 1;
+            optional float TwoWordsIdfSum = 2;
+            optional float PornoWordsIdfSum = 3;
+            optional uint32 WordCount = 4;
+            optional bool IsPorno = 5;
+            optional bool IsAdult = 6;
+            optional uint32 NewCommercialWeight = 7;
+            optional uint32 NewCommercialLength = 8;
+        }
+
+        optional TXMapTextFeatures TextFeatures = 38;  // Precalculated text features for this link.
+            
+        optional bool SourceIsInJupiter = 39;
+
+        optional double SourceSamovarRank = 40;
+
+        optional bool Sponsored = 41;
+        optional bool Ugc = 42; // user-generated content
+
+        extensions 500 to 999; // Required by: 1) links trigger
+    }
+
+    message TStatistics {
+        optional uint64     TotalLinksCount = 1;
+        optional uint64     TotalIntLinksCount = 2;
+        optional uint64     NumRefsFromMP = 3;
+    }
+
+    repeated TLink          Link = 1;
+    optional TLinkTextual   Text = 2;
+    optional TStatistics    Stat = 3;
+
+    extensions 500 to 999; // Required by: 1) links trigger
+}

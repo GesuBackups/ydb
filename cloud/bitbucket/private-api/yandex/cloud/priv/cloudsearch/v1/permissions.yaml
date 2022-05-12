@@ -1,0 +1,11 @@
+permissions:
+  cloudsearch.cloudsIndex.read:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: iam.gizmo
+  cloudsearch.cloudsIndex.write:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: iam.gizmo

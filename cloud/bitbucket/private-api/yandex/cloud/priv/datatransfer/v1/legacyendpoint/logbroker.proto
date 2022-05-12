@@ -1,0 +1,79 @@
+syntax = "proto3";
+
+package yandex.cloud.priv.datatransfer.v1.legacyendpoint;
+
+option go_package = "a.yandex-team.ru/cloud/bitbucket/private-api/yandex/cloud/priv/datatransfer/v1/legacyendpoint;tm_server_legacyendpoint";
+
+import "yandex/cloud/priv/datatransfer/v1/endpoint/common.proto";
+
+message LogbrokerSourceConnection {
+    oneof connection {
+        string cluster = 11;
+        string instance = 3;
+    }
+}
+message TimeColumn {
+    string col = 1;
+    string format = 2;
+}
+message TableSplitter {
+    repeated string columns = 1;
+}
+message LogbrokerSource {
+    // Logbroker topic
+    string topic = 1;
+    // Column used for hashing
+    // 
+    // Default: _timestamp
+    string hash_column = 2;
+    LogbrokerSourceConnection connection = 3;
+    // Consumer used to read data
+    string consumer = 4;
+    // What kind of data format in topic
+    // 
+    // Usually one of: json or tskv
+    string format = 5;
+    // List of fields in topic
+    // 
+    // Use it carefully
+    repeated endpoint.ColSchema fields = 6;
+    // Max time lag to consume data
+    // 
+    // Default: 0 - consume all data
+    string max_time_lag = 7;
+    // Column containing timestamp
+    TimeColumn timestamp = 8;
+    bool null_keys_allowed = 9;
+    // Identifier of schema in logfeller schema registry
+    string schema_id = 10;
+    // Parse data with YQL
+    // 
+    // Experimental.
+    bool use_yql = 12;
+    // YQL Script for post computing parsed data
+    string post_compute = 13;
+    // Max amount of data read before insert
+    string buffer_max_size = 14;
+    // Will add logbroker system columns
+    // 
+    // CreateTime (_lb_ctime) WriteTime (_lb_wtime) and all ExtraFields prefixed with
+    // _lb_extra_
+    bool add_system_cols = 15;
+    // Will split original input into sub tables defined by this discriminator
+    TableSplitter table_splitter = 16;
+    // Will not add logbroker system keys to primary key in target DB
+    bool skip_dedupe_keys = 17;
+    string line_splitter = 18;
+    // Should continue working, if consumer read lag exceed TTL of topic
+    // 
+    // Should be used when consumer is important. False: stop the transfer in error
+    // state, if detected lost data. True: continue working with losing part of data
+    bool allow_ttl_rewind = 19;
+}
+message LogbrokerTarget {
+    // Logbroker topic where to send data
+    string topic = 1;
+    // Instance of logbroker
+    string instance = 3;
+    string database = 4;
+}

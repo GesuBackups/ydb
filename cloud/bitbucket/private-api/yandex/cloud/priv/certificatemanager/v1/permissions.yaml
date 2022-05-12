@@ -1,0 +1,328 @@
+permissions:
+  certificate-manager.certificates.create:
+    description: Import certificate
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+    resourceType: resource-manager.folder
+  certificate-manager.certificates.requestNew:
+    description: Request new certificate via Lets Encrypt
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+    resourceType: resource-manager.folder
+  certificate-manager.certificates.get:
+    description: Get certificate information
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - ACTIVE
+        - BLOCKED_BY_BILLING
+        - DELETING
+    resourceType: certificate-manager.certificate
+  certificate-manager.certificates.list:
+    description: Get certificates list
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - ACTIVE
+        - BLOCKED_BY_BILLING
+        - DELETING
+    resourceType: resource-manager.folder
+  certificate-manager.certificates.update:
+    description: Update certificate
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+    resourceType: certificate-manager.certificate
+  certificate-manager.certificates.renew:
+    description: Renew certificate content via Let's Encrypt
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+    resourceType: certificate-manager.certificate
+  certificate-manager.certificates.delete:
+    description: Delete certificate
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - ACTIVE
+        - BLOCKED_BY_BILLING
+        - DELETING
+    resourceType: certificate-manager.certificate
+  certificate-manager.certificates.forceDelete:
+    description: Delete certificate ignoring deletion protection
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - ACTIVE
+          - BLOCKED_BY_BILLING
+          - DELETING
+  certificate-manager.certificates.readContent:
+    description: Read certificate content
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+    resourceType: certificate-manager.certificate
+  certificate-manager.certificates.getContentMetadata:
+    description: Get certificate content metadata
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+    resourceType: certificate-manager.certificate
+  certificate-manager.certificates.listAccessBindings:
+    description: List certificate access bindings
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - ACTIVE
+          - BLOCKED_BY_BILLING
+          - DELETING
+    resourceType: certificate-manager.certificate
+  certificate-manager.certificates.updateAccessBindings:
+    description: Update certificate access bindings
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+      cloud:
+        status:
+          - ACTIVE
+          - BLOCKED_BY_BILLING
+    resourceType: certificate-manager.certificate
+  certificate-manager.certificates.updateReferences:
+    description: Edit certificate references
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  certificate-manager.certificates.listReferences:
+    description: List certificate references
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - ACTIVE
+          - BLOCKED_BY_BILLING
+          - DELETING
+  certificate-manager.domains.create:
+    description: Create domain
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+    resourceType: resource-manager.folder
+  certificate-manager.domains.get:
+    description: Get domain information
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - ACTIVE
+          - BLOCKED_BY_BILLING
+          - DELETING
+    resourceType: certificate-manager.domain
+  certificate-manager.domains.list:
+    description: Get list of domains
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - ACTIVE
+          - BLOCKED_BY_BILLING
+          - DELETING
+    resourceType: resource-manager.folder
+  certificate-manager.domains.update:
+    description: Update domain
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+    resourceType: certificate-manager.domain
+  certificate-manager.domains.setPrimaryCertificate:
+    description: Set domain primary certificate
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+    resourceType: certificate-manager.domain
+  certificate-manager.domains.delete:
+    description: Delete domain
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - ACTIVE
+          - BLOCKED_BY_BILLING
+          - DELETING
+    resourceType: certificate-manager.domain
+  certificate-manager.domains.listAccessBindings:
+    description: List domain access bindings
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - ACTIVE
+          - BLOCKED_BY_BILLING
+          - DELETING
+    resourceType: certificate-manager.domain
+  certificate-manager.domains.updateAccessBindings:
+    description: Update domain access bindings
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+      cloud:
+        status:
+          - ACTIVE
+          - BLOCKED_BY_BILLING
+    resourceType: certificate-manager.domain
+  certificate-manager.domains.getMetadata:
+    description: Get domain dpl metadata
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+    resourceType: certificate-manager.domain
+  certificate-manager.domains.updateReferences:
+    description: Edit domain references
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  certificate-manager.domains.listReferences:
+    description: List domain references
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - ACTIVE
+          - BLOCKED_BY_BILLING
+          - DELETING
+  certificate-manager.quotas.get:
+    description: Get certificate manager quota
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - ACTIVE
+          - BLOCKED_BY_BILLING
+          - DELETING
+  certificate-manager.quotas.updateLimit:
+    description: Get certificate manager quota limits
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - billSuspend
+      cloud:
+        status:
+          - ACTIVE
+          - BLOCKED_BY_BILLING
+          - DELETING
+  certificate-manager.providers.use:
+    description: Allows creating certificates for specific provider (INTERNAL_CERTUM/INTERNAL_CA/etc.).
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+    resourceType: certificate-manager.provider

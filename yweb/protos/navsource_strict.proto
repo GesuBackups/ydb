@@ -1,0 +1,11 @@
+package NRobot;
+
+message TNavInfoStrict {
+    message TNavItem {
+        optional string Query = 1;
+        optional int64 Region = 2;
+        optional bool IsInternational = 3;
+    };
+
+    repeated TNavItem NavItems = 1;
+};

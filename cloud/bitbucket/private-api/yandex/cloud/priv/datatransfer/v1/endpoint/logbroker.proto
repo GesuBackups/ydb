@@ -1,0 +1,151 @@
+syntax = "proto3";
+
+package yandex.cloud.priv.datatransfer.v1.endpoint;
+
+option go_package = "a.yandex-team.ru/cloud/bitbucket/private-api/yandex/cloud/priv/datatransfer/v1/endpoint;tm_server_endpoint";
+
+import "yandex/cloud/priv/datatransfer/v1/endpoint/yds.proto";
+
+enum LogbrokerOutputFormat {
+    LOGBROKER_OUTPUT_FORMAT_UNSPECIFIED = 0;
+    // Native
+    // 
+    // Data transfer native format for Change Items. TODO: link to doc
+    LOGBROKER_OUTPUT_FORMAT_NATIVE = 1;
+    // JSON
+    LOGBROKER_OUTPUT_FORMAT_JSON = 2;
+}
+message LogbrokerConnection {
+    oneof connection {
+        // Cluster
+        string cluster = 11;
+        // Instance
+        string instance = 3;
+    }
+}
+message LogbrokerParserOptions {
+    oneof parser {
+        // Generic parser
+        GenericParser generic_parser = 1;
+        // No parser
+        NoParser no_parser = 2;
+        // YQL parser
+        YQLParser yql_parser = 3;
+        // Logfeller parser
+        LogfellerParser logfeller_parser = 4;
+        // CDC parser
+        NativeParser native_parser = 5;
+    }
+}
+message NoParser {
+}
+message NativeParser {
+}
+message TimeColumn {
+    // Column name
+    string col = 1;
+    // Date parsing rule
+    // 
+    // Golang format of date parser https://pkg.go.dev/time#Parse
+    string format = 2;
+}
+message GenericParser {
+    enum GenericParserFormat {
+        GENERIC_PARSER_FORMAT_UNSPECIFIED = 0;
+        JSON = 1;
+        TSKV = 2;
+    }
+    // Data format
+    GenericParserFormat format = 1;
+    // Data scheme
+    DataSchema data_schema = 2;
+    // User key
+    // 
+    // After parser logbroker dedupe keys will not be added to key cols
+    bool skip_dedupe_keys = 3;
+    // Column containing timestamp
+    TimeColumn timestamp = 4;
+    // Enable null values in keys
+    bool null_keys_allowed = 5;
+    // Will add logbroker system columns
+    // 
+    // CreateTime (_lb_ctime) WriteTime (_lb_wtime) and all ExtraFields prefixed with
+    // _lb_extra_
+    bool add_system_cols = 6;
+    // Line splitter rule
+    string line_splitter = 7;
+}
+message YQLParser {
+    // YQL Script
+    string script = 1;
+    // Data scheme
+    DataSchema data_schema = 2;
+    // Result key columns
+    repeated string output_key_columns = 3;
+    // Synthetic keys
+    // 
+    // Add _partition _offset _idx key columns to result
+    bool add_synthetic_keys = 4;
+}
+message LogfellerParser {
+    // Parser name
+    string format = 1;
+    // Data scheme
+    DataSchema data_schema = 2;
+    // Line splitter rule
+    string line_splitter = 3;
+    // Will add logbroker system columns
+    // 
+    // CreateTime (_lb_ctime) WriteTime (_lb_wtime) and all ExtraFields prefixed with
+    // _lb_extra_
+    bool add_system_cols = 4;
+}
+message LogbrokerReadOptions {
+    // Max time lag to consume data
+    // 
+    // Default: 0 - consume all data
+    string max_time_lag = 7;
+    // Read buffer max size
+    // 
+    // Max amount of data read before insert
+    string buffer_max_size = 14;
+    // Should continue working, if consumer read lag exceed TTL of topic
+    // 
+    // Should be used when consumer is important. False: stop the transfer in error
+    // state, if detected lost data. True: continue working with losing part of data
+    bool allow_ttl_rewind = 19;
+    // Mask secrets
+    // 
+    // Secrets like AQAD-... would be replaced with XXXXX
+    bool mask_secrets = 20;
+}
+message TableSplitter {
+    // Columns
+    // 
+    // Column for data split, order is important
+    repeated string columns = 1;
+}
+message LogbrokerSource {
+    // Connection type
+    LogbrokerConnection connection = 1;
+    // Consumer
+    string consumer = 3;
+    // Topics
+    repeated string topics = 2;
+    // Parser rules
+    LogbrokerParserOptions parser = 5;
+    // Read options
+    LogbrokerReadOptions read_options = 4;
+    // Split into sub tables
+    // 
+    // Will split input stream into substreams based on discriminator columns
+    TableSplitter table_splitter = 16;
+}
+message LogbrokerTarget {
+    // Instance
+    string instance = 5;
+    // Topic
+    string topic = 3;
+    // Serialization format
+    LogbrokerOutputFormat output_format = 4;
+}

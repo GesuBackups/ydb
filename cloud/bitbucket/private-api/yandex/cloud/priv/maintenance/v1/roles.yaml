@@ -1,0 +1,22 @@
+role_groups:
+  maintenance:
+    name: Maintenance Service roles
+
+roles:
+  internal.maintenance.viewer:
+    groups: [maintenance]
+    name: ''
+    visibility: internal
+    description: (Внутренняя) Роль для проведения READ операций в сервисе обслуживания
+    permissions:
+      - maintenance.read
+
+  internal.maintenance.admin:
+    groups: [maintenance]
+    name: ''
+    visibility: internal
+    description: (Внутренняя) Роль для проведения любых операций в сервисе обслуживания
+    includedRoles:
+      - internal.maintenance.viewer
+    permissions:
+      - maintenance.write

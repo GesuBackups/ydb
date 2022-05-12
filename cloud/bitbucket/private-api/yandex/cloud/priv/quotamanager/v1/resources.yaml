@@ -1,0 +1,3 @@
+resources:
+  quota-manager.quotaRequest:
+    parents: [resource-manager.cloud]

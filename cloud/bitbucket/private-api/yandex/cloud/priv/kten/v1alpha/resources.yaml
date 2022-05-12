@@ -1,0 +1,7 @@
+resources:
+  uk8s.cluster:
+    parents: [resource-manager.folder]
+    accessBindingsListingPermission: uk8s.clusters.listAccessBindings
+  uk8s.namespace:
+    parents: [uk8s.cluster]
+    accessBindingsListingPermission: uk8s.namespaces.listAccessBindings

@@ -1,0 +1,14 @@
+* нужно установить/прописать в PATH gnu core utils, можно их скачать здесь
+  http://gnuwin32.sourceforge.net/packages/coreutils.htm
+
+* для запуска тестов на настоящей windows есть конфигурация в teamcity
+  https://teamcity.yandex-team.ru/viewType.html?buildTypeId=UnifiedAgent_TestUaOnWindows
+  и windows-виртуалка в QYP (https://qyp.yandex-team.ru/vm/sas/ua-teamcity-agent-win),
+  которая зарегистрирована как агент в этой конфигурации. Логин/пароль для этой виртуалки zomb-sandbox/password.
+  Была собрана из этого образа https://sandbox.yandex-team.ru/resource/2734404333,
+  нужна была доустановка wsl через wsl --install -d Ubuntu.
+
+* для запуска тестов с локальным logbroker нужен wsl2, он есть только на windows 10 и выше.
+  Так же для запуска таких тестов нужна переменная USE_LINUX_PACKAGES, чтобы использовалась linux-вая сборка ydb:
+
+  ya make -rj15 --link-threads=5 -tt -DUSE_LINUX_PACKAGES -o bin .

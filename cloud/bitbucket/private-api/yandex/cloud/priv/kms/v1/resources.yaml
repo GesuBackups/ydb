@@ -1,0 +1,6 @@
+resources:
+  kms.key:
+    parents: [resource-manager.folder]
+    accessBindingsListingPermission: kms.keys.listAccessBindings
+  kms.keystore:
+    parents: [resource-manager.folder]

@@ -1,0 +1,213 @@
+permissions:
+  ## ZONES
+  dns.zones.create:
+    description: Create dns zone
+    stage: GA
+    visibility: public
+    resourceType: resource-manager.folder
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  dns.zones.delete:
+    description: Delete dns zone
+    stage: GA
+    visibility: public
+    resourceType: dns.zone
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - ACTIVE
+          - BLOCKED_BY_BILLING
+          - DELETING
+  dns.zones.get:
+    description: Get dns zone
+    stage: GA
+    visibility: public
+    resourceType: dns.zone
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - ACTIVE
+          - BLOCKED_BY_BILLING
+          - DELETING
+  dns.zones.update:
+    description: Update dns zone
+    stage: GA
+    visibility: public
+    resourceType: dns.zone
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  dns.zones.updateRecords:
+    description: Update dns zone records
+    stage: GA
+    visibility: public
+    resourceType: dns.zone
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  dns.zones.use:
+    description: Use dns zone
+    stage: GA
+    visibility: public
+    resourceType: dns.zone
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  dns.zones.listAccessBindings:
+    description: List dns zone access bindings
+    stage: GA
+    visibility: public
+    resourceType: dns.zone
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - ACTIVE
+          - BLOCKED_BY_BILLING
+          - DELETING
+  dns.zones.updateAccessBindings:
+    description: Update dns zone access bindings
+    stage: GA
+    visibility: public
+    resourceType: dns.zone
+    allowedWhen:
+      restrictions:
+        - billSuspend
+      cloud:
+        status:
+          - ACTIVE
+          - BLOCKED_BY_BILLING
+
+  ## VIEWS
+  dns.views.create:
+    description: Create dns view
+    stage: GA
+    visibility: public
+    resourceType: resource-manager.folder
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  dns.views.delete:
+    description: Delete dns view
+    stage: GA
+    visibility: public
+    resourceType: dns.view
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - ACTIVE
+          - BLOCKED_BY_BILLING
+          - DELETING
+  dns.views.get:
+    description: Get dns view
+    stage: GA
+    visibility: public
+    resourceType: dns.view
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - ACTIVE
+          - BLOCKED_BY_BILLING
+          - DELETING
+  dns.views.update:
+    description: Update dns view
+    stage: GA
+    visibility: public
+    resourceType: dns.view
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  dns.views.use:
+    description: Use dns view
+    stage: GA
+    visibility: public
+    resourceType: dns.view
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  dns.views.listAccessBindings:
+    description: List dns view access bindings
+    stage: GA
+    visibility: public
+    resourceType: dns.view
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - ACTIVE
+          - BLOCKED_BY_BILLING
+          - DELETING
+  dns.views.updateAccessBindings:
+    description: Update dns view access bindings
+    stage: GA
+    visibility: public
+    resourceType: dns.view
+    allowedWhen:
+      restrictions:
+        - billSuspend
+      cloud:
+        status:
+          - ACTIVE
+          - BLOCKED_BY_BILLING
+  dns.quotas.get:
+    description: Get DNS quotas
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - ACTIVE
+          - BLOCKED_BY_BILLING
+          - DELETING
+  dns.quotas.updateLimit:
+    description: Update DNS quota limits
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - billSuspend
+      cloud:
+        status:
+          - ACTIVE
+          - BLOCKED_BY_BILLING
+
+# PERMISSIONS FOR INTERNAL USE ONLY
+  dns.internal.updateVpcResource:
+    description: Update zones, views and records because was changed vpc resource
+    stage: GA
+    resourceType: resource-manager.folder
+    visibility: internal

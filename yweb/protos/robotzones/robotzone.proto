@@ -1,0 +1,28 @@
+package NRobotZones;
+
+message TRobotZoneCondition {
+    repeated uint32 Languages = 1;
+    repeated string Domains = 2;
+    repeated uint32 GeoAttrs = 3;
+    optional bool   GeoBaseSelector = 4 [default = false];
+    optional bool   MultilanguageHosts = 5 [default = false];
+}
+
+enum ESelectionRankFormulaId {
+     SRFI_RUS_SELECTION_RANK = 0;
+     SRFI_ENG_SELECTION_RANK = 1;
+     SRFI_TUR_SELECTION_RANK = 2;
+     SRFI_UKR_SELECTION_RANK = 3;
+}
+
+message TRobotZone {
+    optional string Name = 1;
+    optional uint32 Code = 2;
+    optional ESelectionRankFormulaId SelectionRankFormulaId = 3;
+    optional TRobotZoneCondition Condition = 4;
+    optional bool Active = 5 [default = false];
+}
+
+message TRobotZonesConfig {
+    repeated TRobotZone RobotZones = 1;
+};

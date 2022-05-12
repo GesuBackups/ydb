@@ -1,0 +1,332 @@
+permissions:
+  managed-kubernetes.clusters.create:
+    description: Create a new cluster
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  managed-kubernetes.clusters.delete:
+    description: Delete a cluster
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - ACTIVE
+          - BLOCKED_BY_BILLING
+          - DELETING
+  managed-kubernetes.clusters.get:
+    description: View a cluster
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  managed-kubernetes.clusters.list:
+    description: List clusters
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  managed-kubernetes.clusters.update:
+    description: Update a cluster
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  managed-kubernetes.clusters.stop:
+    description: Stop a cluster
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  managed-kubernetes.clusters.start:
+    description: Start a cluster
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  managed-kubernetes.nodeGroups.create:
+    description: Create a new node group
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  managed-kubernetes.nodeGroups.delete:
+    description: Delete a node group
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - ACTIVE
+          - BLOCKED_BY_BILLING
+          - DELETING
+  managed-kubernetes.nodeGroups.get:
+    description: View a node group
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  managed-kubernetes.nodeGroups.list:
+    description: List node groups
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  managed-kubernetes.nodeGroups.update:
+    description: Update a node group
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+
+  managed-kubernetes.cluster-api.cluster-admin:
+    description: Marker permission, that provides FULL access to Kubernetes API objects inside clusters
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+
+  managed-kubernetes.cluster-api.edit:
+    description: Marker permission, that allows to edit Kubernetes API objects inside clusters
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+
+  managed-kubernetes.cluster-api.view:
+    description: Marker permission, that allows to view Kubernetes API objects inside clusters
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+
+  managed-kubernetes.cluster-api.support:
+    description: Marker permission for access to Kubernetes API for user support
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+
+  managed-kubernetes.helmCharts.createDraft:
+    description: Permission to create marketplace manifest draft
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+
+  managed-kubernetes.helmCharts.getDraft:
+    description: Permission to get marketplace manifest draft
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+
+  managed-kubernetes.helmCharts.publish:
+    description: Permission to publish marketplace manifest
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+
+  managed-kubernetes.helmChartReleases.get:
+    description: Permission to get a helm chart release
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+
+  managed-kubernetes.helmChartReleases.install:
+    description: Permission to install a helm chart from marketplace
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+
+  managed-kubernetes.helmChartReleases.update:
+    description: Permission to update a helm chart release
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+
+  managed-kubernetes.helmChartReleases.uninstall:
+    description: Permission to uninstall a helm chart release
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+
+  managed-kubernetes.clusters.innerGet:
+    description: Access master and node group via inner API
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+
+  managed-kubernetes.clusters.innerUpdate:
+    description: Edit master and node group via inner API
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+
+  managed-kubernetes.clusters.migrate:
+    description: Migrate master and node group via inner API
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+
+  managed-kubernetes.clusters.scale:
+    description: Scale master via inner API
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+
+  managed-kubernetes.versions.get:
+    description: Read release channels, versions and revisions via inner API
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+
+  managed-kubernetes.versions.update:
+    description: Edit release channels, versions and revisions via inner API
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+
+  managed-kubernetes.quotas.get:
+    description: Get Mk8s quotas
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+
+  managed-kubernetes.quotas.updateLimit:
+    description: Update Mk8s quotas
+    stage: GA
+    visibility: public

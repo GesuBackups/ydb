@@ -1,0 +1,371 @@
+permissions:
+  container-registry.images.create:
+    description: Create or push image
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  container-registry.images.delete:
+    description: Delete images
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - ACTIVE
+          - BLOCKED_BY_BILLING
+          - DELETING
+  container-registry.images.get:
+    description: Get or pull image
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - ACTIVE
+        - BLOCKED_BY_BILLING
+        - DELETING
+  container-registry.images.list:
+    description: List or pull images
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - ACTIVE
+        - BLOCKED_BY_BILLING
+        - DELETING
+  container-registry.images.update:
+    description: Update or push new version of image
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  container-registry.images.scan:
+    description: Scan Docker image
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  container-registry.images.getScanResult:
+    description: Get scan result of Docker image
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - ACTIVE
+          - BLOCKED_BY_BILLING
+          - DELETING
+  container-registry.images.listScanResults:
+    description: List scan results of Docker image
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - ACTIVE
+          - BLOCKED_BY_BILLING
+          - DELETING
+  container-registry.quotas.get:
+    description: Get quotas
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - ACTIVE
+        - BLOCKED_BY_BILLING
+        - DELETING
+  container-registry.quotas.updateLimit:
+    description: Update quota limit
+    stage: GA
+    visibility: public
+  container-registry.registries.create:
+    description: Create new registry
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  container-registry.registries.delete:
+    description: Delete registries
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - ACTIVE
+          - BLOCKED_BY_BILLING
+          - DELETING
+  container-registry.registries.get:
+    description: Get registry
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - ACTIVE
+        - BLOCKED_BY_BILLING
+        - DELETING
+  container-registry.registries.list:
+    description: List registries
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - ACTIVE
+        - BLOCKED_BY_BILLING
+        - DELETING
+  container-registry.registries.listAccessBindings:
+    description: List registry access bingings
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - ACTIVE
+          - BLOCKED_BY_BILLING
+          - DELETING
+  container-registry.registries.update:
+    description: Update existing registry
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  container-registry.registries.updateAccessBindings:
+    description: Set or update registry access bingings
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+      cloud:
+        status:
+          - ACTIVE
+          - BLOCKED_BY_BILLING
+  container-registry.registries.listIpPermissions:
+    description: List registry ip permissions
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - ACTIVE
+          - BLOCKED_BY_BILLING
+          - DELETING
+  container-registry.registries.updateIpPermissions:
+    description: Set or update registry ip permissions
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  container-registry.registries.ignoreIpPermissions:
+    description: Ignore registry ip permissions
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  container-registry.registries.updateAlias:
+    description: ''
+    stage: GA
+    visibility: public
+  container-registry.repositories.listAccessBindings:
+    description: List repository access bingings
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - ACTIVE
+          - BLOCKED_BY_BILLING
+          - DELETING
+  container-registry.repositories.create:
+    description: Create new repository
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  container-registry.repositories.delete:
+    description: Delete repositories
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - ACTIVE
+          - BLOCKED_BY_BILLING
+          - DELETING
+  container-registry.repositories.updateAccessBindings:
+    description: Set or update repository access bingings
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+      cloud:
+        status:
+          - ACTIVE
+          - BLOCKED_BY_BILLING
+  container-registry.repositories.createLifecyclePolicy:
+    description: Create new lifecycle policy for repository
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  container-registry.repositories.updateLifecyclePolicy:
+    description: Update existing repository lifecycle policy
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  container-registry.repositories.deleteLifecyclePolicy:
+    description: Delete repository lifecycle policies
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - ACTIVE
+          - BLOCKED_BY_BILLING
+          - DELETING
+  container-registry.repositories.getLifecyclePolicy:
+    description: Get repository lifecycle policy
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - ACTIVE
+          - BLOCKED_BY_BILLING
+          - DELETING
+  container-registry.repositories.listLifecyclePolicies:
+    description: List repository lifecycle policices
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - ACTIVE
+          - BLOCKED_BY_BILLING
+          - DELETING
+  container-registry.repositories.dryRunLifecyclePolicy:
+    description: Dry run lifecycle policy
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  container-registry.repositories.getDryRunLifecyclePolicyResult:
+    description: Get result of lifecycle policy dry-run
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - ACTIVE
+          - BLOCKED_BY_BILLING
+          - DELETING
+  container-registry.repositories.listDryRunLifecyclePolicyResults:
+    description: List lifecycle policicy dry-run results
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - ACTIVE
+          - BLOCKED_BY_BILLING
+          - DELETING

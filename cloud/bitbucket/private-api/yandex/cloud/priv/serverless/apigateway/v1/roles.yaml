@@ -1,0 +1,71 @@
+role_groups:
+  api-gateways:
+    name: API Gateways roles
+
+roles:
+  api-gateway.viewer:
+    groups: [serverless]
+    name: ''
+    visibility: public
+    description: Роль для просмотра API-шлюзов
+    permissions:
+      - iam.folders.get
+      - resource-manager.folders.get
+      - serverless.apiGateways.{get,list,listAccessBindings}
+
+  api-gateway.editor:
+    groups: [serverless]
+    name: ''
+    visibility: public
+    description: Роль для редактирования API-шлюзов
+    includedRoles:
+      - api-gateway.viewer
+      - api-gateway.websocketWriter
+    permissions:
+      - serverless.apiGateways.{create,delete,update}
+      - serverless.apiGateways.useNetwork
+      - api-gateway.gateways.createWithWebsockets
+
+  api-gateway.admin:
+    groups: [serverless]
+    name: ''
+    visibility: public
+    description: Роль для администрирования API-шлюзов
+    includedRoles:
+      - api-gateway.editor
+    permissions:
+      - serverless.apiGateways.updateAccessBindings
+
+  api-gateway.websocketWriter:
+    groups: [serverless]
+    name: ''
+    visibility: public
+    description: Роль для работы с веб-сокетами через Websocket Connections API
+    includedRoles:
+      - api-gateway.viewer
+    permissions:
+      - api-gateway.websockets.{get,send,disconnect}
+
+  internal.api-gateway.websockets.alb.agent:
+    groups: [serverless]
+    name: ''
+    visibility: internal
+    description: (Внутренняя) Роль для установления вебсокетного соединения между ALB и function-router
+    permissions:
+      - api-gateway.websockets.internalConnect
+
+  internal.api-gateway.websockets.router.agent:
+    groups: [serverless]
+    name: ''
+    visibility: internal
+    description: (Внутренняя) Роль для управления веб-сокетами в functions-router, предназначена для Websockets Connections API
+    permissions:
+      - api-gateway.websockets.{internalGet,internalSend,internalDisconnect}
+
+  internal.api-gateway.websockets.api.agent:
+    groups: [serverless]
+    name: ''
+    visibility: internal
+    description: (Внутренняя) Роль для управления соединениями в Websockets Connections API, предназначена для function-router
+    permissions:
+      - api-gateway.websockets.{createConnection,getConnection,updateConnection,deleteConnection}

@@ -1,0 +1,352 @@
+permissions:
+  # organizations
+  organization-manager.organizations.create:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: iam.gizmo
+
+  organization-manager.organizations.get:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      organization:
+        status:
+          - CREATING
+          - ACTIVE
+          - DELETING
+    resourceType: organization-manager.organization
+
+  organization-manager.organizations.membership:
+    description: 'Членство в организации'
+    stage: GA
+    visibility: public
+    allowedWhen:
+      organization:
+        status:
+          - CREATING
+          - ACTIVE
+          - DELETING
+    resourceType: organization-manager.organization
+
+  organization-manager.organizations.update:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      organization:
+        status:
+          - ACTIVE
+    resourceType: organization-manager.organization
+
+  organization-manager.organizations.delete:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      organization:
+        status:
+          - ACTIVE
+          - DELETING
+    resourceType: organization-manager.organization
+
+  organization-manager.organizations.listInvitations:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      organization:
+        status:
+          - CREATING
+          - ACTIVE
+          - DELETING
+    resourceType: organization-manager.organization
+
+  organization-manager.organizations.createInvitation:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      organization:
+        status:
+          - ACTIVE
+    resourceType: organization-manager.organization
+
+  organization-manager.organizations.deleteInvitation:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      organization:
+        status:
+          - CREATING
+          - ACTIVE
+          - DELETING
+    resourceType: organization-manager.organization
+
+  organization-manager.organizations.resendInvitation:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      organization:
+        status:
+          - ACTIVE
+    resourceType: organization-manager.organization
+
+  organization-manager.organizations.createInvite:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      organization:
+        status:
+          - ACTIVE
+    resourceType: organization-manager.organization
+
+  organization-manager.organizations.deleteInvite:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      organization:
+        status:
+          - ACTIVE
+          - DELETING
+    resourceType: organization-manager.organization
+
+  organization-manager.organizations.deleteMember:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      organization:
+        status:
+          - ACTIVE
+          - DELETING
+    resourceType: organization-manager.organization
+
+  organization-manager.organizations.listUsers:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      organization:
+        status:
+          - ACTIVE
+    resourceType: organization-manager.organization
+
+  organization-manager.organizations.updateAccessBindings:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      organization:
+        status:
+          - CREATING
+          - ACTIVE
+    resourceType: organization-manager.organization
+
+  organization-manager.organizations.listAccessBindings:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      organization:
+        status:
+          - CREATING
+          - ACTIVE
+          - DELETING
+    resourceType: organization-manager.organization
+
+  # list specified subject organizations
+  organization-manager.organizations.listOrganizations:
+    description: ''
+    stage: GA
+    visibility: public
+    resourceType: iam.userAccount
+
+  organization-manager.organizations.getSettings:
+    description: Returns a single organization settings
+    stage: GA
+    visibility: public
+    allowedWhen:
+      organization:
+        status:
+          - CREATING
+          - ACTIVE
+          - DELETING
+    resourceType: organization-manager.organization
+
+  organization-manager.organizations.updateSettings:
+    description: Updates a single organization settings
+    stage: GA
+    visibility: public
+    allowedWhen:
+      organization:
+        status:
+          - CREATING
+          - ACTIVE
+    resourceType: organization-manager.organization
+
+  # federations
+  organization-manager.federations.create:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      organization:
+        status:
+          - ACTIVE
+    resourceType: organization-manager.organization
+  organization-manager.federations.createCertificate:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      organization:
+        status:
+          - ACTIVE
+    resourceType: organization-manager.federation
+  organization-manager.federations.createUser:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      organization:
+        status:
+          - ACTIVE
+    resourceType: organization-manager.federation
+  organization-manager.federations.delete:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      organization:
+        status:
+          - ACTIVE
+          - DELETING
+    resourceType: organization-manager.federation
+  organization-manager.federations.deleteCertificate:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      organization:
+        status:
+          - ACTIVE
+          - DELETING
+    resourceType: organization-manager.federationCertificate
+  organization-manager.federations.deleteUser:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      organization:
+        status:
+          - ACTIVE
+          - DELETING
+    resourceType: organization-manager.federation
+  organization-manager.federations.get:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      organization:
+        status:
+          - ACTIVE
+          - DELETING
+    resourceType: organization-manager.federation
+  organization-manager.federations.getCertificate:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      organization:
+        status:
+          - ACTIVE
+          - DELETING
+    resourceType: organization-manager.federationCertificate
+  organization-manager.federations.update:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      organization:
+        status:
+          - ACTIVE
+    resourceType: organization-manager.federation
+  organization-manager.federations.updateCertificate:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      organization:
+        status:
+          - ACTIVE
+    resourceType: organization-manager.federationCertificate
+  organization-manager.federations.createGlobal:
+    description: ''
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      organization:
+        status:
+          - ACTIVE
+  organization-manager.federatedUsers.getClaims:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      organization:
+        status:
+          - ACTIVE
+
+  organization-manager.groups.get:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: organization-manager.group
+
+  organization-manager.groups.create:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: organization-manager.organization
+
+  organization-manager.groups.update:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: organization-manager.group
+
+  organization-manager.groups.delete:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: organization-manager.group
+
+  organization-manager.groups.listAccessBindings:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: organization-manager.group
+
+  organization-manager.groups.updateAccessBindings:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: organization-manager.group
+
+  organization-manager.groups.listMembers:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: organization-manager.group
+
+  organization-manager.groups.manageMembers:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: organization-manager.group

@@ -1,0 +1,127 @@
+# this file is used by sandbox/projects/yql/YQLBatchDeployUDF
+
+# full list of UDFs distributed by batches for parallel build
+all:
+  - - yql/udfs/antiadblock/module
+    - yql/udfs/antifraud/compact_storage
+    - yql/udfs/antirobot/decrypt_hypocrisy_fingerprint
+    - yql/udfs/antispam/tmu
+    - yql/udfs/augur/ner
+    - yql/udfs/augur/news
+    - yql/udfs/augur/tokenizer
+    - yql/udfs/common/compress
+    - yql/udfs/common/geo
+    - yql/udfs/common/geohash
+    - yql/udfs/common/h3
+    - yql/udfs/common/html
+    - yql/udfs/common/mime
+    - yql/udfs/common/protobuf
+    - yql/udfs/common/streaming
+    - yql/udfs/common/search_engine
+    - yql/udfs/common/user_agent
+
+  - - yql/udfs/common/xml
+    - yql/udfs/hitman/aggregation_models
+    - yql/udfs/jupiter/annview
+    - yql/udfs/jupiter/arcview
+    - yql/udfs/jupiter/util
+    - yql/udfs/kikimr
+    - yql/udfs/ydb
+    - ydb/library/yql/udfs/logs/dsv
+    - yql/udfs/logs/spiderlog
+    - yql/udfs/logs/spylog
+    - yql/udfs/logs/usersessions
+    - yql/udfs/logs/tamus
+    - yql/udfs/yabs/module
+
+  - - yql/udfs/metrika
+    - yql/udfs/ml/catboost
+    - yql/udfs/ml/dssm
+    - yql/udfs/ml/neocortex
+    - yql/udfs/ml/text_processing
+    - yql/udfs/machine_translation/pt_build
+    - yql/udfs/machine_translation/util
+    - yql/udfs/machine_translation/msp
+    - yql/udfs/news/normalize_url
+    - yql/udfs/modadvert/bigmod
+
+  - - yql/udfs/quality/factors_info
+    - yql/udfs/quality/facts
+    - yql/udfs/quality/gemini
+    - yql/udfs/quality/proto_pool
+    - yql/udfs/quality/ralib
+    - yql/udfs/quality/request_bundle
+    - yql/udfs/quality/search_request
+    - yql/udfs/quality/dssm_tools
+    - yql/udfs/quality/watson
+    - yql/udfs/quality/parse_click_pools
+    - yql/udfs/dj/factorization
+    - yql/udfs/rotor/evlog
+    - yql/udfs/examples/yql_master
+
+  - - yql/udfs/rtmr/kpi
+    - yql/udfs/saas/annotations
+    - yql/udfs/saas/reqans
+    - yql/udfs/sprav/dictionaries
+    - yql/udfs/sprav/similarity
+    - yql/udfs/sprav/unification
+    - yql/udfs/test/protobuf
+    - yql/udfs/test/simple
+    - yql/udfs/test/test_import
+    - yql/udfs/turbo/turbo_urls
+    - yql/udfs/products/canonizer
+    - yql/udfs/video/canonlib
+    - yql/udfs/video/players
+    - yql/udfs/video/vuserdata2
+    - yql/udfs/crypta/id_obfuscator
+    - yql/udfs/crypta/identifiers
+    - yql/udfs/crypta/lemmer
+    - yql/udfs/crypta/soup
+    - yql/udfs/market/mdm
+    - yql/udfs/common/javascript
+    - yql/udfs/aml/aho_corasick
+
+  - - yql/udfs/common/python/python_arc
+
+  # - - yql/udfs/common/python/python2
+
+  - - yql/udfs/common/python/python3
+
+  - - yql/udfs/ml/tensorflow
+    - quality/relev_tools/bert_models/udfs
+    - yql/udfs/market/discount
+    - yql/udfs/market/slug
+
+  - - yql/udfs/quality/web_alice
+    - yql/udfs/quality/configurable_rearrange
+    - yql/udfs/images/robot
+    - yql/udfs/sdc
+    - yql/udfs/blender/factor_storage
+    - yql/udfs/entity/recommender
+    - yql/udfs/alice/wonderlogs
+    - yql/udfs/comdep_analytics/crm_advisor
+
+# UDF that should never be uploaded via API call
+trusted:
+  - yql/udfs/common/clickhouse
+  - ydb/library/yql/udfs/common/clickhouse/client
+  - ydb/library/yql/udfs/common/datetime2
+  - ydb/library/yql/udfs/common/digest
+  - yql/udfs/common/file
+  - ydb/library/yql/udfs/common/histogram
+  - ydb/library/yql/udfs/common/hyperloglog
+  - ydb/library/yql/udfs/common/hyperscan
+  - yql/udfs/common/ip
+  - ydb/library/yql/udfs/common/json
+  - ydb/library/yql/udfs/common/json2
+  - ydb/library/yql/udfs/common/math
+  - ydb/library/yql/udfs/common/pire
+  - ydb/library/yql/udfs/common/re2
+  - ydb/library/yql/udfs/common/set
+  - ydb/library/yql/udfs/common/stat
+  - ydb/library/yql/udfs/common/string
+  - ydb/library/yql/udfs/common/top
+  - ydb/library/yql/udfs/common/topfreq
+  - yql/udfs/common/unicode
+  - yql/udfs/common/url
+  - ydb/library/yql/udfs/common/yson2

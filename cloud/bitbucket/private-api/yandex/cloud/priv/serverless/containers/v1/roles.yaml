@@ -1,0 +1,59 @@
+role_groups:
+  serverless-containers:
+    name: Cloud Containers roles
+
+roles:
+  serverless.containers.viewer:
+    groups: [serverless]
+    name: ''
+    visibility: public
+    description: ''
+    permissions:
+      - iam.folders.get
+      - resource-manager.folders.get
+      - serverless.containers.{get,listAccessBindings}
+
+  serverless.containers.editor:
+    groups: [serverless]
+    name: ''
+    visibility: public
+    description: ''
+    includedRoles:
+      - serverless.containers.viewer
+    permissions:
+      - serverless.containers.invoke
+      - serverless.containers.{create,delete,update}
+      - serverless.containers.useNetwork
+      - serverless.containers.provision
+
+  serverless.containers.admin:
+    groups: [serverless]
+    name: ''
+    visibility: public
+    description: Роль для администрирования облачных контейнеров
+    includedRoles:
+      - serverless.containers.editor
+    permissions:
+      - serverless.containers.updateAccessBindings
+
+  serverless.containers.invoker:
+    groups: [serverless]
+    name: ''
+    visibility: public
+    description: Роль для вызова серверлесс функций
+    permissions:
+    - serverless.containers.invoke
+
+  internal.containersagent:
+    groups: [ serverless ]
+    name: ''
+    visibility: internal
+    description: (Внутренняя) Роль для создания serverless containers
+    permissions:
+      - serverless.functions.setOwnerData
+      - serverless.functions.useSourceDocker
+      - iam.serviceAccounts.use
+      - vpc.subnets.use
+      - "vpc.networks.{list,get}"
+      - "vpc.subnets.{list,get}"
+      - serverless.functions.checkEndUserPermissions

@@ -1,0 +1,771 @@
+syntax = "proto3";
+
+import "ydb/public/api/protos/ydb_operation.proto";
+import "yandex/cloud/priv/validation.proto";
+import "logbroker/public/api/protos/common.proto";
+package NLogBroker.NAdmin;
+
+option cc_enable_arenas = true;
+
+message ExecuteModifyCommandsRequest {
+    Ydb.Operations.OperationParams operation_params = 1;
+
+    repeated SingleModifyRequest actions = 2;
+    // Comment is used only for logging.
+    string comment = 3;
+
+    string token = 111;
+}
+
+message SingleModifyRequest {
+    oneof request {
+        CreateAccountRequest create_account = 71;
+        CreateDirectoryRequest create_directory = 1;
+        CreateTopicRequest create_topic = 2;
+        CreateConsumerRequest create_consumer = 3;
+        CreateReadRuleRequest create_read_rule = 4;
+        CreateAccountTemplateRequest create_account_template = 70;
+        CreateTopicTemplateRequest create_topic_template = 72;
+        CreateConsumerTemplateRequest create_consumer_template = 73;
+        CreateClusterRequest create_cluster = 74;
+        CreateYtConsumerRequest create_yt_consumer = 75;
+        CreateYdbConsumerRequest create_ydb_consumer = 76;
+        CreateShadowClusterRequest create_shadow_cluster = 77;
+        CreateRemoteMirrorRuleRequest create_remote_mirror_rule = 78;
+
+        UpdateDirectoryRequest update_directory = 10;
+        UpdateTopicRequest update_topic = 11;
+        UpdateConsumerRequest update_consumer = 12;
+        UpdateReadRuleRequest update_read_rule = 13;
+        UpdateRemoteMirrorRuleRequest update_remote_mirror_rule = 14;
+
+        UpdateAccountTemplateRequest update_account_template = 80;
+        UpdateAccountRequest update_account = 81;
+        UpdateTopicTemplateRequest update_topic_template = 82;
+        UpdateConsumerTemplateRequest update_consumer_template = 83;
+        UpdateClusterRequest update_cluster = 84;
+        UpdateYtConsumerRequest update_yt_consumer = 85;
+        UpdateShadowClusterRequest update_shadow_cluster = 86;
+
+        SetDirectoryRateLimitRequest set_directory_rate_limit = 40;
+        SetTopicRateLimitRequest set_topic_rate_limit = 41;
+        SetConsumerRateLimitRequest set_consumer_rate_limit = 42;
+        SetMetadataRequest set_metadata = 60;
+
+        RemoveClusterRequest remove_cluster = 94;
+        RemoveAccountRequest remove_account = 91;
+        RemoveDirectoryRequest remove_directory = 20;
+        RemoveTopicRequest remove_topic = 21;
+        RemoveConsumerRequest remove_consumer = 22;
+        RemoveReadRuleRequest remove_read_rule = 23;
+        RemoveDirectoryRateLimitRequest remove_directory_rate_limit = 50;
+        RemoveTopicRateLimitRequest remove_topic_rate_limit = 51;
+        RemoveConsumerRateLimitRequest remove_consumer_rate_limit = 52;
+        RemoveMetadataRequest remove_metadata = 61;
+        RemoveAccountTemplateRequest remove_account_template = 90;
+        RemoveTopicTemplateRequest remove_topic_template = 92;
+        RemoveConsumerTemplateRequest remove_consumer_template = 93;
+        RemoveYtConsumerRequest remove_yt_consumer = 95;
+        RemoveYdbConsumerRequest remove_ydb_consumer = 96;
+        RemoveRemoteMirrorRuleRequest remove_remote_mirror_rule = 97;
+
+        GrantPermissionsRequest grant_permissions = 30;
+        RevokePermissionsRequest revoke_permissions = 31;
+        SetPermissionsRequest set_permissions = 32;
+        ChangeOwnerRequest change_owner = 33;
+
+        AlterAllTopicsRequest alter_all_topics = 62;
+    }
+}
+
+////// DESCRIBE
+message DescribeClusterRequest {
+    Ydb.Operations.OperationParams operation_params = 1;
+
+    string name = 2 [(yandex.cloud.priv.required) = true];
+
+    string token = 111;
+}
+
+message DescribeClusterResponse {
+    Ydb.Operations.Operation operation = 1;
+}
+
+message DescribeClusterResult {
+    string name = 1;
+    ClusterProperties properties = 2;
+    ClusterAdminProperties admin_properties = 3;
+    uint64 creation_time_ms = 20;
+    uint64 modification_time_ms = 21;
+    string created_by = 22;
+    string modified_by = 23;
+}
+
+
+message DescribePathRequest {
+    Ydb.Operations.OperationParams operation_params = 1;
+
+    Path path = 2 [(yandex.cloud.priv.required) = true];
+
+    string token = 111;
+}
+
+message DescribePathResponse {
+    Ydb.Operations.Operation operation = 1;
+}
+
+message DescribePathResult {
+    Path path = 1;
+    oneof result {
+        DescribeAccountResult account = 2;
+        DescribeDirectoryResult directory = 3;
+        DescribeTopicResult topic = 4;
+        DescribeConsumerResult consumer = 5;
+    }
+    uint64 creation_time_ms = 20;
+    uint64 modification_time_ms = 21;
+    string created_by = 22;
+    string modified_by = 23;
+}
+
+message DescribeAccountResult {
+    string name = 1;
+    string parent_template = 2;
+    AccountProperties properties = 3;
+    AccountAdminProperties admin_properties = 10;
+
+    QuotaUsageProperties quota_usage = 8;
+    AdminQuotaUsageProperties admin_quota_usage = 9;
+
+    repeated AccountRateLimitProperties account_rate_limits = 14;
+    repeated DirectoryRateLimitProperties rate_limits = 4; //deprecated
+    repeated Permissions permissions = 5;
+    repeated Permissions effective_permissions = 13;
+
+    repeated Metadata metadata = 7;
+
+    bool is_related_to_caller = 11;
+    string owner = 12;
+}
+
+
+message DescribeDirectoryResult {
+    DirectoryProperties properties = 1;
+    DirectoryAdminProperties admin_properties = 8;
+
+    repeated DirectoryRateLimitProperties rate_limits = 2;
+    repeated InheritedDirectoryRateLimit inherited_rate_limits = 3;
+    repeated Permissions permissions = 4;
+    repeated Permissions effective_permissions = 5;
+
+    repeated Metadata metadata = 7;
+
+    string owner = 9;
+    // Count of immediate directory children
+    uint32 children_count = 10;
+}
+
+message DescribeTopicResult {
+    message Consumer {
+        string path = 1;
+        // Specific topic instances read by the consumer.
+        repeated TopicInstance instances = 2;
+    }
+
+    TopicProperties properties = 1;
+    TopicAdminProperties admin_properties = 2;
+    string parent_template = 3;
+    repeated TopicRateLimitProperties rate_limits = 4;
+    repeated InheritedDirectoryRateLimit inherited_rate_limits = 5;
+    repeated Permissions permissions = 6;
+    repeated Permissions effective_permissions = 7;
+
+    //all read rules that matches this topic
+    repeated ReadRuleAdmin read_rules = 10;
+
+    repeated Metadata metadata = 11;
+
+    string owner = 12;
+    repeated TopicInstance instances = 13;
+    repeated Consumer consumers = 14;
+
+    //all remote mirror rules that matches this topic
+    repeated RemoteMirrorRuleAdmin remote_mirror_rules = 15;
+}
+
+message DescribeConsumerResult {
+    message Topic {
+        string path = 1;
+        // Specific topic instances read by the consumer.
+        repeated TopicInstance instances = 2;
+    }
+
+    ConsumerProperties properties = 1;
+    ConsumerAdminProperties admin_properties = 10;
+
+    string parent_template = 2;
+    repeated ConsumerRateLimitProperties rate_limits = 3;
+    repeated InheritedDirectoryRateLimit inherited_rate_limits = 4;
+    repeated Permissions permissions = 5;
+    repeated Permissions effective_permissions = 6;
+
+    //all read rules that matches this consumer
+    repeated ReadRuleAdmin read_rules = 8;
+
+    repeated Metadata metadata = 9;
+
+    string owner = 11;
+    repeated Topic topics = 12;
+}
+
+message DescribeYtConsumerRequest {
+    Ydb.Operations.OperationParams operation_params = 1;
+
+    Path path = 2 [(yandex.cloud.priv.required) = true];
+    string token = 111;
+}
+
+message DescribeYtConsumerResponse {
+    Ydb.Operations.Operation operation = 1;
+}
+
+message DescribeYtConsumerResult {
+    Path path = 1;
+    YtConsumerProperties properties = 3;
+    uint64 creation_time_ms = 20;
+    uint64 modification_time_ms = 21;
+    string created_by = 22;
+    string modified_by = 23;
+}
+
+message DescribeYdbConsumerRequest {
+    Ydb.Operations.OperationParams operation_params = 1;
+
+    Path path = 2 [(yandex.cloud.priv.required) = true];
+    string token = 111;
+}
+
+message DescribeYdbConsumerResponse {
+    Ydb.Operations.Operation operation = 1;
+}
+
+message DescribeYdbConsumerResult {
+    Path path = 1;
+    uint64 creation_time_ms = 20;
+    uint64 modification_time_ms = 21;
+    string created_by = 22;
+    string modified_by = 23;
+}
+
+message DescribeAccountTemplateRequest {
+    Ydb.Operations.OperationParams operation_params = 1;
+
+    string name = 2 [(yandex.cloud.priv.required) = true];
+    string token = 111;
+}
+
+message DescribeAccountTemplateResponse {
+    Ydb.Operations.Operation operation = 1;
+}
+
+message DescribeAccountTemplateResult {
+    string name = 1;
+    AccountProperties properties = 2;
+    AccountAdminProperties admin_properties = 3;
+    uint64 creation_time_ms = 20;
+    uint64 modification_time_ms = 21;
+    string created_by = 22;
+    string modified_by = 23;
+}
+
+message DescribeTopicTemplateRequest {
+    Ydb.Operations.OperationParams operation_params = 1;
+
+    string name = 2 [(yandex.cloud.priv.required) = true];
+    string token = 111;
+}
+
+message DescribeTopicTemplateResponse {
+    Ydb.Operations.Operation operation = 1;
+}
+
+message DescribeTopicTemplateResult {
+    string name = 1;
+    TopicProperties properties = 2;
+    TopicAdminProperties admin_properties = 3;
+    uint64 creation_time_ms = 20;
+    uint64 modification_time_ms = 21;
+    string created_by = 22;
+    string modified_by = 23;
+}
+
+message DescribeConsumerTemplateRequest {
+    Ydb.Operations.OperationParams operation_params = 1;
+
+    string name = 2 [(yandex.cloud.priv.required) = true];
+    string token = 111;
+}
+
+message DescribeConsumerTemplateResponse {
+    Ydb.Operations.Operation operation = 1;
+}
+
+message DescribeConsumerTemplateResult {
+    string name = 1;
+    ConsumerProperties properties = 2;
+    ConsumerAdminProperties admin_properties = 3;
+    uint64 creation_time_ms = 20;
+    uint64 modification_time_ms = 21;
+    string created_by = 22;
+    string modified_by = 23;
+}
+
+////// LIST
+message ListClustersRequest {
+    Ydb.Operations.OperationParams operation_params = 1;
+    string token = 111;
+}
+
+message ListClustersResponse {
+    Ydb.Operations.Operation operation = 1;
+}
+
+message ListClustersResult {
+    repeated string names = 1;
+}
+
+message ListAccountsRequest {
+    Ydb.Operations.OperationParams operation_params = 1;
+    string token = 111;
+}
+
+message ListAccountsResponse {
+    Ydb.Operations.Operation operation = 1;
+}
+
+message ListAccountsResult {
+    repeated string names = 1;
+}
+
+message ListDirectoryRequest {
+    Ydb.Operations.OperationParams operation_params = 1;
+
+    Path path = 2 [(yandex.cloud.priv.required) = true];
+    string token = 111;
+}
+
+message ListDirectoryResponse {
+    Ydb.Operations.Operation operation = 1;
+}
+
+message ListDirectoryResult {
+    Path path = 1;
+    Entry self = 2;
+
+    repeated Entry children = 3;
+}
+
+message ListYtConsumersRequest {
+    Ydb.Operations.OperationParams operation_params = 1;
+    string token = 111;
+}
+
+message ListYtConsumersResponse {
+    Ydb.Operations.Operation operation = 1;
+}
+
+message ListYtConsumersResult {
+    repeated string names = 1;
+}
+
+message ListYdbConsumersRequest {
+    Ydb.Operations.OperationParams operation_params = 1;
+    string token = 111;
+}
+
+message ListYdbConsumersResponse {
+    Ydb.Operations.Operation operation = 1;
+}
+
+message ListYdbConsumersResult {
+    repeated string names = 1;
+}
+
+message ListAccountTemplatesRequest {
+    Ydb.Operations.OperationParams operation_params = 1;
+    string token = 111;
+}
+
+message ListAccountTemplatesResponse {
+    Ydb.Operations.Operation operation = 1;
+}
+
+message ListAccountTemplatesResult {
+    repeated string names = 1;
+}
+
+message ListTopicTemplatesRequest {
+    Ydb.Operations.OperationParams operation_params = 1;
+    string token = 111;
+}
+
+message ListTopicTemplatesResponse {
+    Ydb.Operations.Operation operation = 1;
+}
+
+message ListTopicTemplatesResult {
+    repeated string names = 1;
+}
+
+message ListConsumerTemplatesRequest {
+    Ydb.Operations.OperationParams operation_params = 1;
+    string token = 111;
+}
+
+message ListConsumerTemplatesResponse {
+    Ydb.Operations.Operation operation = 1;
+}
+
+message ListConsumerTemplatesResult {
+    repeated string names = 1;
+}
+
+////// CREATE
+message CreateClusterRequest {
+    string name = 1 [(yandex.cloud.priv.required) = true];
+    ClusterProperties properties = 2;
+    ClusterAdminProperties admin_properties = 3;
+}
+
+message CreateShadowClusterRequest {
+    string name = 1 [(yandex.cloud.priv.required) = true];
+    string shadow_for = 2 [(yandex.cloud.priv.required) = true];
+    ClusterProperties properties = 3;
+    ClusterAdminProperties admin_properties = 4;
+}
+
+message CreateAccountRequest {
+    string name = 1 [(yandex.cloud.priv.required) = true];
+    string parent_template = 2;
+    AccountProperties properties = 3;
+    AccountAdminProperties admin_properties = 4;
+}
+
+message CreateDirectoryRequest {
+    Path path = 1;
+
+    DirectoryProperties properties = 2;
+    DirectoryAdminProperties admin_properties = 3;
+}
+
+message CreateTopicRequest {
+    Path path = 1;
+    string parent_template = 2;
+    TopicProperties properties = 3;
+    TopicAdminProperties admin_properties = 4;
+}
+
+message CreateConsumerRequest {
+    Path path = 1;
+    string parent_template = 2;
+    ConsumerProperties properties = 3;
+    ConsumerAdminProperties admin_properties = 4;
+
+}
+
+message CreateReadRuleRequest {
+    ReadRuleKey read_rule = 1;
+    ReadRuleProperties properties = 2;
+    ReadRuleAdminProperties admin_properties = 3;
+}
+
+message CreateRemoteMirrorRuleRequest {
+    RemoteMirrorRuleKey remote_mirror_rule = 1;
+    RemoteMirrorRuleProperties properties = 2;
+    RemoteMirrorRuleAdminProperties admin_properties = 3;
+}
+
+message CreateYtConsumerRequest {
+    Path path = 1 [(yandex.cloud.priv.required) = true];
+    string parent_template = 2;
+    ConsumerProperties consumer_properties = 3;
+    ConsumerAdminProperties consumer_admin_properties = 5;
+    YtConsumerProperties yt_consumer_properties = 4;
+}
+
+message CreateYdbConsumerRequest {
+    Path path = 1 [(yandex.cloud.priv.required) = true];
+    string parent_template = 2;
+    ConsumerProperties consumer_properties = 3;
+    ConsumerAdminProperties consumer_admin_properties = 5;
+}
+
+message CreateAccountTemplateRequest {
+    string name = 1 [(yandex.cloud.priv.required) = true];
+    AccountProperties properties = 2;
+    AccountAdminProperties admin_properties = 3;
+}
+
+
+message CreateTopicTemplateRequest {
+    string name = 1 [(yandex.cloud.priv.required) = true];
+    TopicProperties properties = 2;
+    TopicAdminProperties admin_properties = 3;
+}
+
+message CreateConsumerTemplateRequest {
+    string name = 1 [(yandex.cloud.priv.required) = true];
+    ConsumerProperties properties = 2;
+    ConsumerAdminProperties admin_properties = 3;
+}
+
+////// UPDATE
+message UpdateClusterRequest {
+    string name = 1 [(yandex.cloud.priv.required) = true];
+    ClusterProperties properties = 2;
+    ClusterAdminProperties admin_properties = 3;
+}
+
+message UpdateShadowClusterRequest {
+    string name = 1 [(yandex.cloud.priv.required) = true];
+    string shadow_for = 2 [(yandex.cloud.priv.required) = true];
+    ClusterProperties properties = 3;
+    ClusterAdminProperties admin_properties = 4;
+}
+
+message UpdateAccountRequest {
+    string name = 1 [(yandex.cloud.priv.required) = true];
+    AccountProperties properties = 2;
+    AccountAdminProperties admin_properties = 3;
+
+}
+
+message UpdateDirectoryRequest {
+    Path path = 1;
+    DirectoryProperties properties = 2;
+    DirectoryAdminProperties admin_properties = 3;
+}
+
+message UpdateTopicRequest {
+    Path path = 1;
+    TopicProperties properties = 2;
+    TopicAdminProperties admin_properties = 3;
+}
+
+message UpdateConsumerRequest {
+    Path path = 1;
+    ConsumerProperties properties = 2;
+    ConsumerAdminProperties admin_properties = 3;
+}
+
+
+message UpdateReadRuleRequest {
+    ReadRuleKey read_rule = 1;
+    ReadRuleProperties properties = 2;
+    ReadRuleAdminProperties admin_properties = 3;
+
+}
+
+message UpdateYtConsumerRequest {
+    Path path = 1 [(yandex.cloud.priv.required) = true];
+    YtConsumerProperties properties = 2;
+    // Update of consumer properties can be done by UpdateConsumerRequest for corresponding consumer
+}
+
+message UpdateAccountTemplateRequest {
+    string name = 1 [(yandex.cloud.priv.required) = true];
+    AccountProperties properties = 2;
+    AccountAdminProperties admin_properties = 3;
+}
+
+message UpdateTopicTemplateRequest {
+    string name = 1 [(yandex.cloud.priv.required) = true];
+    TopicProperties properties = 2;
+    TopicAdminProperties admin_properties = 3;
+}
+
+message UpdateConsumerTemplateRequest {
+    string name = 1 [(yandex.cloud.priv.required) = true];
+    ConsumerProperties properties = 2;
+    ConsumerAdminProperties admin_properties = 3;
+}
+
+message UpdateRemoteMirrorRuleRequest {
+    RemoteMirrorRuleKey remote_mirror_rule = 1;
+    RemoteMirrorRuleProperties properties = 2;
+    RemoteMirrorRuleAdminProperties admin_properties = 3;
+}
+
+////// SET
+message SetDirectoryRateLimitRequest {
+    Path path = 1;
+    DirectoryRateLimitProperties rate_limit = 2;
+}
+
+message SetTopicRateLimitRequest {
+    Path path = 1;
+    TopicRateLimitProperties rate_limit = 2;
+}
+
+message SetConsumerRateLimitRequest {
+    Path path = 1;
+    ConsumerRateLimitProperties rate_limit = 2;
+}
+
+message SetMetadataRequest {
+    Path path = 1;
+    Metadata metadata = 2;
+}
+
+////// REMOVE
+message RemoveClusterRequest {
+    string name = 1 [(yandex.cloud.priv.required) = true];
+}
+
+message RemoveAccountRequest {
+    string name = 1 [(yandex.cloud.priv.required) = true];
+    // Drop everithing inside account too.
+}
+
+message RemoveDirectoryRequest {
+    Path path = 1;
+}
+
+message RemoveTopicRequest {
+    Path path = 1;
+}
+
+message RemoveConsumerRequest {
+    Path path = 1;
+}
+
+message RemoveReadRuleRequest {
+    ReadRuleKey read_rule = 1;
+}
+
+message RemoveRemoteMirrorRuleRequest {
+    RemoteMirrorRuleKey remote_mirror_rule = 1;
+}
+
+message RemoveYtConsumerRequest {
+    Path path = 1 [(yandex.cloud.priv.required) = true];
+}
+
+message RemoveYdbConsumerRequest {
+    Path path = 1 [(yandex.cloud.priv.required) = true];
+}
+
+message RemoveDirectoryRateLimitRequest {
+    ClusterKey cluster = 2;
+    Path path = 1;
+}
+
+message RemoveTopicRateLimitRequest {
+    ClusterKey cluster = 2;
+    Path path = 1;
+}
+
+message RemoveConsumerRateLimitRequest {
+    ClusterKey cluster = 2;
+    Path path = 1;
+}
+
+message RemoveMetadataRequest {
+    Path path = 1;
+    string key = 2 [(yandex.cloud.priv.required) = true];
+}
+
+message RemoveAccountTemplateRequest {
+    string name = 1 [(yandex.cloud.priv.required) = true];
+}
+
+message RemoveTopicTemplateRequest {
+    string name = 1 [(yandex.cloud.priv.required) = true];
+}
+
+message RemoveConsumerTemplateRequest {
+    string name = 1 [(yandex.cloud.priv.required) = true];
+}
+
+////// ACCESS CONTROL
+message GrantPermissionsRequest {
+    Path path = 1;
+    repeated Permissions permissions = 2;
+}
+
+message RevokePermissionsRequest {
+    Path path = 1;
+    repeated Permissions permissions = 2;
+}
+
+message SetPermissionsRequest {
+    Path path = 1;
+    repeated Permissions permissions = 2;
+}
+
+message ChangeOwnerRequest {
+    Path path = 1;
+    string owner = 2 [(yandex.cloud.priv.required) = true];
+}
+
+////// SPECIAL
+
+message AlterAllTopicsRequest {
+}
+
+////// VERSIONS AND LOG
+message GetCurrentVersionRequest {
+    Ydb.Operations.OperationParams operation_params = 1;
+    // If 0 - then show current progress. Otherwise wait for applying this version to all clusters.
+    uint64 desired_version = 2 [(yandex.cloud.priv.required) = true];
+}
+
+message GetCurrentVersionResponse {
+    Ydb.Operations.Operation operation = 1;
+}
+
+message GetCurrentVersionResult {
+    // Last known version of config.
+    uint64 version = 1;
+    // Last applied to clusters version of config.
+    uint64 current_version = 2;
+}
+
+message GetBackendVersionsRequest {
+    Ydb.Operations.OperationParams operation_params = 1;
+}
+
+message GetBackendVersionsResponse {
+    Ydb.Operations.Operation operation = 1;
+}
+
+message GetBackendVersionsResult {
+    message BackendVersion {
+        // Name of backend.
+        string name = 1;
+        // last applied version of config to this backend.
+        uint64 version = 2;
+    }
+    repeated BackendVersion backend_versions = 1;
+}
+
+message GetCommandsLogRequest {
+    Ydb.Operations.OperationParams operation_params = 1;
+    // Get command logs only starting from this version of config.
+    uint64 start_version = 2;
+    // How much log records to get.
+    uint32 logs_count = 3;
+}
+
+message GetCommandsLogResponse {
+    Ydb.Operations.Operation operation = 1;
+}
+
+message GetCommandsLogResult {
+    message TLogEntry {
+        uint64 version = 1;
+        ExecuteModifyCommandsRequest request = 2;
+    }
+    repeated TLogEntry log_enties = 1;
+}
+

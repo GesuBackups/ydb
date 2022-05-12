@@ -1,0 +1,40 @@
+role_groups:
+  support:
+    name: Support roles
+  support.chats:
+    name: Roles of support chats
+
+roles:
+  internal.support.ticketsCreator:
+    groups: [support]
+    name: Support Internal
+    visibility: internal
+    description: Privileged Ticket Creation
+    permissions:
+      - support.tickets.internalCreate
+      - support.tickets.internalClose
+      - support.tickets.internalUpdate
+  internal.support.chats.viewer:
+    groups: [support.chats]
+    name: Support chat viewer
+    visibility: internal
+    description: Viewer role at support chats
+    permissions:
+      - support.chats.read
+  internal.support.chats.operator:
+    groups: [support.chats]
+    name: Support chat operator
+    visibility: internal
+    description: Operator role at support chats
+    permissions:
+      - support.chats.read
+      - support.chats.write
+  internal.support.chats.admin:
+    groups: [support.chats]
+    name: Support chat admin
+    visibility: internal
+    description: Admin role at support chats
+    permissions:
+      - support.chats.read
+      - support.chats.write
+      - support.chats.delete

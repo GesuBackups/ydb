@@ -1,0 +1,225 @@
+role_groups:
+  ydb:
+    name: YDB roles
+
+roles:
+  yc.yandex-team.ru.ydb.admin:
+    groups: [ydb]
+    visibility: internal
+    name: Администратор YDB
+    description: роль разрешает все действия в YDB
+    includedRoles:
+      - ydb.admin
+
+  yc.yandex-team.ru.ydb.viewer:
+    groups: [ydb]
+    name: YDB Reader
+    visibility: internal
+    description: роль разрешает просмотр схемы таблиц и чтение данные из таблиц в базах YDB
+    includedRoles:
+      - ydb.viewer
+
+  yc.yandex-team.ru.ydb.editor:
+    groups: [ydb]
+    name: YDB Editor
+    visibility: internal
+    description: роль разрешает просмотр схемы таблиц, создание, изменение и удаление таблиц, чтение, удаление и запись данных в таблицы в базах YDB
+    includedRoles:
+      - ydb.editor
+
+  internal.ydbagent:
+    groups: [ydb]
+    name: Агент YDB
+    visibility: internal
+    description: Роль для доступа сервисного аккаунта YDB к пользовательским облакам
+    includedRoles:
+      - internal.vpc.address.yandexOnlyAdmin
+    permissions:
+    - compute.images.get
+    - compute.images.use
+    - compute.disks.get
+    - compute.disks.use
+    - compute.snapshots.get
+    - compute.snapshots.use
+    - compute.instanceGroups.{create,delete,update,stop,start}
+    - compute.instanceGroups.{get,list}
+    - compute.instances.create
+    - compute.instances.createCustomFqdn
+    - compute.instances.createMultiInterface
+    - compute.instances.{internalCreate,internalUpdate,createNvmeDisks,updateNvmeDisks}
+    - computeInternal.images.get
+    - computeInternal.instances.create
+    - computeInternal.instances.createCustomFqdn
+    - computeInternal.instances.createMultiInterface
+    - computeInternal.snapshots.get
+    - iam.serviceAccounts.crossCloudBindings
+    - vpc.addresses.createExternal
+    - vpc.addresses.get
+    - vpc.addresses.use
+    - vpc.networks.get
+    - vpc.subnets.get
+    - vpc.subnets.use
+    - vpc.networks.manageDnsRecords
+    - vpcInternal.networks.manageDnsRecords # TODO(yesworld): Remove me.
+    - ydb.databases.alter
+    - ydb.databases.connect
+    - ydb.databases.create
+    - ydb.databases.drop
+    - ydb.databases.{get,list}
+    - ydb.tables.alter
+    - ydb.tables.drop
+    - ydb.tables.list
+    - ydb.tables.{create,delete,update}
+
+  internal.ydbmonitoringadmin:
+    groups: [ydb]
+    name: ''
+    visibility: internal
+    description: Full access to internal YDB monitoring
+    permissions:
+    - ydbInternal.monitoring.delete
+    - ydbInternal.monitoring.edit
+    - ydbInternal.monitoring.view
+
+  internal.ydb.controlPlaneAgent:
+    groups: [ydb]
+    name: 'YDB Control Plane Agent'
+    visibility: internal
+    description: Internal role for Control Plane
+    permissions:
+    - ydb.databases.connect
+    - ydb.databases.create
+    - ydb.databases.list
+
+  ydb.viewer.pseudo:
+    groups: [ydb]
+    name: ''
+    description: ''
+    visibility: public
+    pseudorole: true
+    permissions:
+      - ydb.databases.connect
+      - ydb.databases.{get,list}
+      - ydb.tables.list
+      - ydb.quotas.get
+      - ydb.backups.get
+
+  ydb.support:
+    groups: [ydb, support]
+    name: Support YDBaaS
+    description: Role for support engineers
+    visibility: internal
+    includedRoles:
+      - ydb.viewer.pseudo
+    permissions:
+      - ydb.quotas.updateLimit
+
+  ydb.supportAdmin:
+    groups: [ydb, support]
+    name: Support YDBaaS Admin
+    description: Privileged operations for support engineers
+    visibility: internal
+    includedRoles:
+      - ydb.support
+    permissions: []
+
+  # https://st.yandex-team.ru/CLOUD-39389
+  ydb.sloChecker:
+    groups: [ydb]
+    name: YDB SLO checker
+    visibility: internal
+    description: Роль для SLO роботов YDB
+    permissions:
+    - ydb.databases.connect
+    - ydb.databases.{get,list}
+    - ydb.tables.list
+    - ydb.tables.{create,delete,update}
+
+  # https://st.yandex-team.ru/SLYDB-132
+  internal.ydb.serverlessAgent:
+    groups: [ydb]
+    name:        YDB Serverless agent
+    visibility:  internal
+    description: Роль для YDB Serverless
+    permissions:
+    - ydb.databases.connect
+    - ydb.databases.{get,list}
+
+  # https://st.yandex-team.ru/CLOUD-53102
+  internal.ydb.connect:
+    groups: [ydb]
+    name: YDB Connect
+    visibility: internal
+    description: роль разрешает устанавливать соединение с базой YDB
+    permissions:
+      - ydb.databases.connect
+
+  ydb.viewer:
+    groups: [ydb]
+    name: YDB Reader
+    visibility: public
+    description: роль разрешает просмотр схемы таблиц и чтение данные из таблиц в базах YDB
+    permissions:
+      - resource-manager.folders.get
+      - resource-manager.clouds.get
+      - iam.folders.get
+      - ydb.databases.connect
+      - ydb.databases.{get,list}
+      - ydb.tables.list
+      - ydb.backups.get
+      - ydb.quotas.get
+      - ydb.databases.listAccessBindings
+      - ydb.backups.listAccessBindings
+
+  ydb.editor:
+    groups: [ydb]
+    name: YDB Editor
+    visibility: public
+    description: роль разрешает просмотр схемы таблиц, создание, изменение и удаление таблиц, чтение, удаление и запись данных в таблицы в базах YDB
+    includedRoles:
+      - ydb.viewer
+    permissions:
+      - ydb.backups.delete
+      - ydb.databases.create
+      - ydb.databases.alter
+      - ydb.databases.restore
+      - ydb.databases.backup
+      - ydb.databases.drop
+      - ydb.databases.start
+      - ydb.databases.stop
+      - ydb.tables.alter
+      - ydb.tables.create
+      - ydb.tables.delete
+      - ydb.tables.drop
+      - ydb.tables.update
+      - ydb.streams.write      
+
+  ydb.admin:
+    groups: [ydb]
+    name: Администратор YDB
+    visibility: public
+    description: роль разрешает все действия в YDB
+    includedRoles:
+      - ydb.editor
+    permissions:
+      - ydb.databases.{listAccessBindings,updateAccessBindings}
+      - ydb.backups.{listAccessBindings,updateAccessBindings}
+
+  ydb.onCall:
+    groups: [ydb]
+    name: YDB on-call engineer
+    visibility: internal
+    description: ydb oncall role
+    includedRoles:
+      - onCall
+      - ydb.viewer
+
+  ydb.onCallAdmin:
+    groups: [ydb]
+    name: YDB on-call Admin
+    visibility: internal
+    description: ydb oncall admin role
+    includedRoles:
+      - ydb.onCall
+    permissions:
+      - ydb.databases.alter

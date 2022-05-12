@@ -1,0 +1,5 @@
+resources:
+  logging.group:
+    parents:
+    - resource-manager.folder
+ 

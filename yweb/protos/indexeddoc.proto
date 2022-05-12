@@ -1,0 +1,307 @@
+package NRealTime;
+
+option optimize_for = SPEED;
+
+import "yweb/protos/indexdata.proto";
+import "yweb/protos/hostfactors.proto";
+import "yweb/protos/docfactors.proto";
+import "yweb/protos/navsource.proto";
+import "yweb/protos/orange.proto";
+import "yweb/realtime/protos/option.proto";
+import "yweb/robot/kiwi_queries/others/lib/indexannportion/input/annotations.proto";
+import "kernel/search_zone/protos/searchzone.proto";
+
+/*
+ * About TIndexedDoc
+ *
+ *
+ */
+message TIndexedDoc {
+    enum ELogelType {
+        DocLogel = 0;
+        UpdUrlLogel = 1;
+        LinkLogel = 2;
+        UpdateLogel = 3;
+    };
+    enum EKeyType {
+        DocUrl = 0;
+        Host = 1;
+        Owner = 2;
+    };
+    enum EEntryType {
+        Word = 0;
+        Attribute = 1;
+        Zone = 2;
+    };
+    message TEntry {
+        required bytes Key = 1;
+        repeated fixed32 Positions = 2;
+        optional EEntryType Type = 3 [default = Word];
+    };
+    message TAttr {
+        enum TAttrType {
+            I16 = 0;
+            I32 = 1;
+            I64 = 2;
+            BAD = 3;
+        };
+        required string Name = 1;
+        required string Value = 2;
+        required uint32 Type = 3;
+        optional TAttrType SizeOfInt = 4 [default = BAD];
+    };
+    message TLinkEntry {
+        required bytes Key = 1;
+        required float Weight = 2;
+        repeated fixed32 Positions = 3;
+    };
+    message TLinkDatum {
+        optional uint32 AnchorData = 1;
+        optional bytes XMapBlock = 2;
+    };
+    message TUpdateMetaInfo {
+        enum EDataSelection {
+            GroupAttributes = 0;
+            Fillers = 1;
+        };
+
+        enum EAction {
+            UpdateValues = 0;
+        };
+
+        optional EDataSelection DataSelection = 1;
+        optional EAction Action = 2;
+    };
+    message TMapType {
+        optional string Name = 1;
+        optional bytes Data = 2;
+    };
+    message TMap2D {
+        optional string Name = 1;
+        repeated bytes Data = 2;
+    };
+    message TExtendedMapEntry {
+        optional bytes Data = 1;
+        optional uint64 Id = 2;
+    };
+    message TExtendedMap {
+        optional string Name = 1;
+        repeated TExtendedMapEntry Entries = 2;
+    };
+    message TExportRankRecord {
+        optional float Value = 1;
+        optional string Type = 2;
+        optional string Version = 3;
+    }
+
+    required string Url = 1;
+    optional bytes Text = 2;
+    repeated TEntry Entries = 3;            // Obsolete. Use for tests only.
+    optional bytes Archive = 4;             // Deprecated. Use Archives[WebTextArchive]
+    optional bytes PackedAttrList = 5;
+    repeated TAttr Attrs = 6;
+    optional THostFactors HostFactors = 7;
+    repeated TLinkEntry LinkEntries = 8;    // Obsolete. Use for tests only.
+    optional bytes LinkArchive = 9;         // Deprecated. Use Archives[WebLinkArchive]
+    optional uint64 DMapBlock = 10;
+    repeated TLinkDatum LinkData = 13;
+    repeated uint32 Lerf = 14;
+    optional bytes DocLinkErfInfo = 15;     // Deprecated. Use Erfs[SDocErf2Info]
+    optional TDocFactors DocFactors = 16;
+    optional uint32 PR = 17;                // Deprecated. Use Erfs[SDocErf2Info]
+    optional string DaterDate = 18;
+    optional string DaterDate2 = 19;
+    optional string DaterStats = 20;
+    optional ELogelType LogelType = 21 [default = DocLogel];
+    optional uint32 UpdUrlLogelFlags = 22;
+    optional uint64 DownloadTime = 23;
+    optional bytes FullArchive = 24;
+    optional bytes SentencesLength = 25;
+    optional uint64 RemoveTime = 26;
+// Don't reuse 'NavInfo' id with another type till 2013/03/21
+//  optional TNavInfo NavInfo = 27; // Obsolete. Do not use!
+    optional bytes ErfInfo = 28;    // Deprecated. Use Erfs[SDocErf2Info]
+    repeated fixed64 UrlHashes = 29;
+    optional NRobot.TNavInfo NavInfoUtf = 30;
+    repeated TIndexData IndicesData = 31;
+    repeated TUpdateMetaInfo UpdateMetaInfos = 32;
+    optional bytes Erf2Info = 33;   // Deprecated. Use Erfs[SDocErf2Info]
+    optional bytes HostErfInfo = 34;
+    optional float ExportRank = 35; // Orange's ExportRank
+    optional string ExportRankVersion = 36; // MD5 of formula file
+    repeated TMapType Erfs = 37;        // keys: SDocErf2Info(ex-Erf2Info), TMangoErfInfo, TMangoHerfInfo
+    repeated TMapType Archives = 38;    // keys: WebTextArchive(Archive), WebLinkArchive(LinkArchive), MangoTextArchive, MangoLinkArchive
+    repeated TMap2D Xmaps = 39;     // keys: TMangoLinkInfo
+    optional fixed64 UrlId = 40;    // urlHash from Erf
+    repeated TExtendedMap ExtendedMap = 41; // map for miscellaneous 2D arrays
+    optional string RealUrl = 42; // real url of document
+    repeated NOrangeData.TTimeAnnotation TimeAnnotations = 43; // timing datas for document
+    repeated TExportRankRecord ExportRankData =  44; // Orange's ExportRank of all types (russian, turkish)
+    optional bytes KiwiObject = 45; // kiwi indexed data
+    optional string KiwiError = 46; // kiwi proccessing error
+    optional EKeyType KeyType = 47 [default = DocUrl];
+    repeated TMapType WadLumps = 48;
+    optional string Version = 49; // indexer version
+} // next tag is 50
+
+/*
+ * Indexer deposit of indexed document
+ *
+ * When indexer produces next document available for indexing, the document is sent
+ * to distributor server to store and distribute to multiple search indexes.
+ *
+ */
+message TIndexedDocDeposit {
+    optional string UrlId    = 1;       // normalized urlid
+    optional bytes  Doc      = 2;       // document to deposit. serialized TIndexedDoc
+    repeated string Stream   = 4;       // stream document belongs to, ex: en, ru, multiple streams can be used
+    optional double Rank     = 5;       // document rank
+    repeated string Attrs    = 6;       // document attributes
+    optional fixed64 UrlKey  = 7;       // Url key for sharding
+    optional uint64 DistTime = 8 [default = 0]; // Upstream distributor (deposit) time in seconds (if set)
+    optional uint64 Version  = 9 [default = 0];
+    optional bool   Broadcast = 10 [default = false];
+}
+
+/*
+ * Acknolegement for Indexer deposit of the document
+ *
+ */
+message TIndexedDocDepSlip {
+    enum EStatus {
+        Ok = 1;              // response contains document for indexing
+        Reject = 2;          // no room for document
+        Error = 3;           // distributor has problem with your request
+    }
+
+    required EStatus Status = 1;   // one of the OK, REJECT, ERROR
+    optional string StatusMsg = 2; // detailed message for status
+}
+
+
+/*
+ * Search Engine request of document
+ *
+ * Search Engine pulls documents for indexing from partitioned repository of documents
+ * located in Distributor database. When requested, search engine provides Distributor
+ * cookie in form of Distributor internal document identification. First request should
+ * contain default value for Cookie, which is 0. All subsequent requests should supply
+ * Cookie value obtained in the previous response.
+ *
+ */
+message TIndexedDocRequest {
+    optional fixed64 Cookie = 1 [default=0];                    // send me next document after this id
+    optional fixed64 RangeStart = 2 [default=0];                // beginning of this search index range of documents
+    optional fixed64 RangeEnd = 3 [default=0xFFFFFFFFFFFFFFFF]; // end of this search index range of documents
+    optional fixed64 Age = 4;                                   // desired age of the doc. Used if cookie is not set
+    optional string Stream = 6;                                 // send documents from a stream, ex: en, ru
+    optional double MinRank = 7;                                // send documents whose rank is higher than MinRank
+    repeated string Attrs = 8;                                  // send documents containing one or more attributes from Attrs
+    optional uint32 MaxChunks = 9 [default = 1];
+    optional uint32 MaxResponseSize = 10;                       // respond with total size less than MaxResponseSize
+    optional bool SignaturesOnly = 11;
+    optional bool ClientActive = 12;
+    optional string ClientId = 13;
+}
+
+message TFetchRequest {
+    required uint64 Key = 1;
+    required string Stream = 2;
+    required TDistributorChunk.TSignature Signature = 3;
+}
+
+/*
+ * Distributor response for document
+ *
+ * Distributor maintains flow of documents available for indexing
+ * and respond to search engine requrest for next document to index.
+ * This response contains the cookie that should be send back in
+ * TIndexedDocRequest to obtain next document for indexing.
+ *
+ */
+message TDistributorChunk {
+    message TSignature {
+        optional string Id = 1;
+        optional uint64 Version = 2;
+        optional uint64 Cookie = 3;
+        optional uint64 Position = 4;
+    }
+    message TRecord {
+        required fixed64 Key  = 1; // id of the data. used for sharding
+        optional bytes Datum  = 2; // payload
+        optional double Rank  = 3; // document rank
+        repeated string Attrs = 4; // document attributes
+        optional uint64 DistTime = 5 [default = 0]; // Upstream distributor (deposit) time in seconds (if set)
+        optional TSignature Signature = 6;
+        optional bool Broadcast = 7;
+    };
+    repeated TRecord Record = 1;
+}
+message TIndexedDocResponse {
+    enum EStatus {
+        Ok = 1;              // response contains document for indexing
+        Reject = 2;          // no documents available for indexing
+        Error = 3;           // distributor has problem with your request
+        TryAgain = 4;        // distributor is not ready to serve request
+    }
+
+    required EStatus Status = 1;   // one of the OK, REJECT, ERROR, TRYAGAIN
+    required fixed64 Cookie = 2;   // use this id to request next document
+    optional fixed64 Age    = 3;   // age of the chunk
+    optional TDistributorChunk Chunk = 4;  // serialized docs.
+    optional string StatusMsg = 5; // detailed message for status
+}
+
+message TIndexedDocBulkResponse {
+    repeated TIndexedDocResponse Response = 1;
+    optional uint32 ResponseSizeAvailable = 2;   // if TIndexedDocRequest::MaxResponseSize is too small
+}
+
+message TClientInfoRequest {
+    required string Stream = 1;
+}
+
+message TClientInfoResponse {
+    enum EStatus {
+        Ok = 1;
+        Error = 2;
+    }
+    message TClientInfo {
+        required string Id = 1;
+        required uint64 LastAccess = 2;
+        required uint64 LastCookie = 3;
+        required uint64 RangeStart = 4;
+        required uint64 RangeEnd = 5;
+        required bool Active = 6;
+        required bool SignaturesOnly = 7;
+    }
+    required EStatus Status = 1;
+    required fixed64 Timestamp = 2;
+    repeated TClientInfo ClientInfo = 3;
+}
+
+// %% {{a name="TRealTimeIndexerRequest"}} **~RealTimeIndexerRequest request** %%
+message TRealTimeIndexerRequest {
+    required bytes Logel = 1; // page content returned by spider
+    optional string ServiceName = 7;            // indexer service desired
+    repeated TOption ProcessOptions = 8;        // real time changed rtindexer process options
+    optional NRTYServer.TZone ExtraSearchZones = 9;    // additional search zones
+    optional string ExternalUrl = 10;           // external Url
+    optional fixed64 ExternalUrlId = 11;         // external UrlId
+    optional bool DirectBroadmatch = 12 [default = false]; // not show direct's documents
+    optional NIndexAnn.NTriggerInput.TAnnotations Annotations = 13; // for annotations index
+}
+
+// %% {{a name="TRealTimeIndexerResponse"}} **~RealTimeIndexerRequest response** %%
+message TRealTimeIndexerResponse {
+    enum EResult {
+        INDEXER_OK = 0;
+        INDEXER_FAIL = 1;
+        INDEXER_SKIP = 2; // NOINDEX flag is set on document.
+    }
+    optional EResult IndexerResult = 1; // Indexer result
+    optional string  IndexerReason = 2; // a message from Indexer. i.e. reason for failure
+    optional bytes   Doc = 3;           // Indexed document. serialized TIndexedDoc
+    optional float   ExportRank = 4;    // Probability to be shown
+    repeated TIndexedDoc.TExportRankRecord ExportRankData = 5; //  Probability to be shown in russia or turkey
+}

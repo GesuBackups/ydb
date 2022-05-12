@@ -1,0 +1,3 @@
+resources:
+  cdn.resource:
+    parents: [resource-manager.folder]

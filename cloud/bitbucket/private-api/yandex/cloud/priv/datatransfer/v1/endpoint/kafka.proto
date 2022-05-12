@@ -1,0 +1,72 @@
+syntax = "proto3";
+
+package yandex.cloud.priv.datatransfer.v1.endpoint;
+
+option go_package = "a.yandex-team.ru/cloud/bitbucket/private-api/yandex/cloud/priv/datatransfer/v1/endpoint;tm_server_endpoint";
+
+import "yandex/cloud/priv/datatransfer/v1/endpoint/common.proto";
+import "yandex/cloud/priv/datatransfer/v1/endpoint/yds.proto";
+import "yandex/cloud/priv/sensitive.proto";
+
+enum KafkaMechanism {
+    KAFKA_MECHANISM_UNSPECIFIED = 0;
+    // SHA 256
+    KAFKA_MECHANISM_SHA256 = 1;
+    // SHA 512
+    KAFKA_MECHANISM_SHA512 = 2;
+}
+message KafkaConnectionOptions {
+    oneof connection {
+        // Managed Kafka
+        string cluster_id = 1;
+        // On Premise
+        OnPremiseKafka on_premise = 2;
+    }
+}
+message OnPremiseKafka {
+    // Broker URLs
+    repeated string broker_urls = 1;
+    // SSL
+    bool ssl_enabled = 2;
+    // PEM Certificate
+    // 
+    // Certificate for database connection.
+    string pem_file_content = 3;
+    // Network interface for endpoint
+    // 
+    // Default: public IPv4.
+    string subnet_id = 4;
+}
+message KafkaAuth {
+    oneof security {
+        // SASL
+        KafkaSaslSecurity sasl = 1;
+        // No Authentication
+        NoAuth no_auth = 2;
+    }
+}
+message KafkaSaslSecurity {
+    // User Name
+    string user = 1;
+    // Password
+    string password = 2 [(sensitive) = true];
+    // Mechanism
+    KafkaMechanism mechanism = 3;
+}
+message NoAuth {
+}
+message KafkaSource {
+    KafkaConnectionOptions connection = 1;
+    KafkaAuth auth = 2;
+    repeated string security_groups = 3;
+    string topic_name = 4;
+    DataTransformationOptions transformer = 5;
+    ConvertRecordOptions converter = 6;
+}
+message KafkaTarget {
+    KafkaConnectionOptions connection = 1;
+    KafkaAuth auth = 2;
+    repeated string security_groups = 3;
+    string topic_name = 4;
+    string topic_prefix = 5;
+}

@@ -1,0 +1,51 @@
+permissions:
+  hcctrl.healthCheckGroups.get:
+    description: Get health check group
+    stage: GA
+    visibility: internal
+  hcctrl.healthCheckGroups.update:
+    description: Update health check group
+    stage: GA
+    visibility: internal
+  hcctrl.healthCheckGroups.delete:
+    description: Delete health check group
+    stage: GA
+    visibility: internal
+  hcctrl.healthCheckGroups.updateForcedStatuses:
+    description: Update forced statuses
+    stage: GA
+    visibility: internal
+  hcctrl.healthCheckGroups.getHealth:
+    description: Get target health
+    stage: GA
+    visibility: internal
+
+  hcctrlInternal.healthCheckGroupTargets.updateStatus:
+    description: Update target status
+    stage: GA
+    visibility: internal
+  hcctrlInternal.healthCheckGroupTargets.get:
+    description: Get targets
+    stage: GA
+    visibility: internal
+  hcctrlInternal.healthCheckGroups.get:
+    description: Get health check groups
+    stage: GA
+    visibility: internal
+
+  hcaas.healthCheckGroups.get:
+    description: Get health check group
+    stage: GA
+    visibility: internal
+  hcaas.healthCheckGroups.update:
+    description: Update health check group
+    stage: GA
+    visibility: internal
+  hcaas.healthCheckGroups.delete:
+    description: Delete health check group
+    stage: GA
+    visibility: internal
+  hcaas.healthCheckGroups.getHealth:
+    description: Get target health
+    stage: GA
+    visibility: internal

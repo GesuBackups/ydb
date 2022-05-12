@@ -1,0 +1,110 @@
+role_groups:
+  yds:
+    name: Data Streams roles
+
+roles:
+  yc.yandex-team.ru.yds.admin:
+    groups: [yds]
+    visibility: internal
+    name: Администратор YDS
+    description: роль разрешает все действия в YDS
+    includedRoles:
+      - ydb.admin
+# TODO: replace with permissions after they will be developed
+
+  yc.yandex-team.ru.yds.viewer:
+    groups: [yds]
+    name: YDS Reader
+    visibility: internal
+    description: роль разрешает чтение из потоков и просмотр настроек потоков YDS
+    includedRoles:
+      - ydb.viewer
+# TODO: replace with permissions after they will be developed
+
+  yc.yandex-team.ru.yds.editor:
+    groups: [yds]
+    name: YDS Editor
+    visibility: internal
+    description: роль разрешает запись и чтение из потоков YDS, а так же просмотр и изменение настроек потоков
+    includedRoles:
+      - ydb.editor
+# TODO: replace with permissions after they will be developed
+
+  yds.admin:
+    groups: [yds]
+    name: Администратор YDS
+    visibility: public
+    description: роль разрешает все действия в YDS
+    includedRoles:
+      - ydb.admin
+    permissions:
+      - ydb.streams.write      
+# TODO: replace with permissions after they will be developed
+
+  yds.viewer:
+    groups: [yds]
+    name: YDS Viewer
+    visibility: public
+    description: роль разрешает чтение из потоков и просмотр настроек потоков YDS
+    includedRoles:
+      - ydb.viewer
+# TODO: replace with permissions after they will be developed
+
+  yds.editor:
+    groups: [yds]
+    name: YDS Editor
+    visibility: public
+    description: роль разрешает запись и чтение из потоков YDS, а так же просмотр и изменение настроек потоков
+    includedRoles:
+      - ydb.editor
+      - yds.writer
+# TODO: replace with permissions after they will be developed
+
+  yds.writer:
+    groups: [yds]
+    name: YDS Writer
+    visibility: public
+    description: роль разрешает запись в потоки YDS
+    permissions:
+      - ydb.streams.write
+      - ydb.databases.connect
+
+# TODO: replace with permissions after they will be developed
+
+  yds.support:
+    groups: [yds, support]
+    name: Support Yandex Data Streams (YDS)
+    description: Role for support engineers
+    visibility: internal
+    includedRoles:
+      - ydb.support
+    permissions: []
+
+  yds.supportAdmin:
+    groups: [yds, support]
+    name: Support Yandex Data Streams(YDS) Admin
+    description: Privileged operations for support engineers
+    visibility: internal
+    includedRoles:
+      - yds.support
+    permissions: []
+
+  yds.onCall:
+    groups: [yds]
+    name: OnCall  Yandex Data Streams (YDS)
+    description: Role for OnCall engineers
+    visibility: internal
+    includedRoles:
+      - onCall
+      - yds.viewer
+    permissions: []
+
+  yds.onCallAdmin:
+    groups: [yds]
+    name: OnCallAdmin Yandex Data Streams (YDS)
+    description: Role for OnCallAdmin engineers
+    visibility: internal
+    includedRoles:
+      - yds.onCall
+      - yds.admin
+    permissions: []

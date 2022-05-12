@@ -1,0 +1,40 @@
+====================BSD-3-Clause====================
+# SPDX-License-Identifier: BSD-3-Clause
+
+
+====================BSD-3-Clause====================
+/* SPDX-License-Identifier: BSD-3-Clause
+
+
+====================BSD-3-Clause====================
+The DPDK uses the Open Source BSD-3-Clause license for the core libraries
+
+
+====================COPYRIGHT====================
+ * Copyright(c) 2010-2013 Intel Corporation.
+ * Copyright(c) 2014-2017 Wind River Systems, Inc.
+
+
+====================COPYRIGHT====================
+ * Copyright(c) 2010-2016 Intel Corporation.
+ * Copyright(c) 2014 6WIND S.A.
+
+
+====================COPYRIGHT====================
+ * Copyright(c) 2015-2018 Intel Corporation
+
+
+====================COPYRIGHT====================
+ * Copyright(c) 2015-2019 Intel Corporation
+
+
+====================COPYRIGHT====================
+ * Copyright(c) 2017 Intel Corporation
+
+
+====================COPYRIGHT====================
+ * Copyright(c) 2018-2019 Intel Corporation
+
+
+====================COPYRIGHT====================
+ * Copyright(c) 2019 Intel Corporation

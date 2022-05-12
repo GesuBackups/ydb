@@ -1,0 +1,30 @@
+package NAnti;
+
+message TKeyType {
+    enum TType {
+        MASK = 0;
+        OWNER = 1;
+    };
+    
+    required TType Type = 1;
+};
+
+message TMaskData {
+    optional bool IsRdr = 1;
+    optional bool IsSpam = 2;
+    optional bool IsInfected = 3;
+    optional bool IsPornoAdv = 4;
+    optional bool IsYellowAdv = 5;
+    optional bool IsPopunder = 6;
+    optional bool IsClickunder = 7;
+    optional int32 TrashAdv = 8;
+    optional int32 PornoWeight = 9;
+    optional bool IsAudioAdv = 10;
+    optional double DirectAdv = 11;
+}
+
+message TOwnerData {
+    optional bool IsSpam = 1;
+    optional int32 PessimizeLevel = 2;
+    optional bool IsFraud = 3;
+}

@@ -1,0 +1,3 @@
+resources:
+  managed-sqlserver.cluster:
+    parents: [resource-manager.folder]

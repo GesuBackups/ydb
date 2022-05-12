@@ -1,0 +1,220 @@
+import "yweb/robot/js/rotor/blink/proto/modules.proto";
+import "yweb/robot/js/rotor/blink/proto/pdf.proto";
+import "yweb/robot/js/rotor/blink/proto/script.proto";
+import "yweb/robot/js/rotor/proto/trace.proto";
+
+package NZoraPb;
+
+// KEEP IT SYNCED WITH NJs::ERotorTaskType
+enum ERotorTaskType {
+    RTT_DEFAULT = 0;
+    RTT_SAMOVAR = 1;
+    RTT_ALICE = 2;
+    RTT_GEOSEARCH_PIN = 3;
+}
+
+message TJsOpts {
+    // TODO: it's not clear whether we need these fields or not
+    // TODO: ZoraMockOptions
+    // TODO: Language
+
+    // TODO: these fields are set inside rotor?
+    // ClientAddress
+
+    enum ECompression {
+        CM_UNKNOWN = 0;
+        CM_NONE    = 1;
+        CM_SNAPPY  = 2;
+        CM_GZIP    = 3;
+    }
+
+    enum EScreenshotMode {
+        //! Скриншот только того, что попадает в указанный viewport
+        ViewportOnly    = 0;
+        //! Область скриншота адаптируется под размер контента
+        FullVisible     = 1;
+        //! Только body; делает resize, если body больше окна
+        ModeBodyOnly = 2;
+    }
+
+    enum EStylesMode {
+        StylesMatched           = 0;
+        StylesComputed          = 1;
+        StylesMatchedComputed   = 2;
+        StylesCustomized        = 3;
+    }
+
+    message TScreenshotOpts {
+        optional bool   Enable          = 1 [default = false];
+        optional EScreenshotMode Mode   = 2 [default = FullVisible];
+    }
+
+    message TDomLayoutOpts {
+        optional bool           Enable                  = 1 [default = false];
+        optional bool           EnableStyle             = 2 [default = false];
+        optional EStylesMode    StylesMode              = 3 [default = StylesMatched];
+        repeated string         CustomMatchedStyles     = 4;
+        repeated string         CustomComputedStyles    = 5;
+
+        // DomLayout in old format (takes more space)
+        // result will be returned in DomLayoutOld field
+        optional bool           OldFormat           = 10 [default = false];
+    }
+
+    message TMhtmlOpts {
+        optional bool Enable = 1 [default=false];
+    }
+
+    //! Параметры выполнения html-документа.
+    message THtml {
+        //! Если опция активирована, то дочерние фреймы встраиваются в итоговый html.
+        optional bool EnableFrames    = 1 [default = true];
+        optional bool EnableImages    = 2 [default = false];
+        optional bool EnableJs        = 3 [default = true];
+        optional bool EnableTabWaiter = 4 [default = true];
+    }
+
+    message TFilter {
+        optional bool   EnableAdblock = 1 [default = true];
+        optional bool   EnableStyles  = 2 [default = true];
+        optional string FilterSet     = 3 [default = "default"];
+    }
+
+    message TPlugins {
+        optional bool Flash = 1 [default = true];
+    }
+
+    message TViewport {
+        optional uint32 Width = 1 [default=1280];
+        optional uint32 Height = 2 [default=960];
+    }
+
+    //! Настройки эмуляции мобильников
+    message TMobileEmulation {
+        // Включает обработку meta viewport и скейлинг страницы
+        optional bool Enable = 1 [default=false];
+        // Если в meta viewport не будут указаны minimum-scale and maximum-scale, то будем использовать эти значения лимитов
+        // MinDefaultScale получено приблизительно экспериментально через google mobile friendly tool для ширины 375px
+        optional float MinDefaultScaleFactor = 2 [default=0.385];
+        optional float MaxDefaultScaleFactor = 3 [default=2.0];
+        // Если переопределить эту опцию, то будет другой ответ window.devicePixelRatio и CSS media queries
+        optional float DeviceScaleFactor = 4 [default=1.0];
+    }
+
+    message TCookie {
+        optional string Url          = 1;// If not specified, then request Url is used
+        optional string CookieString = 2;// In Set-Cookie header form ("name=value; attr1=val1")
+    }
+
+    message TOutputFormats {
+        //! Алгоритм сжатия, применяемый для ответов.
+        optional ECompression       Compression     = 1 [default = CM_NONE];
+        //! Html оригинального документа
+        optional bool               OriginalHtml    = 10;
+        //! Html-текст после рендеринга.
+        optional bool               Html            = 11 [default = true];
+        //! Html-дерево с вычисленными праметрами узлов.
+        optional TDomLayoutOpts     DomLayout       = 12;
+        //! Скриншот страницы.
+        optional TScreenshotOpts    Screenshot      = 13;
+        optional TMhtmlOpts         Mhtml           = 14;
+        optional NBlink.TPdfOptions        Pdf             = 15;
+    }
+
+    //! Настройки трейса
+    message TTraceOptions {
+        optional bool ResourceDetails       = 1; // Заголовки, тела (если еще и IncludeResourceBody), ZoraDiag
+        optional bool IncludeAllExecutions  = 2; // Включить в трейс все стадии исполнения, иначе только последнюю
+        optional bool IncludeResourceBody   = 3; // Включать тела ресурсов в детали
+    }
+
+
+    optional THtml          Html            = 1;
+    optional TFilter        Filter          = 2;
+    optional TPlugins       Plugins         = 3;
+    optional TViewport      Viewport        = 4;
+    optional TMobileEmulation Mobile        = 5;
+    //! Unconditionally wait before serializing result
+    optional uint32 SnapshotTimeoutSeconds  = 6;
+
+    optional NBlink.NScriptExecution.TRequest Script = 10;
+
+    //! Куки, которые должны быть выставлены при выполнении запроса
+    repeated TCookie        Cookies         = 20;
+    //! При выполнении данного запроса
+    //! не брать какие-либо ресурсы из кэша.
+    optional bool           NoCache         = 21;
+
+    optional TOutputFormats Output          = 30;
+    optional TTraceOptions  TraceOptions    = 31;
+
+    optional uint32         Priority        = 40 [default = 5];
+
+    optional ERotorTaskType TaskType = 50 [default=RTT_DEFAULT];
+    optional string TaskData = 51;
+    optional NBlink.TModuleOptions ModuleOptions = 52;
+
+    extensions 900 to 999; // for zora internal use
+}
+
+
+message TJsResult {
+    //TODO: Charset - maybe move to postprocessing
+    //TODO: Language - postprocessing?
+    //TODO: ZoraMockData
+
+    enum EStatus {
+        UNKNOWN               =  0; // Произошла ошибка, еще неизвестная клиенту. Должно быть первым, см. http://stackoverflow.com/questions/10392952
+        OK                    =  1; // Все хорошо
+        ERROR                 =  2; // Общая ошибка
+        QUEUE_REJECT          =  3; // Запрос не принят, т.к. очередь запросов слишком велика
+        QUEUE_TIMEOUT         =  4; // Запрос простоял в очереди слишком долго
+        UNKNOWN_SOURCE        =  5; // Неизвестный Source в запросе
+        UNKNOWN_IP            =  6; // Незивестный IP адрес отправителя
+        QUOTA_EXCEEDED        =  7; // Квота исчерпана
+        FETCH_BODY            =  8; // Не удалось скачать базовый html
+        WRONG_MIMETYPE        =  9; // Неправильный mimetype
+        WRONG_URL             = 10; // URL некорректен
+        WRONG_REQUEST         = 11; // Некорректные параметры запроса (регион, запрещенные опции и т.д.)
+        TOO_MANY_REDIRECTS    = 12; // Слишком много редиректов при скачивании тела
+        WRONG_URL_IN_REDIRECT = 13; // Некорректный редирект при скачивании тела
+        BLINK_ERROR           = 14; // Ошибка при выполнении задачи в Blink
+        BLINK_DISCONNECTED    = 15; // Blink отключился при выполнении задачи (3 раза)
+        BLINK_TIMEOUT         = 16; // Таймаут при выполнении задачи в Blink
+        BLINK_LOAD_FAILED     = 17; // Blink не смог загрузить задачу
+        ZORA_MOCK_ERROR       = 18; // ZoraMock не нашел нужной записи
+        READY_QUEUE_TIMEOUT   = 19; // Запрос простоял в очереди готовых к исполнению документов слишком долго
+        LARGE_RESPONSE        = 20; // Ответ оказался слишком велик для передачи
+        POST_PROC_TIMEOUT     = 21; // Таймаут в постобработке
+    }
+
+    message TOutputResults {
+        optional TJsOpts.ECompression Compression   = 1;
+        optional bytes          OriginalHtml    = 2;
+        optional bytes          Html            = 3;
+        optional bytes          DomLayout       = 4;
+        optional bytes          Screenshot      = 5;
+        optional bytes          Mhtml           = 6;
+        optional bytes          Pdf             = 7;
+
+        optional bytes          OriginalHttpHeaders = 10;
+
+        // старый формат dom-дерева
+        optional bytes          DomLayoutOld    = 29;
+    }
+
+    optional EStatus        Status          = 1;
+    optional string         ErrorStr        = 2;
+    optional uint32         HttpCode        = 3;
+
+    // All URLs in redirects chain including original and final ones
+    repeated string         UrlChain        = 10; // after zora release, rename to _DEPRECATED and eventually (in a year?) remove
+    optional TOutputResults Output          = 11;
+
+    optional NBlink.NScriptExecution.TResponse ScriptResult = 20;
+
+    optional NJs.TTrace     Trace           = 30;
+
+    optional string         TaskResultData = 40;
+}
+

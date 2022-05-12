@@ -1,0 +1,1091 @@
+permissions:
+  vpc.resources.stream:
+    description: Stream resources for accounting
+    stage: GA
+    visibility: internal
+    resourceType: iam.gizmo
+
+  vpc.operations.get:
+    description: Get operation
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  vpc.operations.list:
+    description: List operations
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  vpc.useIpv6:
+    description: 'Allows ip6 in all VPC objects'
+    stage: VPC_IPV6_ALPHA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  vpc.internal.useYandexIpv6Cidr:
+    description: 'Allows usage of yandex ipv6 cirds for subnets'
+    stage: VPC_IPV6_ALPHA
+    visibility: internal
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  vpc.internal.slfSubnets.create:
+    description: 'Create special serverless function subnet'
+    stage: GA
+    visibility: internal
+  vpc.internal.slfInterfaces.replug:
+    description: 'Plug/Unplug special serverless interface'
+    stage: GA
+    visibility: internal
+  vpc.internal.slfInterfaces.createDetached:
+    description: 'Allow creation of detached serverless interfaces'
+    stage: GA
+    visibility: internal
+  vpc.addressOperations.list:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  vpc.addresses.createExternal:
+    description: Create external address
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  vpc.addresses.createInternal:
+    description: Create internal address
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  vpc.addresses.delete:
+    description: Delete address
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - ACTIVE
+          - BLOCKED_BY_BILLING
+          - DELETING
+  vpc.addresses.get:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  vpc.addresses.list:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  vpc.addresses.update:
+    description: Update address
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  vpc.addresses.use:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  vpc.addresses.useHints:
+    description: Use address requirements hints
+    stage: GA
+    visibility: internal
+  vpc.addresses.useCustomFipBucket:
+    description: Create address from custom fip-bucket
+    stage: GA
+    visibility: internal
+  vpc.addresses.createYandexOnly:
+    description: Create address from yandex-only fip-bucket
+    stage: GA
+    visibility: internal
+  vpc.addresses.createYandexServices:
+    description: Create address from yandex-services fip-bucket
+    stage: VPC_YANDEX_SERVICES
+    visibility: internal
+  vpc.addresses.createSpecific:
+    description: Allocate specific address
+    stage: GA
+    visibility: internal
+  vpc.featureFlags.get:
+    description: Get FeatureFlag
+    stage: GA
+    visibility: internal
+    resourceType: iam.gizmo
+  vpc.featureFlags.list:
+    description: List FeatureFlags
+    stage: GA
+    visibility: internal
+    resourceType: iam.gizmo
+  vpc.featureFlags.create:
+    description: Create FeatureFlag
+    stage: GA
+    visibility: internal
+    resourceType: iam.gizmo
+  vpc.featureFlags.delete:
+    description: Delete FeatureFlag
+    stage: GA
+    visibility: internal
+    resourceType: iam.gizmo
+  vpc.featureFlags.listForScope:
+    description: List FeatureFlags for ScopeId
+    stage: GA
+    visibility: internal
+    resourceType: iam.gizmo
+  vpc.featureFlags.switch:
+    description: Enable or disable FeatureFlag
+    stage: GA
+    visibility: internal
+    resourceType: iam.gizmo
+  vpc.featureFlags.getWhiteList:
+    description: Set FeatureFlag whitelist
+    stage: GA
+    visibility: internal
+    resourceType: iam.gizmo
+  vpc.featureFlags.editWhiteList:
+    description: Edit FeatureFlag whitelist
+    stage: GA
+    visibility: internal
+    resourceType: iam.gizmo
+  vpc.featureFlags.getBlackList:
+    description: Set FeatureFlag blacklist
+    stage: GA
+    visibility: internal
+    resourceType: iam.gizmo
+  vpc.featureFlags.editBlackList:
+    description: Edit FeatureFlag blacklist
+    stage: GA
+    visibility: internal
+    resourceType: iam.gizmo
+  vpc.featureFlags.editTagsList:
+    description: Edit FeatureFlag tags list
+    stage: GA
+    visibility: internal
+    resourceType: iam.gizmo
+  vpc.featureFlagOperations.list:
+    description: List FeatureFlag operations
+    stage: GA
+    visibility: internal
+    resourceType: iam.gizmo
+  vpc.instances.manageRouting:
+    description: 'Modify instance routing parameters'
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  vpc.networkOperations.list:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  vpc.networks.bridge:
+    description: Bridge network with others
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  vpc.networks.configureExternalAccess:
+    description: Configure external access to network
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  vpc.networks.create:
+    description: Create network
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  vpc.networks.createRouteTable:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  vpc.networks.createSubnet:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  vpc.networks.delete:
+    description: Delete network
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - ACTIVE
+          - BLOCKED_BY_BILLING
+          - DELETING
+  vpc.networks.get:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  vpc.networks.list:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  vpc.networks.manageRouting:
+    description: 'Modify network routing parameters'
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  vpc.networks.update:
+    description: Update network
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  vpc.networks.use:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  vpc.networks.createDefaultSecurityGroup:
+    description: 'Available creating default security group in new networks'
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  vpc.networks.createSecurityGroup:
+    description: 'Create security group for network'
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  vpc.networks.updateSecurityGroup:
+    description: 'Update security group rules for network'
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  vpc.networks.deleteSecurityGroup:
+    description: 'Delete security group for network'
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  vpc.networks.security.addEgressRule:
+    description: 'Add egress rules in network security groups'
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  vpc.networks.security.deleteEgressRule:
+    description: 'Delete egress rules in network security groups'
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  vpc.networks.security.addIngressRule:
+    description: 'Add ingress rules in network security groups'
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  vpc.networks.security.deleteIngressRule:
+    description: 'Delete ingress rules in network security groups'
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  vpc.networks.manageDnsRecords:
+    description: ''
+    stage: GA
+    visibility: internal
+  vpc.subnetOperations.list:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  vpc.subnets.create:
+    description: Create subnetwork
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  vpc.subnets.assignExtraParams:
+    description: Assign extra params
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  vpc.subnets.delete:
+    description: Delete subnetwork
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - ACTIVE
+          - BLOCKED_BY_BILLING
+          - DELETING
+  vpc.subnets.get:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  vpc.subnets.list:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  vpc.subnets.listUsedAddresses:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  vpc.subnets.manageRouting:
+    description: 'Modify subnet routing parameters'
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  vpc.subnets.update:
+    description: Update subnetwork
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  vpc.subnets.use:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  vpc.subnets.useEgressNat:
+    description: ''
+    stage: EGRESS_NAT_ALPHA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  vpc.subnets.assignDhcpOptions:
+    description: 'Modify subnet dhcp parameters'
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  vpc.routeTableOperations.list:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  vpc.routeTables.create:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  vpc.routeTables.delete:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - ACTIVE
+          - BLOCKED_BY_BILLING
+          - DELETING
+  vpc.routeTables.get:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  vpc.routeTables.list:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  vpc.routeTables.update:
+    description: 'Update rules in security group'
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  vpc.routeTables.use:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  vpc.securityGroupOperations.list:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  vpc.securityGroups.create:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  vpc.securityGroups.delete:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - ACTIVE
+          - BLOCKED_BY_BILLING
+          - DELETING
+  vpc.securityGroups.get:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  vpc.securityGroups.list:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  vpc.securityGroups.update:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  vpc.securityGroups.updateMeta:
+    description: 'Update name / description / labels for security group'
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  vpc.securityGroups.updateRuleMeta:
+    description: 'Update description / labels for security group rule'
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  vpc.securityGroups.use:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  vpc.securityGroups.createDefaultSecurityGroup:
+    description: 'Special permission for creating default security group in existed networks'
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+    resourceType: resource-manager.folder
+  vpc.securityGroups.deleteDefaultSecurityGroup:
+    description: 'Special permission for deleting default security group in existed networks'
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+    resourceType: resource-manager.folder
+
+  vpc.gateways.get:
+    description: 'Get gateway'
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+
+  vpc.gateways.create:
+    description: 'Create gateway'
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+
+  vpc.gateways.update:
+    description: 'Update gateway'
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+
+  vpc.gateways.delete:
+    description: 'Delete gateway'
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+
+  vpc.gateways.use:
+    description: 'Use gateway'
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+
+  vpc.fipBuckets.create:
+    description: ''
+    stage: GA
+    visibility: internal
+  vpc.fipBuckets.delete:
+    description: ''
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - ACTIVE
+          - BLOCKED_BY_BILLING
+          - DELETING
+  vpc.fipBuckets.get:
+    description: ''
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  vpc.fipBuckets.list:
+    description: ''
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  vpc.fipBuckets.update:
+    description: ''
+    stage: GA
+    visibility: internal
+  vpcInternal.instances.manageRouting:
+    description: ''
+    stage: GA
+    visibility: internal
+  vpcInternal.fipBuckets.create:
+    description: ''
+    stage: GA
+    visibility: internal
+  vpcInternal.fipBuckets.delete:
+    description: ''
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - ACTIVE
+          - BLOCKED_BY_BILLING
+          - DELETING
+  vpcInternal.fipBuckets.get:
+    description: ''
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  vpcInternal.fipBuckets.list:
+    description: ''
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  vpcInternal.fipBuckets.update:
+    description: ''
+    stage: GA
+    visibility: internal
+  # TODO(yesworld): Remove me.
+  vpcInternal.networks.manageDnsRecords:
+    description: ''
+    stage: GA
+    visibility: internal
+  vpcInternal.networks.manageRouting:
+    description: ''
+    stage: GA
+    visibility: internal
+  vpcInternal.subnets.manageRouting:
+    description: ''
+    stage: GA
+    visibility: internal
+  vpcInternal.computeInternal.use:
+    description: Use vpc-api ComputeInternalService
+    stage: GA
+    visibility: internal
+  vpc.quotas.get:
+    description: Get cloud limit
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  vpc.quotas.updateLimit:
+    description: Set cloud limit
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - billSuspend
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  vpcInternal.monops.use:
+    description: Use monops web tool (permission for user)
+    stage: GA
+    visibility: internal
+
+  vpc.ports.get:
+    description: (Internal) Get port from vpc-config (vpi-api)
+    stage: GA
+    visibility: internal
+    resourceType: iam.gizmo
+  vpc.ports.batchGet:
+    description: (Internal) Get batch of ports from vpc-config (vpi-api)
+    stage: GA
+    visibility: internal
+    resourceType: iam.gizmo
+
+  vpcctrl.ports.create:
+    description: Create ports in vpc-control
+    stage: GA
+    visibility: internal
+    resourceType: iam.gizmo
+  vpcctrl.ports.delete:
+    description: Delete port in vpc-control
+    stage: GA
+    visibility: internal
+    resourceType: iam.gizmo
+  vpcctrl.ports.update:
+    description: Update port in vpc-control
+    stage: GA
+    visibility: internal
+    resourceType: iam.gizmo
+  vpcctrl.ports.forcedelete:
+    description: ForceDelete port in vpc-control
+    stage: GA
+    visibility: internal
+    resourceType: iam.gizmo
+
+  vpcctrl.microOperations.get:
+    description: Get microOperation from vpc-control
+    stage: GA
+    visibility: internal
+    resourceType: iam.gizmo
+  vpcctrl.microOperations.retry:
+    description: Retry microOperation in vpc-control
+    stage: GA
+    visibility: internal
+    resourceType: iam.gizmo
+  vpcctrl.microOperations.cancel:
+    description: Cancel microOperation in vpc-control
+    stage: GA
+    visibility: internal
+    resourceType: iam.gizmo
+  vpcctrl.microOperations.add:
+    description: (Internal) Add microOperation in vpc-control
+    stage: GA
+    visibility: internal
+    resourceType: iam.gizmo
+  vpcctrl.microOperations.update:
+    description: (Internal) Update microOperation in vpc-control
+    stage: GA
+    visibility: internal
+    resourceType: iam.gizmo
+
+  vpcctrl.locations.register:
+    description: (Internal) Register location in vpc-control
+    stage: GA
+    visibility: internal
+    resourceType: iam.gizmo
+  vpcctrl.locations.unregister:
+    description: (Internal) Unregister location in vpc-control
+    stage: GA
+    visibility: internal
+    resourceType: iam.gizmo
+  vpcctrl.locations.listObjectIdentifiers:
+    description: (Internal) List ObjectIdentifiers for location in vpc-control
+    stage: GA
+    visibility: internal
+    resourceType: iam.gizmo
+  vpcctrl.locations.list:
+    description: (Internal) List Locations for ObjectIdentifier in vpc-control
+    stage: GA
+    visibility: internal
+    resourceType: iam.gizmo
+
+  vpcnode.ports.list:
+    description: (Internal) List ports in vpc-node
+    stage: GA
+    visibility: internal
+    resourceType: iam.gizmo
+  vpcnode.ports.get:
+    description: (Internal) Get port in vpc-node
+    stage: GA
+    visibility: internal
+    resourceType: iam.gizmo
+  vpcnode.ports.reload:
+    description: (Internal) Reload port in vpc-node
+    stage: GA
+    visibility: internal
+    resourceType: iam.gizmo
+  vpcnode.ports.create:
+    description: (Internal) Create port in vpc-node
+    stage: GA
+    visibility: internal
+    resourceType: iam.gizmo
+  vpcnode.ports.delete:
+    description: (Internal) Delete port in vpc-node
+    stage: GA
+    visibility: internal
+    resourceType: iam.gizmo
+  vpcnode.ports.update:
+    description: (Internal) Update port in vpc-node
+    stage: GA
+    visibility: internal
+    resourceType: iam.gizmo

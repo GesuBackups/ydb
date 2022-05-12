@@ -1,0 +1,137 @@
+permissions:
+  ymq.messages.changeVisibility:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  ymq.messages.delete:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - ACTIVE
+          - BLOCKED_BY_BILLING
+          - DELETING
+  ymq.messages.receive:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  ymq.messages.send:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  ymq.queues.create:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  ymq.queues.delete:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - ACTIVE
+          - BLOCKED_BY_BILLING
+          - DELETING
+  ymq.queues.getAttributes:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  ymq.queues.getUrl:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  ymq.queues.list:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  ymq.queues.listDeadLetterSourceQueues:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  ymq.queues.purge:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  ymq.queues.setAttributes:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE

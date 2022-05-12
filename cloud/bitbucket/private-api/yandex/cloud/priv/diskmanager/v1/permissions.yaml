@@ -1,0 +1,366 @@
+permissions:
+  disk-manager.disks.create:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: resource-manager.folder
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  disk-manager.disks.delete:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: resource-manager.folder
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - ACTIVE
+        - BLOCKED_BY_BILLING
+        - DELETING
+  disk-manager.disks.update:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: resource-manager.folder
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  disk-manager.disks.get:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: resource-manager.folder
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - ACTIVE
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - DELETING
+  disk-manager.disks.list:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: resource-manager.folder
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - ACTIVE
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - DELETING
+  disk-manager.disks.read:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: resource-manager.folder
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  disk-manager.disks.write:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: resource-manager.folder
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  disk-manager.images.create:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: resource-manager.folder
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  disk-manager.images.delete:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: resource-manager.folder
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - ACTIVE
+        - BLOCKED_BY_BILLING
+        - DELETING
+  disk-manager.images.update:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: resource-manager.folder
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  disk-manager.images.get:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: resource-manager.folder
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - ACTIVE
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - DELETING
+  disk-manager.images.list:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: resource-manager.folder
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - ACTIVE
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - DELETING
+  disk-manager.images.read:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: resource-manager.folder
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  disk-manager.images.write:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: resource-manager.folder
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  disk-manager.operations.create:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: resource-manager.folder
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  disk-manager.operations.delete:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: resource-manager.folder
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - ACTIVE
+        - BLOCKED_BY_BILLING
+        - DELETING
+  disk-manager.operations.update:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: resource-manager.folder
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  disk-manager.operations.get:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: resource-manager.folder
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - ACTIVE
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - DELETING
+  disk-manager.operations.list:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: resource-manager.folder
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - ACTIVE
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - DELETING
+  disk-manager.operations.read:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: resource-manager.folder
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  disk-manager.operations.write:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: resource-manager.folder
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  disk-manager.snapshots.create:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: resource-manager.folder
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  disk-manager.snapshots.delete:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: resource-manager.folder
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - ACTIVE
+        - BLOCKED_BY_BILLING
+        - DELETING
+  disk-manager.snapshots.update:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: resource-manager.folder
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  disk-manager.snapshots.get:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: resource-manager.folder
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - ACTIVE
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - DELETING
+  disk-manager.snapshots.list:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: resource-manager.folder
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - ACTIVE
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - DELETING
+  disk-manager.snapshots.read:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: resource-manager.folder
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  disk-manager.snapshots.write:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: resource-manager.folder
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  disk-manager.filesystems.create:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: resource-manager.folder
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  disk-manager.filesystems.delete:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: resource-manager.folder
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - ACTIVE
+        - BLOCKED_BY_BILLING
+        - DELETING
+  disk-manager.filesystems.update:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: resource-manager.folder
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE

@@ -1,0 +1,76 @@
+service: yt
+title: YT Development
+ci:
+  secret: sec-01enjp9kbaykjntv4x4fegp6m2
+
+  runtime:
+    sandbox-owner: YT
+
+  autocheck:
+    strong: true
+    large-autostart:
+      - target: yt/yt/tests/integration/tests/*
+      - target: yt/yt/tests/integration/compat/*
+      - target: yt/python/yt/wrapper/tests
+      - target: yt/python/yt/wrapper/new_system_python_tests
+#      - target: yt/yt/core/net/unittests
+#        platform: default-darwin-x86_64
+#      - target: yt/yt/core/bus/unittests
+#        platform: default-darwin-x86_64
+#      - target: yt/yt/core/rpc/unittests
+#        platform: default-darwin-x86_64
+
+  release-title-source: flow
+  releases:
+    release-yt:
+      title: YT release
+      flow: build-yt
+      stages:
+        - id: build
+          title: Build
+
+  triggers:
+    - on: commit
+      flow: build-yt
+      filters:
+        - sub-paths: ["yt/**", "a.yaml"]
+
+  flows:
+    build-yt:
+      title: Build release
+      description: Builds YT_BINARIES resource suitable for release
+      jobs:
+        start-build:
+          title: Start build
+          task: dummy
+          stage: build
+
+        build-yt-binaries:
+          needs: start-build
+          title: Build YT_BINARIES
+          task: common/arcadia/ya_package_2
+          input:
+            packages: yt/packages/yt_binaries.json
+            resource_type: YT_BINARIES
+            package_type: tarball
+            raw_package: true
+            raw_package_path: yt_binaries
+            thinlto: true
+
+        run_tests:
+          needs: start-build
+
+          title: Run tests
+          task: common/arcadia/ya_make
+          input:
+            build_system: semi_distbuild
+            test: true
+            targets: yt/yt/tests
+            definition_flags: -DAUTOCHECK=yes
+            env_vars: "YA_RUN_TAGGED_TESTS_ON_YT=1 YT_TOKEN='$(vault:value:prime:robot-yt-test-token)'"
+            ya_timeout: 21600
+
+          requirements:
+            disk: 100GB
+            cores: 12
+            ram: 32GB

@@ -1,0 +1,45 @@
+role_groups:
+  nbs:
+    name: NBS roles
+
+roles:
+  internal.nbs.admin:
+    groups: [nbs]
+    name: ''
+    visibility: internal
+    description: Полный доступ к NBS
+    permissions:
+    - nbsInternal.disks.read
+    - nbsInternal.disks.write
+    - nbsInternal.disks.{create,delete,update}
+    - nbsInternal.disks.{get,list}
+
+  nbs.support:
+    groups: [nbs, support]
+    name: NBS Support
+    visibility: internal
+    description: NBS Role for Support Engineers
+    permissions:
+    - nbsInternal.disks.{get,list}
+
+  nbs.supportAdmin:
+    groups: [nbs, support]
+    name: NBS Support Admin
+    visibility: internal
+    description: NBS Role for support admin
+    includedRoles:
+      - nbs.support
+    permissions: []
+
+  nbs.onCall:
+    groups: [nbs]
+    name: NBS onCall
+    visibility: internal
+    description: NBS duty
+    includedRoles:
+      - nbs.support
+      - onCall
+    permissions:
+      - compute.disks.{getRemoved,listRemoved,deleteRemoved,clearRemoved}
+      - compute.quotas.{getCloudLimit,getCloudSoftLimit,setCloudLimit,setCloudSoftLimit,deleteCloudLimit,deleteCloudSoftLimit}
+

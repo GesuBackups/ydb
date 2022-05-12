@@ -1,0 +1,398 @@
+role_groups:
+  managed-kubernetes:
+    name: k8s roles
+
+roles:
+
+  k8s.admin:
+    groups: [managed-kubernetes]
+    name: Администратор Managed Kubernetes
+    visibility: public
+    description: доступ к полному управлению облачными объектами Managed Kubernetes (кластера и группы узлов)
+    includedRoles:
+    - k8s.editor
+
+  k8s.editor:
+    groups: [managed-kubernetes]
+    name: Editor Managed Kubernetes
+    visibility: public
+    description: доступ к полному управлению облачными объектами Managed Kubernetes (кластера и группы узлов)
+    includedRoles:
+    - k8s.viewer
+    permissions:
+    - managed-kubernetes.clusters.create
+    - managed-kubernetes.clusters.delete
+    - managed-kubernetes.clusters.update
+    - managed-kubernetes.clusters.stop
+    - managed-kubernetes.clusters.start
+    - managed-kubernetes.nodeGroups.create
+    - managed-kubernetes.nodeGroups.delete
+    - managed-kubernetes.nodeGroups.update
+    - managed-kubernetes.helmChartReleases.{get,install,update,uninstall}
+
+  k8s.viewer:
+    groups: [managed-kubernetes]
+    name: Viewer Managed Kubernetes
+    visibility: public
+    description: доступ на просмотр облачных объектов Managed Kubernetes (кластера и группы узлов)
+    permissions:
+    - iam.folders.get
+    - resource-manager.folders.get
+    - managed-kubernetes.clusters.get
+    - managed-kubernetes.clusters.list
+    - managed-kubernetes.nodeGroups.get
+    - managed-kubernetes.nodeGroups.list
+    - managed-kubernetes.helmChartReleases.get
+    - managed-kubernetes.quotas.get
+
+  k8s.clusters.agent:
+    groups: [managed-kubernetes]
+    name: Роль для сервисного аккаунта кластера с нативной облачной сетью
+    visibility: public
+    description: Часто используемая комбинация ролей для сервисного аккаунта кластера с нативной облачной сетью
+    includedRoles:
+    - k8s.tunnelClusters.agent
+    - vpc.privateAdmin
+
+  k8s.tunnelClusters.agent:
+    groups: [managed-kubernetes]
+    name: Роль для сервисного аккаунта кластера с туннельной сетью
+    visibility: public
+    description: Часто используемая комбинация ролей для сервисного аккаунта кластера с туннельной сетью
+    includedRoles:
+    - compute.admin
+    - load-balancer.privateAdmin
+    - kms.keys.encrypterDecrypter
+    - iam.serviceAccounts.user
+    - k8s.viewer
+
+  k8s.cluster-api.cluster-admin:
+    groups: [managed-kubernetes]
+    name: Роль для ПОЛНОГО доступа пользователя к объектам в кластере
+    visibility: public
+    description: Роль для ПОЛНОГО доступа пользователя к объектам в кластере
+    permissions:
+    - managed-kubernetes.cluster-api.cluster-admin
+
+  k8s.cluster-api.editor:
+    groups: [managed-kubernetes]
+    name: Роль разрешающая пользователю редактировать объекты в кластере
+    visibility: public
+    description: Роль разрешающая пользователю редактировать объекты в кластере
+    permissions:
+    - managed-kubernetes.cluster-api.edit
+
+  k8s.cluster-api.viewer:
+    groups: [managed-kubernetes]
+    name: Роль разрешающая пользователю просматривать объекты в кластере
+    visibility: public
+    description: Роль разрешающая пользователю просматривать объекты в кластере
+    permissions:
+    - managed-kubernetes.cluster-api.view
+
+  internal.managed-kubernetes.logWriter:
+    groups: [managed-kubernetes]
+    name: (Внутренняя) Агент Managed Kubernetes для записи audit-логов
+    visibility: internal
+    description: доступ к функциям cloudlogs
+    permissions:
+    - logs.logEvents.write
+
+  internal.managed-kubernetes.agent:
+    groups: [managed-kubernetes]
+    name: (Внутренняя) Агент Managed Kubernetes
+    visibility: internal
+    description: доступ к функциям compute
+    includedRoles:
+    - k8s.admin
+    - k8s.cluster-api.cluster-admin
+    - compute.instanceGroups.admin
+    - internal.vpc.address.yandexOnlyAdmin
+    permissions:
+    - compute.diskOperations.list
+    - compute.diskPooling.get
+    - compute.diskPooling.{delete,update}
+    - compute.disks.use
+    - compute.disks.{create,delete,update}
+    - compute.disks.{get,list}
+    - compute.imageOperations.list
+    - compute.images.getLatestByFamily
+    - compute.images.use
+    - compute.images.{create,delete,update}
+    - compute.images.{get,list}
+    - compute.images.ignoreWhitelist
+    - compute.instanceOperations.list
+    - compute.instances.assignServiceAccount
+    - compute.instances.attachDisk
+    - compute.instances.createCustomFqdn
+    - compute.instances.createMultiInterface
+    - compute.instances.detachDisk
+    - compute.instances.getSerialPortOutput
+    - compute.instances.restart
+    - compute.instances.start
+    - compute.instances.stop
+    - compute.instances.{create,delete,update}
+    - compute.instances.{get,list}
+    - compute.instances.{internalCreate,internalUpdate,createNvmeDisks,updateNvmeDisks}
+    - compute.instances.assignSecurityGroup
+    - compute.networkInterfaces.attach
+    - compute.networkInterfaces.detach
+    - compute.networkInterfaces.{get,list}
+    - compute.operations.cancel
+    - compute.operations.{get,list}
+    - compute.placementGroups.use
+    - compute.placementGroups.{create,delete,update}
+    - compute.placementGroups.{internalCreate,internalUpdate}
+    - compute.placementGroups.{get,list,listInstances}
+    - compute.quotas.deleteCloudLimit
+    - compute.quotas.deleteCloudSoftLimit
+    - compute.quotas.deleteFolderLimit
+    - compute.quotas.getCloudLimit
+    - compute.quotas.getCloudSoftLimit
+    - compute.quotas.getFolderLimit
+    - compute.quotas.setCloudLimit
+    - compute.quotas.setCloudSoftLimit
+    - compute.quotas.setFolderLimit
+    - compute.snapshotOperations.list
+    - compute.snapshots.import
+    - compute.snapshots.use
+    - compute.snapshots.{create,delete,update}
+    - compute.snapshots.{get,list}
+    - compute.zones.{get,list}
+    - computeInternal.diskOperations.list
+    - computeInternal.diskPooling.get
+    - computeInternal.diskPooling.{delete,update}
+    - computeInternal.disks.use
+    - computeInternal.disks.{create,delete,update}
+    - computeInternal.disks.{get,list}
+    - computeInternal.imageOperations.list
+    - computeInternal.images.getLatestByFamily
+    - computeInternal.images.use
+    - computeInternal.images.{create,delete,update}
+    - computeInternal.images.{get,list}
+    - computeInternal.instanceGroups.use
+    - computeInternal.instanceGroups.{create,delete,update,stop,start}
+    - computeInternal.instanceGroups.{get,list}
+    - computeInternal.instanceOperations.list
+    - computeInternal.instances.assignServiceAccount
+    - computeInternal.instances.attachDisk
+    - computeInternal.instances.createCustomFqdn
+    - computeInternal.instances.createMultiInterface
+    - computeInternal.instances.detachDisk
+    - computeInternal.instances.getSerialPortOutput
+    - computeInternal.instances.restart
+    - computeInternal.instances.start
+    - computeInternal.instances.stop
+    - computeInternal.instances.{create,delete,update}
+    - computeInternal.instances.{get,list}
+    - computeInternal.instances.assignSecurityGroup
+    - computeInternal.networkInterfaces.attach
+    - computeInternal.networkInterfaces.detach
+    - computeInternal.networkInterfaces.{get,list}
+    - computeInternal.operations.cancel
+    - computeInternal.operations.{get,list}
+    - computeInternal.placementGroups.use
+    - computeInternal.placementGroups.{create,delete,update}
+    - computeInternal.placementGroups.{get,list,listInstances}
+    - computeInternal.quotas.deleteCloudLimit
+    - computeInternal.quotas.deleteCloudSoftLimit
+    - computeInternal.quotas.deleteFolderLimit
+    - computeInternal.quotas.getCloudLimit
+    - computeInternal.quotas.getCloudSoftLimit
+    - computeInternal.quotas.getFolderLimit
+    - computeInternal.quotas.setCloudLimit
+    - computeInternal.quotas.setCloudSoftLimit
+    - computeInternal.quotas.setFolderLimit
+    - computeInternal.snapshotOperations.list
+    - computeInternal.snapshots.import
+    - computeInternal.snapshots.use
+    - computeInternal.snapshots.{create,delete,update}
+    - computeInternal.snapshots.{get,list}
+    - computeInternal.tasks.cancel
+    - computeInternal.tasks.{get,list}
+    - computeInternal.templates.{create,delete,update}
+    - computeInternal.templates.{get,list}
+    - computeInternal.zones.{get,list}
+    - container-registry.images.{get,list}
+    - container-registry.quotas.get
+    - container-registry.registries.{get,list}
+    - iam.folders.get
+    - resource-manager.folders.get
+    - iam.serviceAccounts.get
+    - iam.serviceAccounts.issueToken
+    - iam.serviceAccounts.use
+
+    # https://st.yandex-team.ru/CLOUD-42345#5ede61e450ef38299070b72a
+    - iam.accessBindings.update
+
+    - iot.quotas.get
+    - kms.keys.get
+    - logs.logEvents.read
+    - logs.logEvents.write
+    - logs.logGroups.{create,delete,update}
+    - logs.logGroups.{get,list}
+    - monitoring.configs.updateInternals
+    - monitoring.configs.{create,delete,update}
+    - monitoring.configs.{get,list}
+    - monitoring.data.read
+    - monitoring.data.write
+    - monitoring.sensorLabels.get
+    - monitoring.sensorNames.get
+    - monitoring.sensors.get
+    - vpc.addresses.createExternal
+    - vpc.addresses.createInternal
+    - vpc.addresses.use
+    - vpc.addresses.{delete,update}
+    - vpc.addresses.{get,list}
+    - vpc.networks.bridge
+    - vpc.networks.configureExternalAccess
+    - vpc.networks.createRouteTable
+    - vpc.networks.createSubnet
+    - vpc.networks.use
+    - vpc.networks.create
+    - vpc.networks.delete
+    - vpc.networks.update
+    - vpc.networks.createDefaultSecurityGroup
+    - vpc.networks.get
+    - vpc.networks.list
+    - vpc.quotas.get
+    - vpc.routeTables.use
+    - vpc.routeTables.{create,delete,update}
+    - vpc.routeTables.{get,list}
+    - vpc.securityGroups.{get,use}
+    - vpc.subnets.use
+    - vpc.subnets.useEgressNat
+    - vpc.subnets.{create,delete,update}
+    - vpc.subnets.{get,list}
+    - vpc.subnets.assignExtraParams
+    - vpc.fipBuckets.{create,delete,update}
+    - vpc.fipBuckets.{get,list}
+    - ylb.networkLoadBalancerOperations.list
+    - ylb.networkLoadBalancers.start
+    - ylb.networkLoadBalancers.stop
+    - ylb.networkLoadBalancers.{create,createInternal,createUdpListener,delete,update,createExternal,deleteExternal,updateExternal}
+    - ylb.networkLoadBalancers.{get,list}
+    - ylb.targetGroupOperations.list
+    - ylb.targetGroups.use
+    - ylb.targetGroups.{create,delete,update}
+    - ylb.targetGroups.{get,list}
+    # TODO(yesworld): Remove me.
+    - vpcInternal.fipBuckets.{create,delete,update}
+    - vpcInternal.fipBuckets.{get,list}
+
+  k8s.support:
+    groups: [managed-kubernetes, support]
+    name: Support Managed K8s
+    description: Role for support engineers
+    visibility: internal
+    includedRoles:
+      - k8s.viewer
+      - k8s.cluster-api.viewer
+    permissions:
+      - managed-kubernetes.cluster-api.support
+      - managed-kubernetes.quotas.get
+      - managed-kubernetes.quotas.updateLimit
+
+  k8s.supportAdmin:
+    groups: [managed-kubernetes, support]
+    name: Support Managed K8s Admin
+    description: Privileged operations for support engineers
+    visibility: internal
+    includedRoles:
+    - k8s.support
+    permissions:
+    - managed-kubernetes.helmChartReleases.{install,update,uninstall}
+
+  k8s.onCall:
+    groups: [managed-kubernetes, staff]
+    name: On-call Managed K8s
+    visibility: internal
+    description: Role for Managed K8s oncall engineers
+    includedRoles:
+      - onCall
+      - k8s.viewer
+      - k8s.cluster-api.viewer
+      - compute.instanceGroups.viewer
+      - compute.viewer
+      - load-balancer.viewer
+      - alb.viewer
+      - vpc.viewer
+    permissions:
+      - managed-kubernetes.cluster-api.support
+      - managed-kubernetes.quotas.get
+      - managed-kubernetes.quotas.updateLimit
+
+  k8s.onCallAdmin:
+    groups: [managed-kubernetes, staff]
+    name: On-call Managed K8s Admin
+    visibility: internal
+    description: Privileged Operations in Managed K8s for on-call engineers
+    includedRoles:
+      - k8s.onCall
+    permissions:
+      # fix potential PVC problems
+      - compute.instances.{attachDisk,detachDisk}
+      # add ssh keys to instance metadata for user-approved access
+      - compute.instances.update
+
+  internal.managed-kubernetes.marketplacePublisher:
+    groups: [managed-kubernetes]
+    name: (Внутренняя) Managed Kubernetes Marketplace Publisher
+    visibility: internal
+    description: Роль для доступа к функциям K8s Marketplace Publisher
+    permissions:
+      - managed-kubernetes.helmCharts.createDraft
+      - managed-kubernetes.helmCharts.getDraft
+      - managed-kubernetes.helmCharts.publish
+
+  internal.managed-kubernetes.innerReader:
+    groups: [ managed-kubernetes, staff ]
+    name: (internal) Reader with access to inner API
+    visibility: internal
+    description: Роль для чтения данных о кластере и нод группе через внутрений API
+    permissions:
+      - managed-kubernetes.clusters.innerGet
+      - managed-kubernetes.versions.get
+
+  internal.managed-kubernetes.innerEditor:
+    groups: [ managed-kubernetes, staff ]
+    name: (internal) Editor with access to inner API (including migrations)
+    visibility: internal
+    description: Роль для изменения кластера и нод группы через внутрений API
+    includedRoles:
+      - internal.managed-kubernetes.innerReader
+    permissions:
+      - managed-kubernetes.clusters.innerUpdate
+      - managed-kubernetes.clusters.migrate
+
+  internal.managed-kubernetes.versionManager:
+    groups: [ managed-kubernetes, staff ]
+    name: (internal) Manages release channels and versions via inner API
+    visibility: internal
+    description: Роль для управления релизными каналами и версиями через внутрений API
+    permissions:
+      - managed-kubernetes.versions.get
+      - managed-kubernetes.versions.update
+
+  internal.managed-kubernetes.innerAdmin:
+    groups: [ managed-kubernetes, staff ]
+    name: (internal) Admin with access to inner API
+    visibility: internal
+    description: Роль для полного доступа к внутреннему API
+    includedRoles:
+      - internal.managed-kubernetes.innerReader
+      - internal.managed-kubernetes.innerEditor
+      - internal.managed-kubernetes.versionManager
+    permissions:
+      - managed-kubernetes.clusters.scale
+
+  internal.managed-kubernetes.imageImporter:
+    groups: [managed-kubernetes]
+    name: (internal) Image importer
+    description: Role for service accounts that imports images build in another environment
+    visibility: internal
+    permissions:
+      - compute.imageOperations.list
+      - compute.images.{create,get,getLatestByFamily,list}
+      - compute.images.ignoreWhitelist
+      - compute.operations.{get,list}

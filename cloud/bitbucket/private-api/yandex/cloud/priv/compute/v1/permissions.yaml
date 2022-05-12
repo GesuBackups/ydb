@@ -1,0 +1,2733 @@
+permissions:
+  compute.console.getFolderStats:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  compute.console.getDiskLimits:
+    description: 'Show disk limits (iops, bandwidth, etc.)'
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  compute.diskOperations.list:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  compute.diskPooling.delete:
+    description: ''
+    stage: GA
+    visibility: public
+  compute.diskPooling.get:
+    description: ''
+    stage: GA
+    visibility: public
+  compute.diskPooling.update:
+    description: ''
+    stage: GA
+    visibility: public
+  compute.disks.create:
+    description: Create disk
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  compute.disks.delete:
+    description: Delete disk
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  compute.disks.get:
+    description: Get disk
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  compute.disks.list:
+    description: List disks
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  compute.disks.update:
+    description: Update disk
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  compute.disks.updateReferences:
+    description: Edit disk references
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  compute.disks.listReferences:
+    description: List disk references
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  compute.disks.use:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  compute.disks.resurrect:
+    description: 'Resurrect removed disk'
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  compute.disks.deleteRemoved:
+    description: 'Delete removed disk'
+    resourceType: compute.disk
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  compute.disks.clearRemoved:
+    description: 'Clear removed disks'
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  compute.disks.listRemoved:
+    description: 'List removed disks'
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  compute.disks.getRemoved:
+    description: 'Get removed disk'
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  compute.disks.move:
+    description: Move disk between folders
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  compute.identity.authorize:
+    description: ''
+    stage: GA
+    visibility: public
+  compute.imageOperations.list:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  compute.images.create:
+    description: Create image
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  compute.images.delete:
+    description: Delete image
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  compute.images.get:
+    description: Get image
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  compute.images.getLatestByFamily:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  compute.images.list:
+    description: List images
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  compute.images.update:
+    description: Update image
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  compute.images.updateReferences:
+    description: Edit image references
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  compute.images.listReferences:
+    description: List image references
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  compute.images.use:
+    description: Use image
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  compute.images.ignoreWhitelist:
+    description: Ignore source host whitelist when creating image
+    stage: GA
+    visibility: internal
+  compute.instanceOperations.list:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  compute.instances.accessSerialPort:
+    description: '-'
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  compute.instances.accessSerialProxy:
+    description: ''
+    stage: GA
+    visibility: public
+  compute.instances.assignServiceAccount:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  compute.instances.create:
+    description: Create instance
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  compute.instances.internalCreate:
+    description: Create instance (extended capabilities for internal users)
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  compute.instances.createNvmeDisks:
+    description: Accept create requests with NVME disks specified
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  compute.instances.createCustomFqdn:
+    description: Create instance with custom FQDN
+    stage: CUSTOM_FQDN_INSTANCES_ALPHA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  compute.instances.createMultiInterface:
+    description: Create multi-interface instance
+    stage: MULTI_INTERFACE_INSTANCES_ALPHA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  compute.instances.createMaintenanceGracePeriod:
+    description: Accept create requests with custom maintenance grace period
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  compute.instances.delete:
+    description: Delete instance
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - ACTIVE
+        - BLOCKED_BY_BILLING
+        - DELETING
+  compute.instances.simulateMaintenanceEvent:
+    description: Simulate maintenance event on instance
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  compute.instances.attachDisk:
+    description: Attach disk to instance
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  compute.instances.detachDisk:
+    description: Detach disk from instance
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  compute.instances.attachFilesystem:
+    description: Attach filesystem to instance
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  compute.instances.detachFilesystem:
+    description: Detach filesystem from instance
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  compute.instances.useGpuInterconnect:
+    description: Use GPU interconnect network
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  compute.instances.get:
+    description: Show instance
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  compute.instances.getSerialPortOutput:
+    description: Get instance serial port output
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  compute.instances.move:
+    description: Move instance between folders
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  compute.instances.list:
+    description: List instances
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  compute.instances.listZone:
+    description: List all instances in specified zone
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  compute.instances.restart:
+    description: Restart instance
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  compute.instances.start:
+    description: Start instance
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  compute.instances.stop:
+    description: Stop instance
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  compute.instances.update:
+    description: Update instance
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  compute.instances.internalUpdate:
+    description: Update instance (extended capabilities for internal users)
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  compute.instances.updateNvmeDisks:
+    description: Accept update requests with NVME disks specified
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  compute.instances.updateMaintenanceGracePeriod:
+    description: Accept update requests with custom maintenance grace period
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  compute.instances.updateHypervisor:
+    description: Update instance hypervisor
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  compute.instances.updateReferences:
+    description: Edit instance references
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  compute.instances.listReferences:
+    description: List instance references
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  compute.instances.assignSecurityGroup:
+    description: 'Assign security group to instance'
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  compute.instances.migrate:
+    description: Migrate instance from active node
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  compute.instances.evacuate:
+    description: Evacuate instance from dead node
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  compute.instances.deallocate:
+    description: Deallocate instance
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  compute.networkInterfaces.attach:
+    description: Attach network interface
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  compute.networkInterfaces.detach:
+    description: Detach network interface
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  compute.networkInterfaces.get:
+    description: Get instance network interface
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  compute.networkInterfaces.list:
+    description: List instance network interfaces
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  compute.operations.cancel:
+    description: Cancel operation
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  compute.operations.get:
+    description: Get operation
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  compute.operations.list:
+    description: List operations
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  compute.worker.catchTasks:
+    description: Notify about operations (for internal usage)
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  compute.osLogin.adminLogin:
+    description: ''
+    stage: COMPUTE_OSLOGIN_ALPHA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  compute.osLogin.login:
+    description: ''
+    stage: COMPUTE_OSLOGIN_ALPHA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  compute.osLogin.users.get:
+    description: ''
+    stage: COMPUTE_OSLOGIN_ALPHA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  compute.placementGroups.create:
+    description: Create placement group
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  compute.placementGroups.internalCreate:
+    description: Create placement group (extended capabilities for internal users)
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  compute.placementGroups.delete:
+    description: Delete placement group
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  compute.placementGroups.get:
+    description: Get placement group
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  compute.placementGroups.list:
+    description: List placement groups
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  compute.placementGroups.listInstances:
+    description: List placement group's instances
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  compute.placementGroups.update:
+    description: Update placement group
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  compute.placementGroups.internalUpdate:
+    description: Update placement group (extended capabilities for internal users)
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  compute.placementGroups.updateReferences:
+    description: Edit placement group references
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  compute.placementGroups.listReferences:
+    description: List placement group references
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  compute.placementGroups.use:
+    description: Create instance in placement group
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  compute.placementGroupOperations.list:
+    description: List placement group's operations
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  compute.platforms.list:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  compute.platforms.get:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  compute.platforms.use:
+    description: ''
+    stage: GA
+    visibility: public
+  compute.quotas.deleteCloudLimit:
+    description: Delete cloud limit
+    stage: GA
+    visibility: public
+  compute.quotas.deleteCloudSoftLimit:
+    description: Delete cloud soft-limit
+    stage: GA
+    visibility: public
+  compute.quotas.deleteFolderLimit:
+    description: Delete folder limit
+    stage: GA
+    visibility: public
+  compute.quotas.getCloudLimit:
+    description: Get cloud limit
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  compute.quotas.getCloudSoftLimit:
+    description: Get cloud soft-limit
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  compute.quotas.getFolderLimit:
+    description: Get folder limit
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  compute.quotas.setCloudLimit:
+    description: Set cloud limit
+    stage: GA
+    visibility: public
+  compute.quotas.setCloudSoftLimit:
+    description: Set cloud soft-limit
+    stage: GA
+    visibility: public
+  compute.quotas.setFolderLimit:
+    description: Set folder limit
+    stage: GA
+    visibility: public
+  compute.resources.list:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  compute.snapshotOperations.list:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  compute.snapshots.create:
+    description: Create snapshot
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  compute.snapshots.delete:
+    description: Delete snapshot
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - ACTIVE
+          - BLOCKED_BY_BILLING
+          - DELETING
+  compute.snapshots.get:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  compute.snapshots.import:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  compute.snapshots.list:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  compute.snapshots.update:
+    description: Update snapshot
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  compute.snapshots.updateReferences:
+    description: Edit snapshot references
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  compute.snapshots.listReferences:
+    description: Edit snapshot references
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  compute.snapshots.use:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  compute.snapshotService.full:
+    description: 'Full access to internal snapshot service'
+    stage: GA
+    visibility: internal
+  compute.zones.create:
+    description: Create availability zone
+    stage: GA
+    visibility: internal
+  compute.zones.delete:
+    description: Delete availability zone
+    stage: GA
+    visibility: internal
+  compute.zones.update:
+    description: Update availability zone
+    stage: GA
+    visibility: internal
+  compute.zones.get:
+    description: Get availability zone
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  compute.zones.list:
+    description: List availability zones
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  compute.hostGroups.create:
+    description: Create host group
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  compute.hostGroups.update:
+    description: Update host group
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  compute.hostGroups.delete:
+    description: Delete host group
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  compute.hostGroups.get:
+    description: Get host group
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  compute.hostGroups.list:
+    description: List host groups
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  compute.hostGroups.listInstances:
+    description: List instances within host group
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  compute.hostGroups.listHosts:
+    description: List hosts within host group
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  compute.hostGroups.updateReferences:
+    description: Edit host group references
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  compute.hostGroups.listReferences:
+    description: List host group references
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  compute.hostGroups.use:
+    description: Create instance in host group
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  compute.hostGroupOperations.list:
+    description: List host group's operations
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  compute.nodeOperations.list:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  compute.nodes.get:
+    resourceType: compute.node
+    description: Show compute node
+    stage: GA
+    visibility: public
+  compute.nodes.list:
+    description: List compute nodes
+    stage: GA
+    visibility: public
+  compute.nodes.disable:
+    resourceType: compute.node
+    description: Disable compute node in scheduler
+    stage: GA
+    visibility: public
+  compute.nodes.enable:
+    resourceType: compute.node
+    description: Enable compute node in scheduler
+    stage: GA
+    visibility: public
+  compute.nodes.update:
+    resourceType: compute.node
+    description: Update compute node
+    stage: GA
+    visibility: public
+  compute.nodes.listInstances:
+    resourceType: compute.node
+    description: List instances, belongs to compute node
+    stage: GA
+    visibility: public
+  compute.nodes.evacuateInstance: # deprecated
+    resourceType: compute.node
+    description: Evacuate instance from compute node
+    stage: GA
+    visibility: public
+  compute.nodes.evacuate:
+    resourceType: compute.node
+    description: Evacuate instances from compute node
+    stage: GA
+    visibility: internal
+  compute.nodes.migrateInstance: # deprecated
+    resourceType: compute.node
+    description: Migrate instance from compute node
+    stage: GA
+    visibility: public
+  compute.nodes.migrate:
+    resourceType: compute.node
+    description: Migrate instances from compute node
+    stage: GA
+    visibility: internal
+  compute.nodes.delete:
+    resourceType: compute.node
+    description: Delete compute node from scheduler
+    stage: GA
+    visibility: internal
+  compute.nodes.listInstanceIds:
+    resourceType: compute.node
+    description: List instances, belongs to compute node
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  compute.nodes.getInstance:
+    resourceType: compute.node
+    description: Get instance
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  compute.nodes.getInstanceMetadata:
+    resourceType: compute.node
+    description: Get instance metadata
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  compute.nodes.getInstanceVncEndpoint:
+    resourceType: compute.node
+    description: Get instance VNC endpoint
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  compute.nodes.updateState:
+    resourceType: compute.node
+    description: Update compute node state
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  compute.nodes.syncInstanceState:
+    resourceType: compute.node
+    description: Sync instance state with compute node
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  compute.nodes.deleteInstanceSecondaryAllocations:
+    resourceType: compute.node
+    description: Delete instance secondary allocation
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  compute.nodes.assignToken:
+    resourceType: compute.node
+    description: Assign NBS token to compute node
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  compute.diskPlacementGroups.create:
+    description: Create disk placement group
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  compute.diskPlacementGroups.delete:
+    description: Delete disk placement group
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  compute.diskPlacementGroups.get:
+    description: Get disk placement group
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  compute.diskPlacementGroups.list:
+    description: List disk placement groups
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  compute.diskPlacementGroups.listDisks:
+    description: List placement group's disks
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  compute.diskPlacementGroups.update:
+    description: Update disk placement group
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  compute.diskPlacementGroups.updateReferences:
+    description: Edit disk placement group references
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  compute.diskPlacementGroups.listReferences:
+    description: List disk placement group references
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  compute.diskPlacementGroups.use:
+    description: Create disk in placement group
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  compute.diskPlacementGroupOperations.list:
+    description: List placement group's operations
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  compute.filesystems.create:
+    description: Create filesystem
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  compute.filesystems.delete:
+    description: Delete filesystem
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  compute.filesystems.get:
+    description: Get filesystem
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  compute.filesystems.list:
+    description: List filesystems
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  compute.filesystems.update:
+    description: Update filesystem
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  compute.filesystems.updateReferences:
+    description: Edit filesystem references
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  compute.filesystems.listReferences:
+    description: List filesystem references
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  compute.filesystems.useReadOnly:
+    description: Use filesystem in instance (read-only mode)
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  compute.filesystems.useReadWrite:
+    description: Use filesystem in instance (read-write mode)
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  compute.filesystemOperations.list:
+    description: Get list of operations on the specified filesystem
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  computeInternal.diskOperations.list:
+    description: ''
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  computeInternal.diskPooling.delete:
+    description: ''
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - ACTIVE
+          - BLOCKED_BY_BILLING
+          - DELETING
+  computeInternal.diskPooling.get:
+    description: ''
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  computeInternal.diskPooling.update:
+    description: ''
+    stage: GA
+    visibility: internal
+  computeInternal.disks.create:
+    description: Create disk
+    stage: GA
+    visibility: internal
+  computeInternal.disks.delete:
+    description: Delete disk
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - ACTIVE
+          - BLOCKED_BY_BILLING
+          - DELETING
+  computeInternal.disks.get:
+    description: Get disk
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  computeInternal.disks.list:
+    description: List disks
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  computeInternal.disks.update:
+    description: Update disk
+    stage: GA
+    visibility: internal
+  computeInternal.disks.use:
+    description: ''
+    stage: GA
+    visibility: internal
+  computeInternal.identity.authorize:
+    description: ''
+    stage: GA
+    visibility: internal
+  computeInternal.imageOperations.list:
+    description: ''
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  computeInternal.images.create:
+    description: Create image
+    stage: GA
+    visibility: internal
+  computeInternal.images.delete:
+    description: Delete image
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - ACTIVE
+          - BLOCKED_BY_BILLING
+          - DELETING
+  computeInternal.images.get:
+    description: Get image
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  computeInternal.images.getLatestByFamily:
+    description: ''
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  computeInternal.images.list:
+    description: List images
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  computeInternal.images.update:
+    description: Update image
+    stage: GA
+    visibility: internal
+  computeInternal.images.use:
+    description: Use image
+    stage: GA
+    visibility: internal
+  computeInternal.instanceGroups.create:
+    description: COMPUTE_INTERNAL Create instance group
+    stage: GA
+    visibility: internal
+  computeInternal.instanceGroups.delete:
+    description: COMPUTE_INTERNAL Delete instance group
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - ACTIVE
+          - BLOCKED_BY_BILLING
+          - DELETING
+  computeInternal.instanceGroups.get:
+    description: COMPUTE_INTERNAL Get instance group
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  computeInternal.instanceGroups.list:
+    description: COMPUTE_INTERNAL List instance groups
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  computeInternal.instanceGroups.update:
+    description: COMPUTE_INTERNAL Update instance group
+    stage: GA
+    visibility: internal
+  computeInternal.instanceGroups.start:
+    description: COMPUTE_INTERNAL Update instance group
+    stage: GA
+    visibility: internal
+  computeInternal.instanceGroups.stop:
+    description: COMPUTE_INTERNAL Update instance group
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  computeInternal.instanceGroups.use:
+    description: ''
+    stage: GA
+    visibility: internal
+  computeInternal.instanceOperations.list:
+    description: ''
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  computeInternal.instances.accessSerialPort:
+    description: '-'
+    stage: GA
+    visibility: internal
+  computeInternal.instances.accessSerialProxy:
+    description: ''
+    stage: GA
+    visibility: internal
+  computeInternal.instances.assignServiceAccount:
+    description: ''
+    stage: GA
+    visibility: internal
+  computeInternal.instances.attachDisk:
+    description: ''
+    stage: GA
+    visibility: internal
+  computeInternal.instances.create:
+    description: Create instance
+    stage: GA
+    visibility: internal
+  computeInternal.instances.createCustomFqdn:
+    description: Create instance with custom FQDN
+    stage: GA
+    visibility: internal
+  computeInternal.instances.createMultiInterface:
+    description: Create multi-interface instance
+    stage: GA
+    visibility: internal
+  computeInternal.instances.delete:
+    description: Delete instance
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - ACTIVE
+          - BLOCKED_BY_BILLING
+          - DELETING
+  computeInternal.instances.detachDisk:
+    description: ''
+    stage: GA
+    visibility: internal
+  computeInternal.instances.get:
+    description: Show instance
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  computeInternal.instances.getSerialPortOutput:
+    description: '-'
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  computeInternal.instances.list:
+    description: List instances
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  computeInternal.instances.restart:
+    description: Restart instance
+    stage: GA
+    visibility: internal
+  computeInternal.instances.start:
+    description: Start instance
+    stage: GA
+    visibility: internal
+  computeInternal.instances.stop:
+    description: Stop instance
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  computeInternal.instances.update:
+    description: ''
+    stage: GA
+    visibility: internal
+  computeInternal.instances.assignSecurityGroup:
+    description: 'Assign security group to instance'
+    stage: GA
+    visibility: internal
+  computeInternal.networkInterfaces.attach:
+    description: Attach network interface
+    stage: GA
+    visibility: internal
+  computeInternal.networkInterfaces.detach:
+    description: Detach network interface
+    stage: GA
+    visibility: internal
+  computeInternal.networkInterfaces.get:
+    description: Get instance network interface
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  computeInternal.networkInterfaces.list:
+    description: List instance network interfaces
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  computeInternal.operations.cancel:
+    description: Cancel operation
+    stage: GA
+    visibility: internal
+  computeInternal.operations.get:
+    description: Get operation
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  computeInternal.operations.list:
+    description: List operations
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  computeInternal.osLogin.adminLogin:
+    description: ''
+    stage: GA
+    visibility: internal
+  computeInternal.osLogin.login:
+    description: ''
+    stage: GA
+    visibility: internal
+  computeInternal.osLogin.users.get:
+    description: ''
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  computeInternal.placementGroups.create:
+    description: COMPUTE_INTERNAL Create placement group
+    stage: GA
+    visibility: internal
+  computeInternal.placementGroups.delete:
+    description: COMPUTE_INTERNAL Delete placement group
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - ACTIVE
+          - BLOCKED_BY_BILLING
+          - DELETING
+  computeInternal.placementGroups.get:
+    description: COMPUTE_INTERNAL Get placement group
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  computeInternal.placementGroups.list:
+    description: COMPUTE_INTERNAL List placement groups
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  computeInternal.placementGroups.listInstances:
+    description: COMPUTE_INTERNAL List placement group's instances
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  computeInternal.placementGroups.update:
+    description: COMPUTE_INTERNAL Update placement group
+    stage: GA
+    visibility: internal
+  computeInternal.placementGroups.use:
+    description: COMPUTE_INTERNAL Create instance in placement group
+    stage: GA
+    visibility: internal
+  computeInternal.placementGroupOperations.list:
+    description: COMPUTE_INTERNAL List placement group's operations
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  computeInternal.platforms.list:
+    description: ''
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  computeInternal.platforms.use:
+    description: ''
+    stage: GA
+    visibility: internal
+  computeInternal.quotas.deleteCloudLimit:
+    description: ''
+    stage: GA
+    visibility: internal
+  computeInternal.quotas.deleteCloudSoftLimit:
+    description: ''
+    stage: GA
+    visibility: internal
+  computeInternal.quotas.deleteFolderLimit:
+    description: ''
+    stage: GA
+    visibility: internal
+  computeInternal.quotas.getCloudLimit:
+    description: ''
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  computeInternal.quotas.getCloudSoftLimit:
+    description: ''
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  computeInternal.quotas.getFolderLimit:
+    description: ''
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  computeInternal.quotas.listOverriddenMetricsByName:
+    description: List clouds with overridden limits
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  computeInternal.quotas.setCloudLimit:
+    description: ''
+    stage: GA
+    visibility: internal
+  computeInternal.quotas.setCloudSoftLimit:
+    description: ''
+    stage: GA
+    visibility: internal
+  computeInternal.quotas.setFolderLimit:
+    description: ''
+    stage: GA
+    visibility: internal
+  computeInternal.resources.list:
+    description: ''
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  computeInternal.snapshotOperations.list:
+    description: ''
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  computeInternal.snapshots.create:
+    description: Create snapshot
+    stage: GA
+    visibility: internal
+  computeInternal.snapshots.delete:
+    description: Delete snapshot
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - ACTIVE
+          - BLOCKED_BY_BILLING
+          - DELETING
+  computeInternal.snapshots.get:
+    description: ''
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  computeInternal.snapshots.import:
+    description: ''
+    stage: GA
+    visibility: internal
+  computeInternal.snapshots.list:
+    description: ''
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  computeInternal.snapshots.update:
+    description: Update snapshot
+    stage: GA
+    visibility: internal
+  computeInternal.snapshots.use:
+    description: ''
+    stage: GA
+    visibility: internal
+  computeInternal.tasks.cancel:
+    description: Cancel task
+    stage: GA
+    visibility: internal
+  computeInternal.tasks.get:
+    description: Show task
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  computeInternal.tasks.list:
+    description: List tasks
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  computeInternal.templates.create:
+    description: Create template
+    stage: GA
+    visibility: internal
+  computeInternal.templates.delete:
+    description: Delete template
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - ACTIVE
+          - BLOCKED_BY_BILLING
+          - DELETING
+  computeInternal.templates.get:
+    description: Get template
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  computeInternal.templates.list:
+    description: List templates
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  computeInternal.templates.update:
+    description: Update template
+    stage: GA
+    visibility: internal
+  computeInternal.zones.create:
+    description: Create availability zone
+    stage: GA
+    visibility: internal
+  computeInternal.zones.delete:
+    description: Delete availability zone
+    stage: GA
+    visibility: internal
+  computeInternal.zones.get:
+    description: Get availability zone
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  computeInternal.zones.list:
+    description: List availability zones
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  computeInternal.zones.update:
+    description: Update availability zone
+    stage: GA
+    visibility: internal
+  compute.platforms.useAmdV1:
+    description: Use amd-v1 platform
+    stage: GA
+    visibility: internal
+  compute.platforms.useDev1:
+    description: Use dev-1 platform
+    stage: GA
+    visibility: internal
+  compute.platforms.useDev2:
+    description: Use dev-2 platform
+    stage: GA
+    visibility: internal
+  compute.platforms.useDev3:
+    description: Use dev-3 platform
+    stage: GA
+    visibility: internal
+  compute.platforms.useDev4:
+    description: Use dev-4 platform
+    stage: GA
+    visibility: internal
+  compute.platforms.useDev5:
+    description: Use dev-5 platform
+    stage: GA
+    visibility: internal
+  compute.platforms.useDevelGpuV2:
+    description: Use devel-gpu-v2 platform
+    stage: GA
+    visibility: internal
+  compute.platforms.useE2e:
+    description: Use e2e platform
+    stage: GA
+    visibility: internal
+  compute.platforms.useE2eGpu:
+    description: Use e2e-gpu platform
+    stage: GA
+    visibility: internal
+  compute.platforms.useGpuStandardV2:
+    description: Use gpu-standard-v2 platform
+    stage: GA
+    visibility: internal
+  compute.platforms.useGpuStandardV3:
+    description: Use gpu-standard-v3 platform
+    stage: GA
+    visibility: internal
+  compute.platforms.useGpuPrivateV3:
+    description: Use gpu-private-v3 platform
+    stage: GA
+    visibility: internal
+  compute.platforms.useVgpuPrivateV35c:
+    description: Use vgpu-private-v3-5c platform
+    stage: GA
+    visibility: internal
+  compute.platforms.useMdbV1:
+    description: Use mdb-v1 platform
+    stage: GA
+    visibility: internal
+  compute.platforms.useMdbV2:
+    description: Use mdb-v2 platform
+    stage: GA
+    visibility: internal
+  compute.platforms.useMdbV3:
+    description: Use mdb-v3 platform
+    stage: GA
+    visibility: internal
+  compute.platforms.useStandardV3:
+    description: Use standard-v3 platform
+    stage: GA
+    visibility: internal
+  compute.platforms.useStandardV3T4:
+    description: Use standard-v3-t4 platform
+    stage: GA
+    visibility: internal
+  compute.platforms.getAmdV1:
+    description: Get amd-v1 platform
+    stage: GA
+    visibility: internal
+  compute.platforms.getDev1:
+    description: Get dev-1 platform
+    stage: GA
+    visibility: internal
+  compute.platforms.getDev2:
+    description: Get dev-2 platform
+    stage: GA
+    visibility: internal
+  compute.platforms.getDev3:
+    description: Get dev-3 platform
+    stage: GA
+    visibility: internal
+  compute.platforms.getDev4:
+    description: Get dev-4 platform
+    stage: GA
+    visibility: internal
+  compute.platforms.getDev5:
+    description: Get dev-5 platform
+    stage: GA
+    visibility: internal
+  compute.platforms.getDevelGpuV2:
+    description: Get devel-gpu-v2 platform
+    stage: GA
+    visibility: internal
+  compute.platforms.getE2e:
+    description: Get e2e platform
+    stage: GA
+    visibility: internal
+  compute.platforms.getE2eGpu:
+    description: Get e2e-gpu platform
+    stage: GA
+    visibility: internal
+  compute.platforms.getGpuStandardV2:
+    description: Get gpu-standard-v2 platform
+    stage: GA
+    visibility: internal
+  compute.platforms.getGpuStandardV3:
+    description: Get gpu-standard-v3 platform
+    stage: GA
+    visibility: internal
+  compute.platforms.getGpuPrivateV3:
+    description: Get gpu-private-v3 platform
+    stage: GA
+    visibility: internal
+  compute.platforms.getVgpuPrivateV35c:
+    description: Get vgpu-private-v3-5c platform
+    stage: GA
+    visibility: internal
+  compute.platforms.getMdbV1:
+    description: Get mdb-v1 platform
+    stage: GA
+    visibility: internal
+  compute.platforms.getMdbV2:
+    description: Get mdb-v2 platform
+    stage: GA
+    visibility: internal
+  compute.platforms.getMdbV3:
+    description: Get mdb-v3 platform
+    stage: GA
+    visibility: internal
+  compute.platforms.getStandardV3:
+    description: Get standard-v3 platform
+    stage: GA
+    visibility: internal
+  compute.platforms.getStandardV3T4:
+    description: Get standard-v3-t4 platform
+    stage: GA
+    visibility: internal

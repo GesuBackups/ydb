@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+package yandex.cloud.priv.datatransfer.v1.endpoint;
+
+option go_package = "a.yandex-team.ru/cloud/bitbucket/private-api/yandex/cloud/priv/datatransfer/v1/endpoint;tm_server_endpoint";
+
+import "yandex/cloud/priv/datatransfer/v1/endpoint/common.proto";
+
+message OracleConnection {
+    oneof connection {
+        // Instance
+        OracleInstance instance = 1;
+        // TNS connect string
+        // 
+        // Oracle RDBMS connection string (connect descriptor)
+        string tns = 2;
+    }
+}
+message OracleInstanceType {
+    oneof instance_type {
+        // SID
+        string sid = 1;
+        // Service name
+        string service_name = 2;
+    }
+}
+message OracleInstance {
+    // Host
+    string host = 3;
+    // Port
+    int64 port = 4;
+    // Type
+    OracleInstanceType instance_type = 5;
+}
+message OracleSource {
+    // Connection
+    OracleConnection connection = 8;
+    // Username
+    string user = 4;
+    // Password
+    Secret password = 5;
+    // PDB container
+    // 
+    // Used in CDB/PDB environment. The name of the PDB container. Leave field empty if
+    // you are not using CDB/PDB.
+    string pdb = 9;
+    // Included tables
+    // 
+    // Tables filter, white tables list. Leave empty for transfer all available tables.
+    // You can filter all schema tables using the * character, example "SCHEMA_NAME.*".
+    repeated string include_tables = 6;
+    // Excluded tables
+    // 
+    // Tables filter, exclude tables list. Leave empty for transfer all available
+    // tables. You can filter all schema tables using the * character, example
+    // "SCHEMA_NAME.*".
+    repeated string exclude_tables = 7;
+}

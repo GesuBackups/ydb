@@ -1,0 +1,131 @@
+permissions:
+  managed-elasticsearch.clusters.create:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+    deniedWhen:
+      restrictions:
+        - elasticsearchSanctions
+
+  managed-elasticsearch.clusters.delete:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+
+  managed-elasticsearch.clusters.forceDelete:
+    description: Delete managed-elasticsearch cluster ignoring deletion protection
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+
+  managed-elasticsearch.clusters.update:
+    description: managed-elasticsearch write actions
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+    deniedWhen:
+      restrictions:
+        - elasticsearchSanctions
+
+  managed-elasticsearch.clusters.get:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+
+  managed-elasticsearch.clusters.getLogs:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+
+  managed-elasticsearch.clusters.start:
+    description: Start managed-elasticsearch cluster
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+    deniedWhen:
+      restrictions:
+        - elasticsearchSanctions
+
+  managed-elasticsearch.clusters.stop:
+    description: Stop managed-elasticsearch cluster
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+
+  managed-elasticsearch.quotas.get:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+
+  managed-elasticsearch.quotas.updateLimit:
+    description: ''
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - billSuspend
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE

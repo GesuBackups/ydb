@@ -1,0 +1,618 @@
+role_groups:
+  billing:
+    name: Billing roles
+
+roles:
+  billing.accounts.customer:
+    groups: [billing]
+    name: ''
+    visibility: internal
+    description: Billing Account Customer
+    permissions:
+    - billing.accounts.acceptInvitation
+    - billing.accounts.bindCloud
+
+  billing.accounts.member:
+    groups: [billing]
+    name: ''
+    visibility: internal
+    description: Billing Account Member
+    resourceType: billing.account
+    permissions:
+      - iam.resourceTypes.membership
+
+  billing.accounts.viewer:
+    groups: [billing]
+    name: ''
+    visibility: public
+    description: Billing Account Viewer
+    pseudorole: true
+    permissions:
+      - billing.accounts.getBudget
+      - billing.accounts.getBudgetNotifications
+      - billing.accounts.getDocuments
+      - billing.accounts.getInvoice
+      - billing.accounts.getOperation
+      - billing.accounts.getReferrerStatus
+      - billing.accounts.getReport
+      - billing.accounts.getSkuCost
+      - billing.accounts.getSkuOverride
+      - billing.accounts.listAccessBindings
+      - billing.accounts.listBudgetNotificationHistory
+      - billing.accounts.listBudgets
+      - billing.accounts.listClouds
+      - billing.accounts.listCommittedUseDiscount
+      - billing.accounts.listCommittedUseDiscountTemplates
+      - billing.accounts.listExporterTask
+      - billing.accounts.listMonetaryGrants
+      - billing.accounts.listReferralCodes
+      - billing.accounts.listSubaccounts
+      - billing.accounts.listSupportSubscriptions
+      - billing.accounts.listTransactions
+      - billing.accounts.listVolumeIncentive
+      - billing.accounts.{get,list}
+      - billing.organizationMeta.get
+      - billing.organizationUsage.get
+
+  billing.accounts.editor:
+    groups: [billing]
+    name: ''
+    visibility: public
+    description: Billing Account Editor
+    pseudorole: true
+    includedRoles:
+      - billing.accounts.viewer
+    permissions:
+      - billing.accounts.acceptMonetaryGrantOffer
+      - billing.accounts.activateReferralCode
+      - billing.accounts.activateSubaccount
+      - billing.accounts.bindCloud
+      - billing.accounts.createBudget
+      - billing.accounts.createCommittedUseDiscount
+      - billing.accounts.createExporterTask
+      - billing.accounts.createReferralCode
+      - billing.accounts.createSubaccount
+      - billing.accounts.createYandexGrantProgram
+      - billing.accounts.deleteBudget
+      - billing.accounts.makeInvoicePayment
+      - billing.accounts.rename
+      - billing.accounts.setLabels
+      - billing.accounts.suspendSubaccount
+      - billing.accounts.updateBudget
+      - billing.accounts.updateExporterTask
+      - billing.accounts.updateReferralCode
+      - billing.accounts.updateSupportSubscriptions
+      - billing.accounts.updatePerson
+      - billing.accounts.withdrawReferralReward
+
+  billing.accounts.admin:
+    groups: [billing]
+    name: ''
+    visibility: public
+    description: Billing Account Admin
+    pseudorole: true
+    includedRoles:
+      - billing.accounts.editor
+      - billing.partners.editor
+
+    permissions:
+      - billing.accounts.listAccessBindings
+      - billing.accounts.updateAccessBindings
+
+  billing.clouds.owner:
+    groups: [billing]
+    name: ''
+    visibility: public
+    description: Permissions for cloud owner
+    pseudorole: true
+    permissions:
+      - billing.accounts.list
+      - billing.clouds.bind
+      - billing.organizationMeta.get
+      - billing.organizationUsage.get
+
+  billing.accounts.owner:
+    groups: [billing]
+    name: ''
+    visibility: internal
+    description: Billing Account Owner
+    resourceType: billing.account
+    includedRoles:
+    - billing.accounts.member
+    - billing.publishers.creator
+    - billing.partners.editor
+    permissions:
+    - billing.accounts.acceptMonetaryGrantOffer
+    - billing.accounts.activateReferralCode
+    - billing.accounts.activateSubaccount
+    - billing.accounts.bindCard
+    - billing.accounts.bindCloud
+    - billing.accounts.createBudget
+    - billing.accounts.createCommittedUseDiscount
+    - billing.accounts.createExporterTask
+    - billing.accounts.createReferralCode
+    - billing.accounts.createSubaccount
+    - billing.accounts.createYandexGrantProgram
+    - billing.accounts.deleteBudget
+    - billing.accounts.get
+    - billing.accounts.getBudget
+    - billing.accounts.getBudgetNotifications
+    - billing.accounts.getDocuments
+    - billing.accounts.getInvoice
+    - billing.accounts.getOperation
+    - billing.accounts.getReport
+    - billing.accounts.getSkuCost
+    - billing.accounts.getSkuOverride
+    - billing.accounts.listVolumeIncentive
+    - billing.accounts.inactivate
+    - billing.accounts.listAccessBindings
+    - billing.accounts.listBudgetNotificationHistory
+    - billing.accounts.listBudgets
+    - billing.accounts.listClouds
+    - billing.accounts.listCommittedUseDiscount
+    - billing.accounts.listCommittedUseDiscountTemplates
+    - billing.accounts.listExporterTask
+    - billing.accounts.listMonetaryGrants
+    - billing.accounts.listReferralCodes
+    - billing.accounts.listSubaccounts
+    - billing.accounts.listSupportSubscriptions
+    - billing.accounts.listTransactions
+    - billing.accounts.makeInvoicePayment
+    - billing.accounts.makePayment
+    - billing.accounts.rename
+    - billing.accounts.setLabels
+    - billing.accounts.setPaid
+    - billing.accounts.suspendSubaccount
+    - billing.accounts.updateAccessBindings
+    - billing.accounts.updateBudget
+    - billing.accounts.updateExporterTask
+    - billing.accounts.updateReferralCode
+    - billing.accounts.updateSupportSubscriptions
+    - billing.accounts.withdrawReferralReward
+    - iam.accessBindings.manageOwners
+    - marketplace.agreementAcceptances.list
+    - marketplace.agreements.accept
+    - marketplace.agreements.create
+    - marketplace.agreements.deprecate
+    - marketplace.agreements.{get,list}
+    - marketplace.avatar.create
+    - marketplace.isvs.{create,update}
+    - marketplace.isvs.{get,list}
+    - marketplace.osProductFamilies.deprecate
+    - marketplace.osProductFamilies.update
+    - marketplace.osProductFamilies.{get,list}
+    - marketplace.osProductFamilyVersions.list
+    - marketplace.osProducts.deprecate
+    - marketplace.osProducts.{create,update}
+    - marketplace.osProducts.{get,list}
+    - marketplace.partner.become
+    - marketplace.product.create
+    - marketplace.products.list
+    - marketplace.publishers.{create,update}
+    - marketplace.publishers.{get,list}
+    - marketplace.skus.{create,update}
+    - marketplace.skus.{get,list}
+    - marketplace.vars.{create,update}
+    - marketplace.vars.{get,list}
+    - marketplacepublic.agreements.{get,list}
+    - marketplacepublic.avatars.get
+    - marketplacepublic.categories.{get,list}
+    - marketplacepublic.osProductFamilies.{get,list}
+    - marketplacepublic.osProducts.{get,list}
+    - marketplacepublic.publishers.{get,list}
+
+  internal.billing.accountmanager:
+    groups: [billing]
+    name: ''
+    visibility: internal
+    description: Роль для управления billing account через private API биллинга
+    permissions:
+    - billingInternal.accounts.acceptMonetaryGrantOffer
+    - billingInternal.accounts.activateReferralCode
+    - billingInternal.accounts.bindCloud
+    - billingInternal.accounts.bindCloudDelayed
+    - billingInternal.accounts.changeSkuOverride
+    - billingInternal.accounts.changeVolumeIncentive
+    - billingInternal.accounts.createCommittedUseDiscount
+    - billingInternal.accounts.createExporterTask
+    - billingInternal.accounts.createReferralCode
+    - billingInternal.accounts.createSkuOverride
+    - billingInternal.accounts.createSubscription
+    - billingInternal.accounts.createVolumeIncentive
+    - billingInternal.accounts.getBudget
+    - billingInternal.accounts.getDocuments
+    - billingInternal.accounts.getHistory
+    - billingInternal.accounts.getInvoice
+    - billingInternal.accounts.getReferrerStatus
+    - billingInternal.accounts.getReport
+    - billingInternal.accounts.getSalesManager
+    - billingInternal.accounts.getSkuCost
+    - billingInternal.accounts.getSkuOverride
+    - billingInternal.accounts.giveMonetaryGrants
+    - billingInternal.accounts.listBillingRecords
+    - billingInternal.accounts.listBudgets
+    - billingInternal.accounts.listBudgetNotificationHistory
+    - billingInternal.accounts.listClouds
+    - billingInternal.accounts.listAccessBindings
+    - billingInternal.accounts.listCommittedUseDiscount
+    - billingInternal.accounts.listCommittedUseDiscountTemplates
+    - billingInternal.accounts.listExporterTask
+    - billingInternal.accounts.listMonetaryGrants
+    - billingInternal.accounts.listReferralCodes
+    - billingInternal.accounts.listSubaccounts
+    - billingInternal.accounts.listSubscription
+    - billingInternal.accounts.listSupportSubscriptions
+    - billingInternal.accounts.listTransactions
+    - billingInternal.accounts.listVolumeIncentive
+    - billingInternal.accounts.update
+    - billingInternal.accounts.updateAccessBindings
+    - billingInternal.accounts.updateExporterTask
+    - billingInternal.accounts.updateReferralCode
+    - billingInternal.accounts.updateSalesManager
+    - billingInternal.accounts.updateSupportSubscriptions
+    - billingInternal.accounts.varAdjustments.list
+    - billingInternal.accounts.varAdjustments.manage
+    - billingInternal.accounts.{get,list}
+
+  internal.billing.admin:
+    groups: [billing]
+    name: ''
+    visibility: internal
+    description: Полный доступ к Billing Internal
+    permissions:
+    - billingInternal.accounts.acceptMonetaryGrantOffer
+    - billingInternal.accounts.activateReferralCode
+    - billingInternal.accounts.bindCloud
+    - billingInternal.accounts.bindCloudDelayed
+    - billingInternal.accounts.changeSkuOverride
+    - billingInternal.accounts.changeVolumeIncentive
+    - billingInternal.accounts.createCommittedUseDiscount
+    - billingInternal.accounts.createBudget
+    - billingInternal.accounts.createExporterTask
+    - billingInternal.accounts.createReferralCode
+    - billingInternal.accounts.createSkuOverride
+    - billingInternal.accounts.createSubscription
+    - billingInternal.accounts.createVolumeIncentive
+    - billingInternal.accounts.deleteBudget
+    - billingInternal.accounts.getBudgetNotifications
+    - billingInternal.accounts.getBudget
+    - billingInternal.accounts.getDocuments
+    - billingInternal.accounts.getHistory
+    - billingInternal.accounts.getInvoice
+    - billingInternal.accounts.getReferrerStatus
+    - billingInternal.accounts.getReport
+    - billingInternal.accounts.getSalesManager
+    - billingInternal.accounts.getSkuCost
+    - billingInternal.accounts.getSkuOverride
+    - billingInternal.accounts.giveMonetaryGrants
+    - billingInternal.accounts.listAccessBindings
+    - billingInternal.accounts.listBillingRecords
+    - billingInternal.accounts.listBudgets
+    - billingInternal.accounts.listBudgetNotificationHistory
+    - billingInternal.accounts.listClouds
+    - billingInternal.accounts.listCommittedUseDiscount
+    - billingInternal.accounts.listCommittedUseDiscountTemplates
+    - billingInternal.accounts.listExporterTask
+    - billingInternal.accounts.listMonetaryGrants
+    - billingInternal.accounts.listReferralCodes
+    - billingInternal.accounts.listSubaccounts
+    - billingInternal.accounts.listSubscription
+    - billingInternal.accounts.listSupportSubscriptions
+    - billingInternal.accounts.listTransactions
+    - billingInternal.accounts.listVolumeIncentive
+    - billingInternal.accounts.update
+    - billingInternal.accounts.updateAccessBindings
+    - billingInternal.accounts.updateBudget
+    - billingInternal.accounts.updateExporterTask
+    - billingInternal.accounts.updateReferralCode
+    - billingInternal.accounts.updateSalesManager
+    - billingInternal.accounts.updateSupportSubscriptions
+    - billingInternal.accounts.varAdjustments.list
+    - billingInternal.accounts.varAdjustments.manage
+    - billingInternal.accounts.{get,list}
+    - billingInternal.clouds.bind
+    - billingInternal.committedUseDiscount.list
+    - billingInternal.committedUseDiscountTemplate.list
+    - billingInternal.committedUseDiscountTemplate.{create,update}
+    - billingInternal.conversionRates.create
+    - billingInternal.conversionRates.get
+    - billingInternal.grantPolicies.{create,delete}
+    - billingInternal.grantPolicies.{get,list}
+    - billingInternal.monetaryGrant.give
+    - billingInternal.monetaryGrant.update
+    - billingInternal.monetaryGrantOffers.{create,update}
+    - billingInternal.monetaryGrantOffers.{get,list}
+    - billingInternal.partners.view
+    - billingInternal.partnerVersions.view
+    - billingInternal.partnerProposals.view
+    - billingInternal.partnerProducts.view
+    - billingInternal.pastePost.get
+    - billingInternal.pastePost.{create,delete}
+    - billingInternal.person.change
+    - billingInternal.person.get
+    - billingInternal.publisherAccount.get
+    - billingInternal.publisherAccount.{create,update}
+    - billingInternal.revenueReport.create
+    - billingInternal.revenueReport.get
+    - billingInternal.salesManager.list
+    - billingInternal.service.{create,update}
+    - billingInternal.sku.{create,delete,update,list}
+    - billingInternal.skuDraft.{list,update,create,reject,accept}
+    - billingInternal.skuOverride.list
+    - billingInternal.subscription.list
+    - billingInternal.subscriptionTemplates.{get,list,manage}
+    - billingInternal.support.resolve
+    - billingInternal.volumeIncentive.list
+
+  internal.billing.skumanager:
+    groups: [billing]
+    name: ''
+    visibility: internal
+    description: Роль для управления SKU через private API биллинга
+    permissions:
+    - billingInternal.sku.{create,delete,update,list}
+    - billingInternal.skuDraft.{create,list,update,reject,accept}
+
+  internal.billing.skuprovider:
+    groups: [billing]
+    name: ''
+    visibility: internal
+    description: Роль для управления SKU Drafts через private API биллинга
+    permissions:
+    - billingInternal.sku.list
+    - billingInternal.skuDraft.{list,update,create}
+
+  internal.billing.folderresolver:
+    groups: [billing]
+    name: ''
+    visibility: internal
+    description: Роль для резолвинга каталогов
+    permissions:
+      - resource-manager.folders.get
+
+  internal.billing.cloudresolver:
+    groups: [billing]
+    name: ''
+    visibility: internal
+    description: Роль для резолвинга облаков
+    permissions:
+      - resource-manager.clouds.get
+
+  internal.billing.verificationScoreViewer:
+    groups: [ billing ]
+    name: ''
+    visibility: internal
+    description: Роль для получения verificationScore биллинг аккаунтов
+    permissions:
+      - billingInternal.accounts.getVerificationScore
+
+  internal.billing.viewer:
+    groups: [billing]
+    name: ''
+    visibility: internal
+    description: Роль для частичного доступа к Billing Internal
+    permissions:
+    - billingInternal.accounts.getBudget
+    - billingInternal.accounts.getBudgetNotifications
+    - billingInternal.accounts.getDocuments
+    - billingInternal.accounts.getHistory
+    - billingInternal.accounts.getInvoice
+    - billingInternal.accounts.getReferrerStatus
+    - billingInternal.accounts.getReport
+    - billingInternal.accounts.getSalesManager
+    - billingInternal.accounts.getSkuCost
+    - billingInternal.accounts.getSkuOverride
+    - billingInternal.accounts.listBillingRecords
+    - billingInternal.accounts.listBudgets
+    - billingInternal.accounts.listBudgetNotificationHistory
+    - billingInternal.accounts.listClouds
+    - billingInternal.accounts.listCommittedUseDiscount
+    - billingInternal.accounts.listCommittedUseDiscountTemplates
+    - billingInternal.accounts.listExporterTask
+    - billingInternal.accounts.listMonetaryGrants
+    - billingInternal.accounts.listReferralCodes
+    - billingInternal.accounts.listSubaccounts
+    - billingInternal.accounts.listSubscription
+    - billingInternal.accounts.listSupportSubscriptions
+    - billingInternal.accounts.listTransactions
+    - billingInternal.accounts.listVolumeIncentive
+    - billingInternal.accounts.{get,list}
+    - billingInternal.committedUseDiscount.list
+    - billingInternal.committedUseDiscountTemplate.list
+    - billingInternal.conversionRates.get
+    - billingInternal.grantPolicies.{get,list}
+    - billingInternal.monetaryGrantOffers.{get,list}
+    - billingInternal.partners.{view,edit}
+    - billingInternal.partnerVersions.{view,edit}
+    - billingInternal.partnerProposals.{view,apply,reject,approve,delete}
+    - billingInternal.partnerProducts.{view,edit}
+    - billingInternal.pastePost.get
+    - billingInternal.person.get
+    - billingInternal.publisherAccount.get
+    - billingInternal.revenueReport.get
+    - billingInternal.salesManager.list
+    - billingInternal.skuOverride.list
+    - billingInternal.skuDraft.list
+    - billingInternal.subscription.list
+    - billingInternal.subscriptionTemplates.{get,list}
+    - billingInternal.support.resolve
+    - billingInternal.volumeIncentive.list
+
+# THIS ROLE IS BEING DEPRECATED
+# USE internal.marketplaceagent from mkt instead
+  internal.billingmarketplaceagent:
+    groups: [billing]
+    name: ''
+    visibility: internal
+    description: Роль для доступа из маркетплейса в биллинг
+    permissions:
+    - billingInternal.accounts.update
+    - billingInternal.accounts.{get,list,listSupportSubscriptions}
+    - billingInternal.grantPolicies.{create,delete}
+    - billingInternal.grantPolicies.{get,list}
+    - billingInternal.monetaryGrantOffers.{get,list}
+    - billingInternal.publisherAccount.get
+    - billingInternal.publisherAccount.{create,update}
+    - billingInternal.revenueReport.{create,get}
+    - billingInternal.sku.{create,delete,update,list}
+
+  internal.billing.personmanager:
+    groups: [billing]
+    name: ''
+    visibility: internal
+    description: Роль для управления Persons
+    permissions:
+    - billingInternal.person.{change,get}
+
+  billing.support:
+    groups: [billing, support]
+    name: Support Billing
+    visibility: internal
+    description: Role for support engineers to see billing information
+    permissions:
+      - billingInternal.accounts.getBudget
+      - billingInternal.accounts.getDocuments
+      - billingInternal.accounts.getSalesManager
+      - billingInternal.accounts.getInvoice
+      - billingInternal.accounts.getReport
+      - billingInternal.accounts.getSkuCost
+      - billingInternal.accounts.listBudgets
+      - billingInternal.accounts.listBudgetNotificationHistory
+      - billingInternal.accounts.listClouds
+      - billingInternal.accounts.listCommittedUseDiscount
+      - billingInternal.accounts.listCommittedUseDiscountTemplates
+      - billingInternal.accounts.listExporterTask
+      - billingInternal.accounts.listMonetaryGrants
+      - billingInternal.accounts.listReferralCodes
+      - billingInternal.accounts.listSubaccounts
+      - billingInternal.accounts.listSupportSubscriptions
+      - billingInternal.accounts.listTransactions
+      - billingInternal.accounts.{get,list}
+
+  billing.supportAdmin:
+    groups: [billing, support]
+    name: Support Billing Admin
+    visibility: internal
+    description: Role for privileged operations with billing accounts
+    includedRoles:
+      - billing.support
+    permissions:
+      - billingInternal.clouds.bind
+      - billingInternal.accounts.bindCloud
+      - billingInternal.accounts.bindCloudDelayed
+      - billingInternal.accounts.updateSupportSubscriptions
+
+  internal.billingtestagent:
+    groups: [billing]
+    name: ''
+    visibility: internal
+    description: Роль для e2e тестов биллинга в сервисах
+    permissions:
+      - billingInternal.accounts.listBillingRecords
+      - billingInternal.accounts.getReport
+
+  internal.billing.moneyAdjuster:
+    groups: [billing, support]
+    name: Money Adjuster
+    visibility: internal
+    description: Роль для начисления денежных корректировок через создание подписок по шаблону
+    permissions:
+      - billingInternal.accounts.{createSubscriptionByTemplate,listSubscription}
+      - billingInternal.subscriptionTemplates.{get,list}
+
+  internal.billing.agent:
+    groups: [billing]
+    name: Агент Billing
+    visibility: internal
+    description: Роль для агентов биллинга
+    permissions:
+    - monitoring.data.write
+
+  internal.billing.storageAgent:
+    groups: [billing]
+    name: Storage Agent
+    visibility: internal
+    description: Внутренняя роль для проверки принадлежности бакета владельцу
+    permissions:
+      - s3.buckets.getExternalSettings
+
+  internal.partners.viewer:
+    groups: [billing]
+    name: Partner viewer
+    visibility: internal
+    description: Внутренняя роль для просмотра партнера и связанных с ним сущностей
+    permissions:
+      - billingInternal.partners.{view,list}
+      - billingInternal.partnerVersions.view
+      - billingInternal.partnerProposals.view
+      - billingInternal.partnerProducts.view
+      - billingInternal.partnerProductVersions.view
+      - billingInternal.partnerProductProposals.view
+
+  internal.partners.editor:
+    groups: [billing]
+    name: Partner editor
+    visibility: internal
+    description: Внутренняя роль для просмотра и редактирования партнера и связанных с ним сущностей
+    includedRoles:
+      - internal.partners.viewer
+    permissions:
+      - billingInternal.partners.edit
+      - billingInternal.partnerVersions.edit
+      - billingInternal.partnerProposals.{apply,reject,approve,delete}
+      - billingInternal.partnerProducts.edit
+      - billingInternal.partnerProductVersions.edit
+      - billingInternal.partnerProductProposals.{apply,reject,approve,delete}
+
+  billing.partners.viewer:
+    groups: [billing]
+    name: Partner viewer
+    visibility: public
+    description: Публичная роль для просмотра партнера и связанных с ним сущностей
+    permissions:
+      - billing.partners.{view,list}
+      - billing.partnerVersions.view
+      - billing.partnerProposals.view
+      - billing.partnerProducts.view
+      - billing.partnerProductVersions.view
+      - billing.partnerProductProposals.view
+
+  billing.partnerProducts.editor:
+    groups: [billing]
+    name: Partner product editor
+    visibility: public
+    description: Публичная роль для редактирования только продуктов партнера
+    includedRoles:
+      - billing.partners.viewer
+    permissions:
+      - billing.partnerProducts.edit
+      - billing.partnerProductVersions.edit
+      - billing.partnerProductProposals.{apply,reject,delete}
+
+  billing.partners.editor:
+    groups: [billing]
+    name: Partner editor
+    visibility: public
+    description: Публичная роль для просмотра и редактирования партнера и связанных с ним сущностей
+    includedRoles:
+      - billing.partnerProducts.editor
+    permissions:
+      - billing.partners.edit
+      - billing.partnerVersions.edit
+      - billing.partnerProposals.{apply,reject,delete}
+
+  internal.billing.accountResolver:
+    groups: [billing]
+    name: Billing account resolver
+    visibility: internal
+    description: Роль для резолвинга биллинг аккаунтов
+    permissions:
+      - billingInternal.accounts.list
+
+  billing.publishers.creator:
+    groups: [ billing ]
+    name: Publisher creator
+    visibility: public
+    description: Публичная роль для создания паблишера
+    permissions:
+      - billing.publisherAccounts.create

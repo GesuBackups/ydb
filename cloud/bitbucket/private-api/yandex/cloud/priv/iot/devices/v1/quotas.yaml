@@ -1,0 +1,4 @@
+quotas:
+  - iot.registries.count
+  - iot.devices.count
+  - iot.brokers.count

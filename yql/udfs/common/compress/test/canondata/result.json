@@ -1,0 +1,16 @@
+{
+    "test.test[RoundTrip]": [
+        {
+            "checksum": "602dc28cf68274a580cdcd229b327312",
+            "size": 4794,
+            "uri": "https://storage.yandex-team.ru/get-devtools/1937429/3f0f31a3d4519730388567da5192161199135f02/resource.tar.gz#test.test_RoundTrip_/results.txt"
+        }
+    ],
+    "test.test[TryDecompress]": [
+        {
+            "checksum": "935c16881015ab12a8e3030ff708817f",
+            "size": 7700,
+            "uri": "https://storage.yandex-team.ru/get-devtools/1937429/3f0f31a3d4519730388567da5192161199135f02/resource.tar.gz#test.test_TryDecompress_/results.txt"
+        }
+    ]
+}

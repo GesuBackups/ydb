@@ -1,0 +1,329 @@
+/*
+ * This file defines incoming/outgoing messages for the Fetcher (spiderlib)
+ */
+package NFetcherMsg;
+
+import "zora/zora/proto/common/common.proto";
+
+option java_package = "ru.yandex.spider.proto";
+
+/*
+ * About Constraint and CrawlDelay
+ *
+ * Constraint is a special kind of fetcher cookie that help fetcher identify
+ * appropriate politeness queue for the given URL. For most URLs (and by default)
+ * it is hostname, however in cases of multihost IPs fetcher may choose to restrict
+ * politeness by IP or combination of host and IP. CrawlDelay is average rate at
+ * which fetcher is downloading URLs for a given Constraint. Fetcher returns
+ * this rate alongside the constraint to the crawler to allow scheduler to adapt to
+ * the expected yield. Fetcher default CrawlDelay for the host can be overridden by robots.txt
+ * or relaxed (read: reduced) for large sites that have multiple worms downloading URLs.
+ * If fetcher is shared by several crawlers, CrawlDelay should be divided by this crawler
+ * share of the fetches. E.g. if given site has actual CrawlDelay of 10 seconds and crawler is
+ * given 25% share, CrawlDelay returned to the crawler should be 10/0.25 = 40 seconds.
+ *
+ * The reason why Constraint is outside of the TContext is to allow scheduler to use this
+ * field to sort and constrain the flow of download requests from crawler to the fetcher.
+ */
+
+message TIpv6Address {
+   required uint64 High = 1;
+   required uint64 Low = 2;
+}
+
+/*
+ * Structure for basic (and digest in future) authorization
+ */
+message TAuthData {
+    enum EAuthType {
+        NONE  = 0;
+        BASIC = 1;
+    };
+
+    required EAuthType AuthType = 1 [default=NONE];
+    optional string Login = 2;
+    optional string Password = 3;
+}
+
+enum ERequestType {
+    ONLINE = 0;
+    OFFLINE = 1;
+    USERPROXY = 2;
+}
+
+message TDiagInfo {
+    message TZoraInfo {
+        optional uint64 GotRequest = 1;
+        optional uint64 StartResolve = 6;
+        optional uint64 FinishResolve = 7;
+        optional uint64 StartLocate = 8;
+        optional uint64 FinishLocate = 9;
+        optional uint64 SentRequest = 2;
+        optional uint64 GotReply = 3;
+        optional uint64 SentReply = 4;
+
+        optional string HostName = 5;
+    }
+    message TSpiderInfo {
+        optional uint64 GotRequest = 1;
+        optional uint64 StartCacheLookup = 18;
+        optional uint64 FinishCacheLookup = 19;
+        optional uint64 GotCacheResponse = 20;
+        optional uint64 StartResolve = 11;
+        optional uint64 FinishResolve = 12;
+        optional uint64 StartRobots = 13;
+        optional uint64 FinishRobots = 14;
+        optional uint64 StartFetch = 15;
+        optional uint64 StartRefetch = 16;
+        optional uint64 StartSend = 2;
+        optional uint64 FinishSend = 3;
+        optional uint64 FinishFetch = 17;
+        optional uint64 StartReceive = 4;
+        optional uint64 FinishReceive = 5;
+        optional uint64 StartCalc = 6;
+        optional uint64 FinishCalc = 7;
+        optional uint64 SentReply = 8;
+
+        optional string HostName = 9;
+        optional string FetcherName = 10;
+    }
+
+    message TLogicdocInfo {
+        optional uint64 Received = 1;
+        optional uint64 WorkStarted = 2;
+        optional uint64 WorkFinished = 3;
+        optional uint64 Sent = 4;
+    }
+
+    optional TZoraInfo ZoraInfo = 1;
+    optional TSpiderInfo SpiderInfo = 2;
+    optional TLogicdocInfo LogicdocInfo = 3;
+}
+
+message TRealContext {
+   optional uint64 First  = 1;
+   optional uint64 Second = 2;
+};
+
+
+message TRDSRequest {
+   message TRange {
+      optional uint64 Start  = 10;
+      optional uint64 Length = 20;
+   }
+   optional TRange       Range  = 10;
+   optional TRealContext Cookie = 20;
+};
+message TRDSResponse {
+   enum TStatus {
+      Ok_WaitingForNextCommand                          = 1; // See in status of OrdinaryResponse
+      Ok_Finished                                       = 2; // See in status of OrdinaryResponse
+      IllFormedRequest_BadRange                         = 3; // See BadRangeExplanation
+   };
+   optional TStatus      Status      = 10;
+   optional TRealContext Cookie      = 20;
+   optional string       Description = 30;
+};
+/*
+ * Context that passed with the message and returned back :)
+ */
+message TContext {
+    optional int32 HttpModTime = 1;  // If-modified-since:
+    optional string Cookies = 2;     // Set-Cookie:
+    optional string ETags = 3;       // If-none-match:
+    optional uint32 LangRegion = 4 [default=0];  // what Accept-Language and region is used to fetch the page
+    optional uint32 LogelVersion = 5 [default=0]; // desired logel version (0 for old, 1 for new)
+    optional uint32 RequestCtx = 6;  // user defined request context (passed to spider and back unchanged)
+    optional string LargeCtx = 13; //context for imageparser trigger
+
+    // fetch options:
+    optional bool   IgnoreRobotsTxt = 7; // ignore robots.txt (works for special sources only)
+    optional bool   ModifyCrc = 8; // increment document Crc (for robot to be able to reindex it)
+    optional bool   CutOutOrigDoc = 10; // cut out PsOrigDoc from logel
+    optional bool   DumbFetch = 11; // return doc logel with resoinse contents even if an error occurred
+    optional bool   FromCache = 12; // don't fetch, only lookup for document in cache
+    optional ERequestType RequestType = 9 [default=ONLINE];
+    optional bool   Mp3Tags = 14;  // fetch mp3 tags or not
+    optional int64  ContentRangeStart = 15 [default=-1];
+    optional int64  ContentRangeEnd = 16 [default=-1];
+    optional string PDFetchProcId = 17; // process in pdfetch (video, redirects)
+    optional uint32 PDFetchVerbose = 18 [default=0]; // more info in PDFetchDiag
+}
+
+enum EMethod {
+        Get     = 0;
+        Post    = 1;
+        Head    = 2;
+        Delete  = 3;
+        Put     = 4;
+        Connect = 5;
+        Options = 6;
+        Trace   = 7;
+};
+
+message TSesOptJs {
+   optional bool Js = 10 [default = false];
+};
+message TSesOptStickyIp {
+   optional bool StickyIp = 10 [default = false];
+   // enum ActionOnDifferentIp: Warning, Stop, ... - TODO
+};
+
+message TCreateSession {
+   optional TSesOptJs       SesOptJs       = 10;
+   optional TSesOptStickyIp SesOptStickyIp = 20;
+};
+
+message TContinueSession {
+   optional bytes SessionCookie  = 10;
+   optional bool  UseJsSes       = 20;
+   optional bool  UseStickyIpSes = 30;
+}
+
+message TSessionCommand {
+   oneof Command {
+      TCreateSession   CreateSession   = 10;
+      TContinueSession ContinueSession = 20;
+      // TCloseSession    CloseSession    = 30; - TODO
+   };
+};
+
+
+/*
+ * Request message to fetcher to download single URL from the web
+ * The logistics information (Type, Size, Buffer) to deserialize
+ * the class object is provided by the messaging library.
+ *
+ * Special instance of this requests allows to get robots.txt information.
+ */
+message TFetchRequest {
+    required string Url = 1;        // http://www.host.ru:8080/path TUrlChecker validated
+                                    // http://www.host.ru/robots.txt - special case of request for TRobotsLogel
+
+    optional string                        Constraint           = 2; // Host or IP that identify worm queue, host by default, spider returns real one
+    optional TContext                      Context              = 3; // fetcher cookie
+    required string                        ClientType           = 4; // zora client type
+    optional uint32                        Timeout              = 5 [default=3600];    // how long client is willing to wait for TFetchResponse (in seconds)
+    optional uint32                        Freshness            = 6 [default=3600];  // maximal staleness if document has been fetched before (in seconds)
+    optional uint32                        LegacyPriority       = 7; // range [0, 9], used only if Priority is not specified
+    optional TAuthData                     AuthData             = 8;
+    optional uint32                        Ipv4                 = 9; // Requested domain ip.
+    optional TIpv6Address                  Ipv6                 = 14; // ipv6 version ov Ip
+    optional uint32                        Flags                = 10 [default=0];
+    optional uint32                        PolicyId             = 11; // Policy which requested a document
+    optional TDiagInfo                     DiagInfo             = 12;
+    optional string                        VersionInfo          = 13;
+    optional EMethod                       Method               = 15 [default=Get];
+    repeated string                        Header               = 16;
+    optional string                        Body                 = 17;
+    optional string                        ComCon2Token         = 18;
+    optional TRealContext                  RealContext          = 19;
+    optional TRDSRequest                   RDSRequest           = 20;
+    optional bytes                         IpToDownloadFrom     = 21;
+    optional bytes                         SessionCookie        = 22;
+    optional bool                          NoCalc               = 23;
+    optional uint64                        SessionLifeTime      = 24; // in MicroSeconds
+    optional uint64                        Priority             = 25 [default=4]; // lower is more important, range [0, 2^64), MSB is forced 1 for offline requests
+    optional bool                          NoRetry              = 26 [default=false]; // don't wait for bad hosts to become good
+    optional string                        FetcherDcHint        = 27; // fetcher is selected from this DC (as specified in cluster.conf) if possible
+    optional TSessionCommand               SessionCommand       = 28;
+    optional bool                          OutputToPipeline     = 29;
+    optional NZoraPb.TSslCertPolicy        SslCertPolicy        = 30;
+    optional string                        TvmServiceTicket     = 31;
+    optional string                        ExplicitId           = 32;
+
+    extensions 1000 to max;
+}
+
+/*
+ * Response message from the fetcher with results of the download of one URL from the web.
+ * Each TFetchRequest should generate exactly one TFetchResponse. The logistics information
+ * (Type, Size, Buffer) to deserialize the class objes is provided by messaging library.
+ *
+ * Status indicates results of the download and Logel field contains serialized
+ * form of the reply. Fetcher cookie (TContext) is mechanism for the fetcher to
+ * pass information between subsequent fetches of the same URL.
+ * Crawler is responsible for storing this data and returning it back
+ * for next fetch of the same URL.
+ */
+enum EConstraintId {
+    CID_NO_CONSTRAINT = 0;
+
+    // quotalib constraints
+    CID_QUOTA_NO_SOURCENAME         = 1;
+    CID_QUOTA_NO_REQTYPE            = 2;
+    CID_QUOTA_NO_IP                 = 3;
+    CID_QUOTA_REQTYPE_EXCEEDED      = 4;
+    CID_QUOTA_IP_EXCEEDED           = 5;
+
+    CID_TIMEOUT                     = 6;
+    CID_NO_SPACE                    = 7;
+    CID_HOST_RENEWED_RECENTLY       = 8;
+    CID_NO_HOST                     = 9;
+    CID_HOST_BUSY                   = 10;
+    CID_IP_BUSY                     = 11;
+    CID_MAXINFLIGHT_EXCEEDED        = 12;
+    CID_PROCESSING_QUEUE_IS_FULL    = 13;
+    CID_DNS_QUEUE_IS_FULL           = 14;
+    CID_INCONSISTENT_CLUSTER        = 15;
+    CID_SPIDER_SEND_ERROR           = 16;
+    CID_ZORACL_ERROR                = 17;
+    CID_KWCALC_ERROR                = 18;
+
+    CID_AUTH_FAILED                 = 19;
+
+    CID_SESSION                     = 20;
+}
+
+message TFetchResponse {
+    enum EStatus {
+        OK          = 1; // got HTML content, Logel contains TDocLogel
+        REJECT      = 2; // fetcher did not attempt to crawl because queue is full, Logel is empty
+        UPDATE      = 3; // failed to crawl, Logel contains TUpdUrlLogel to explain why
+        DISALLOW    = 4; // failed due to robots disallow (or firewall, or spam), Logel is empty
+        REDIR       = 5; // page is redirect, Logel contains TRedirLogel
+        ROBOTS      = 6; // response for http://www.host.ru/robots.txt, Logel contain TRobotsLogel
+        FETCHERROR  = 7; // http code clarifies error
+        UNAVAILABLE = 8; // Server Unavailable
+        ACCEPTED    = 9; // Special query accepted (for example, host information has been renewed), Logel is empty
+    }
+
+    required EStatus       Status        = 1;      // one of the OK, REJECT, FETCHERROR and etc.
+
+    optional TContext      Context       = 2;     // fetcher cookie
+
+    optional EConstraintId ConstraintId  = 8 [default = CID_NO_CONSTRAINT];
+    optional string        Constraint    = 3;  // Host or IP that identity worm queue, real one
+    optional uint32        CrawlDelay    = 4;  // in milliseconds for this Constraint
+
+    optional uint32        Ipv4          = 5;          // IP address when available because is missing from TDocLogel?
+    optional TIpv6Address  Ipv6          = 10;   // Ipv6 version ov Ip
+    optional uint32        HttpCode      = 6;    // extended http code; see definition in util/httpcodes.h
+    optional bytes         Logel         = 7;       // payload serialized into Logel record
+
+    optional TDiagInfo     DiagInfo      = 9;
+
+    optional TRDSResponse   RDSResponse   = 11;
+    optional bytes          SessionCookie = 12;
+
+    optional string         RequestId     = 20;
+    optional string         ExplicitId    = 21;
+
+    extensions 1000 to max;
+}
+
+/*
+ * Questions:
+ *
+ * 1) What does TFetchResponse contain in case If-modified-since returns not-modified?
+ * 2) Suggestion: add content fingerprint into the TContext so spider could save
+ *    bits on transfering the entire HTML in case fingerprint has not been changed.
+ */
+
+/*
+ * Subscription to logels from zora/spider cluster
+ */
+
+message TLogelMessage {
+    required bytes Logel = 1;
+};

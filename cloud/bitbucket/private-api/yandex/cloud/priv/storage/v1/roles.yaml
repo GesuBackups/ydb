@@ -1,0 +1,438 @@
+role_groups:
+  storage:
+    name: Object Storage roles
+
+roles:
+
+  storage.viewer:
+    groups: [storage]
+    name: Доступ к Object storage в режиме чтения
+    visibility: public
+    description: роль дает доступ к Object storage в режиме чтения
+    permissions:
+      - iam.folders.get
+      - resource-manager.folders.get
+      - s3.buckets.getBucketCors
+      - s3.buckets.getBucketLocation
+      - s3.buckets.getBucketLogging
+      - s3.buckets.getBucketVersioning
+      - s3.buckets.getBucketWebsite
+      - s3.buckets.getEncryptionConfiguration
+      - s3.buckets.getExternalHTTPSConfiguration
+      - s3.buckets.getExternalSettings
+      - s3.buckets.getLifecycleConfiguration
+      - s3.buckets.listAccessBindings
+      - s3.buckets.listBucket
+      - s3.buckets.listBucketMultipartUploads
+      - s3.buckets.listBucketVersions
+      - s3.cloudQuotas.get
+      - s3.objects.getObject
+      - s3.objects.getObjectVersion
+      - s3.objects.listAccessBindings
+      - s3.objects.listMultipartUploadParts
+      - s3.objects.select
+      - s3.services.listAllMyBuckets
+      - s3.services.getServiceStats
+      - s3.services.getFolderStats
+      - s3.services.getCloudStats
+
+  storage.uploader:
+    groups: [storage]
+    name: Доступ к Object storage в режиме чтения и записи, без удаления
+    visibility: public
+    description: роль дает доступ к Object storage в режите чтения, и права на запись объектов, без возможности удаления
+    includedRoles:
+      - storage.viewer
+    permissions:
+      - s3.objects.abortMultipartUpload
+      - s3.objects.putObject
+
+  storage.editor:
+    groups: [storage]
+    name: Доступ к Object storage в режиме чтения и записи
+    visibility: public
+    description: роль дает доступ к Object storage в режиме чтения и записи
+    includedRoles:
+      - storage.uploader
+    permissions:
+      - s3.buckets.createBucket
+      - s3.buckets.deleteBucket
+      - s3.buckets.deleteBucketWebsite
+      - s3.buckets.deleteExternalHTTPSConfiguration
+      - s3.buckets.putBucketCors
+      - s3.buckets.putBucketLogging
+      - s3.buckets.putBucketWebsite
+      - s3.buckets.putEncryptionConfiguration
+      - s3.buckets.putExternalHTTPSConfiguration
+      - s3.buckets.putExternalSettings
+      - s3.buckets.putLifecycleConfiguration
+      - s3.objects.deleteObject
+      - s3.objects.deleteObjectVersion
+      - s3.objects.restoreObject
+
+  storage.admin:
+    groups: [storage]
+    name: Администратор Object storage
+    visibility: public
+    description: роль дает доступ ко всем действиям в Object storage
+    includedRoles:
+      - storage.editor
+    permissions:
+      - s3.buckets.getBucketSystemTagging
+      - s3.buckets.listAccessBindings
+      - s3.buckets.putBucketSystemTagging
+      - s3.buckets.putBucketVersioning
+      - s3.buckets.updateAccessBindings
+      - s3.buckets.deleteBucketPolicy
+      - s3.buckets.getBucketPolicy
+      - s3.buckets.putBucketPolicy
+      - s3.objects.listAccessBindings
+      - s3.objects.updateAccessBindings
+
+  storage.configurer:
+    groups: [storage]
+    name: Доступ к управлению настройками в Object storage
+    visibility: public
+    description: роль дает права просматривать и менять настройки бакетов в Object Storage, без доступа к данным
+    permissions:
+      - iam.folders.get
+      - resource-manager.folders.get
+      - s3.buckets.deleteBucketPolicy
+      - s3.buckets.deleteExternalHTTPSConfiguration
+      - s3.buckets.getBucketCors
+      - s3.buckets.getBucketLocation
+      - s3.buckets.getBucketLogging
+      - s3.buckets.getBucketPolicy
+      - s3.buckets.getBucketVersioning
+      - s3.buckets.getBucketWebsite
+      - s3.buckets.getEncryptionConfiguration
+      - s3.buckets.getExternalHTTPSConfiguration
+      - s3.buckets.getLifecycleConfiguration
+      - s3.buckets.putBucketCors
+      - s3.buckets.putBucketLogging
+      - s3.buckets.putBucketPolicy
+      - s3.buckets.putBucketWebsite
+      - s3.buckets.putEncryptionConfiguration
+      - s3.buckets.putExternalHTTPSConfiguration
+      - s3.buckets.putLifecycleConfiguration
+
+  storage.configViewer:
+    groups: [storage]
+    name: Группа аудита
+    visibility: public
+    description: Роль даёт права просматривать настройки бакетов и объектов
+    permissions:
+      - iam.folders.get
+      - resource-manager.folders.get
+      - s3.buckets.getBucketCors
+      - s3.buckets.getBucketLocation
+      - s3.buckets.getBucketLogging
+      - s3.buckets.getBucketPolicy
+      - s3.buckets.getBucketVersioning
+      - s3.buckets.getBucketWebsite
+      - s3.buckets.getEncryptionConfiguration
+      - s3.buckets.getExternalHTTPSConfiguration
+      - s3.buckets.getExternalSettings
+      - s3.buckets.getLifecycleConfiguration
+      - s3.buckets.listAccessBindings
+      - s3.buckets.listBucket
+      - s3.buckets.listBucketMultipartUploads
+      - s3.buckets.listBucketVersions
+      - s3.objects.listAccessBindings
+      - s3.objects.listMultipartUploadParts
+      - s3.services.listAllMyBuckets
+      - s3.services.getServiceStats
+      - s3.services.getFolderStats
+      - s3.services.getCloudStats
+
+  s3.admin:
+    groups: [storage]
+    name: Администратор объектного хранилища
+    visibility: internal
+    description: полный доступ к настройкам S3.
+    permissions:
+    - iam.authorizedKeys.get
+    - iam.authorizedKeys.{create,delete,update}
+    - iam.clouds.get
+    - iam.folders.get
+    - resource-manager.folders.get
+    - iam.serviceAccounts.createAccessKey
+    - iam.serviceAccounts.createApiKey
+    - iam.serviceAccounts.deleteAccessKey
+    - iam.serviceAccounts.deleteApiKey
+    - iam.serviceAccounts.updateAccessKey
+    - iam.serviceAccounts.updateApiKey
+    - iam.serviceAccounts.getAccessKey
+    - iam.serviceAccounts.getApiKey
+    - iam.serviceAccounts.listAccessKeys
+    - iam.serviceAccounts.listApiKeys
+    - iam.serviceAccounts.{create,delete,update}
+    - iam.serviceAccounts.{get,list}
+    - iam.tokenKeys.get
+    - iam.tokenKeys.{create,delete,update}
+    - iam.userAccounts.get
+    - marketplace.agreements.get
+    - s3.buckets.createBucket
+    - s3.buckets.deleteBucket
+    - s3.buckets.deleteBucketWebsite
+    - s3.buckets.getBucketLocation
+    - s3.buckets.getBucketVersioning
+    - s3.buckets.getBucketWebsite
+    - s3.buckets.getLifecycleConfiguration
+    - s3.buckets.getEncryptionConfiguration
+    - s3.buckets.listBucket
+    - s3.buckets.listBucketMultipartUploads
+    - s3.buckets.listBucketVersions
+    - s3.buckets.putBucketWebsite
+    - s3.buckets.putLifecycleConfiguration
+    - s3.buckets.putEncryptionConfiguration
+    - s3.objects.abortMultipartUpload
+    - s3.objects.deleteObject
+    - s3.objects.getObject
+    - s3.objects.listMultipartUploadParts
+    - s3.objects.putObject
+    - s3.objects.getObjectVersion
+    - s3.objects.deleteObjectVersion
+    - s3.objects.select
+    - s3.services.listAllMyBuckets
+    - s3.buckets.deleteBucketPolicy
+    - s3.buckets.getBucketPolicy
+    - s3.buckets.putBucketPolicy
+
+  internal.storage.acpReader:
+    groups: [storage]
+    name: ''
+    visibility: internal
+    description: Внутренняя роль для интеграции с s3 acp
+    permissions:
+    - s3.buckets.listAccessBindings
+    - s3.objects.listAccessBindings
+
+  internal.storage.acpWriter:
+    groups: [storage]
+    name: ''
+    visibility: internal
+    description: Внутренняя роль для интеграции с s3 acp
+    permissions:
+    - s3.buckets.updateAccessBindings
+    - s3.objects.updateAccessBindings
+
+  internal.storage.bucketReader:
+    groups: [storage]
+    name: ''
+    visibility: internal
+    description: Внутренняя роль для байндинга на бакет с публичным чтением
+    permissions:
+      - s3.objects.getObject
+
+  internal.storage.bucketConfigReader:
+    groups: [storage]
+    name: ''
+    visibility: internal
+    description: Внутренняя роль для байндинга на бакет с публичным чтением настроек
+    permissions:
+      - s3.buckets.getBucketCors
+      - s3.buckets.getBucketLocation
+      - s3.buckets.getBucketVersioning
+      - s3.buckets.getBucketWebsite
+      - s3.buckets.getBucketPolicy
+      - s3.buckets.getExternalSettings
+      - s3.buckets.getLifecycleConfiguration
+      - s3.buckets.getEncryptionConfiguration
+      - s3.services.getServiceStats
+      - s3.services.getFolderStats
+      - s3.services.getCloudStats
+
+  internal.storage.bucketLister:
+    groups: [storage]
+    name: ''
+    visibility: internal
+    description: Внутренняя роль для байндинга на бакет с публичным листингом
+    permissions:
+      - s3.buckets.getBucketLocation
+      - s3.buckets.listBucket
+      - s3.buckets.listBucketMultipartUploads
+      - s3.buckets.listBucketVersions
+      - s3.objects.listMultipartUploadParts
+
+  internal.storage.bucketMover:
+    groups: [storage]
+    name: ''
+    visibility: internal
+    description: Внутренняя роль для переноса бакета между фолдерами одного облака
+    permissions:
+      - s3.buckets.move
+
+  internal.storage.reader:
+    groups: [storage]
+    name: ''
+    visibility: internal
+    description: Внутренняя роль для интеграции с s3 acp
+    permissions: []
+    includedRoles:
+    - internal.storage.bucketReader
+    - internal.storage.bucketConfigReader
+    - internal.storage.bucketLister
+
+  internal.storage.writer:
+    groups: [storage]
+    name: ''
+    visibility: internal
+    description: Внутренняя роль для интеграции с s3 acp
+    permissions:
+    - s3.buckets.deleteBucketWebsite
+    - s3.buckets.putBucketCors
+    - s3.buckets.putBucketWebsite
+    - s3.buckets.putExternalSettings
+    - s3.buckets.putLifecycleConfiguration
+    - s3.buckets.putEncryptionConfiguration
+    - s3.objects.abortMultipartUpload
+    - s3.objects.deleteObject
+    - s3.objects.putObject
+
+  internal.storage.agent:
+    groups: [storage]
+    name: ''
+    visibility: internal
+    description: Внутренняя роль для интеграции с s3 acp
+    permissions:
+      - iam.clouds.get
+      - iam.folders.get
+      - resource-manager.folders.get
+      - resource-manager.clouds.get
+      - iam.serviceAccounts.get
+      - iam.userAccounts.get
+      - iam.userAccounts.presignUrl
+
+  internal.storage.serverlogs:
+    groups: [storage]
+    name: ''
+    visibility: internal
+    description: Внутренняя роль для выгрузки логов через ServerLogs
+    permissions:
+    - s3.objects.putObject
+
+  internal.storage.cdnService:
+    groups: [storage]
+    name: ''
+    visibility: internal
+    description: Внутренняя роль для управления S3 бакетами из CDN сервиса
+    permissions:
+    - s3.buckets.createBucket
+    - s3.buckets.deleteBucket
+    - s3.buckets.getExternalSettings
+
+  storage.support:
+    groups: [storage, support]
+    name: Support Object Storage (s3)
+    description: Role for support engineers
+    visibility: internal
+    permissions:
+      - s3.buckets.getBucketCors
+      - s3.buckets.getBucketLocation
+      - s3.buckets.getBucketVersioning
+      - s3.buckets.getBucketWebsite
+      - s3.buckets.getBucketPolicy
+      - s3.buckets.getExternalHTTPSConfiguration
+      - s3.buckets.getExternalSettings
+      - s3.buckets.getLifecycleConfiguration
+      - s3.buckets.getEncryptionConfiguration
+      - s3.buckets.listBucket
+      - s3.buckets.listBucketMultipartUploads
+      - s3.buckets.listBucketVersions
+      - s3.cloudQuotas.get
+      - s3.services.listAllMyBuckets
+      - s3.cloudQuotas.put
+      - s3.services.getServiceStats
+      - s3.services.getFolderStats
+      - s3.services.getCloudStats
+
+  storage.supportAdmin:
+    groups: [storage, support]
+    name: Support Object Storage (s3) Admin
+    description: Privileged operations for support engineers
+    visibility: internal
+    includedRoles:
+      - storage.support
+    permissions: []
+
+  storage.onCall:
+    groups: [storage]
+    name: On-call Object Storage (s3)
+    description: Role for Object Storage on-call engineers
+    visibility: internal
+    includedRoles:
+      - onCall
+      - storage.support
+      - storage.viewer
+    permissions:
+      - s3.cloudQuotas.putForce
+
+  storage.onCallAdmin:
+    groups: [storage]
+    name: On-call Object Storage (s3) Admin
+    description: Role for Object Storage on-call admins with privileged access
+    visibility: internal
+    includedRoles:
+      - storage.admin
+      - storage.onCall
+      - storage.supportAdmin
+    permissions: []
+
+  yc.yandex-team.ru.storage.reader:
+    groups: [storage]
+    name: reader
+    visibility: internal
+    description: Обладает правами для операций чтения объектов и листинга.
+    includedRoles:
+      - storage.viewer
+
+  yc.yandex-team.ru.storage.uploader:
+    groups: [storage]
+    name: uploader
+    visibility: internal
+    description: Обладает правами для листинга, чтения настроек бакета, записи и перезаписи объектов.
+    includedRoles:
+      - storage.uploader
+
+  yc.yandex-team.ru.storage.writer:
+    groups: [storage]
+    name: writer
+    visibility: internal
+    description: Может делать те же действия, что и admin, кроме создания/удаления бакетов и изменения bucket policy.
+    includedRoles:
+      - yc.yandex-team.ru.storage.uploader
+    permissions:
+      - s3.buckets.deleteBucketWebsite
+      - s3.buckets.putBucketCors
+      - s3.buckets.putBucketLogging
+      - s3.buckets.putBucketWebsite
+      - s3.buckets.putEncryptionConfiguration
+      - s3.buckets.putLifecycleConfiguration
+      - s3.objects.deleteObject
+      - s3.objects.deleteObjectVersion
+      - s3.objects.listAccessBindings
+      - s3.objects.updateAccessBindings
+
+  yc.yandex-team.ru.storage.admin:
+    groups: [storage]
+    name: admin
+    visibility: internal
+    description: Обладает правами для выполнения любых операций над бакетами и объектами сервиса, кроме управления настройками анонимности и квотой бакета.
+    includedRoles:
+      - iam.serviceAccounts.admin
+      - resource-manager.viewer
+      - storage.admin
+    permissions:
+      - iam.accessBindings.list
+
+  yc.yandex-team.ru.storage.owner:
+    groups: [storage]
+    name: owner
+    visibility: internal
+    description: Позволяет подтверждать роли сотрудникам/роботам в рамках квоты сервиса, управлять настройками анонимности и квотой бакета.
+    includedRoles:
+      - storage.viewer
+    permissions:
+      - s3.buckets.getExternalSettings
+      - s3.buckets.putExternalSettings

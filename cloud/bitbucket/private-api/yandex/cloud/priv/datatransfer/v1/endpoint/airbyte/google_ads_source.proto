@@ -1,0 +1,91 @@
+syntax = "proto3";
+
+package yandex.cloud.priv.datatransfer.v1.endpoint.airbyte;
+
+option go_package = "a.yandex-team.ru/cloud/bitbucket/private-api/yandex/cloud/priv/datatransfer/v1/endpoint/airbyte;tm_server_airbyte_endpoint";
+
+import "yandex/cloud/priv/sensitive.proto";
+
+message GoogleAdsSource {
+    message CustomQuery {
+        // Custom Query
+        // 
+        // A custom defined GAQL query for building the report. Should not contain
+        // segments.date expression as it used by incremental streams. Example: SELECT
+        // segments.ad_destination_type, campaign.advertising_channel_sub_type FROM
+        // campaign WHERE campaign.status = 'PAUSED'
+        string query = 1;
+        // Destination Table Name
+        // 
+        // The table name in your destination database for choosen query.
+        string table_name = 2;
+    }
+    message Credentials {
+        // Developer Token
+        // 
+        // Developer token granted by Google to use their APIs. More instruction on how to
+        // find this value in our <a
+        // href="https://docs.airbyte.com/integrations/sources/google-ads#setup-guide">docs</a>
+        string developer_token = 1 [(sensitive) = true];
+        // Client ID
+        // 
+        // The Client ID of your Google Ads developer application. More instruction on how
+        // to find this value in our <a
+        // href="https://docs.airbyte.com/integrations/sources/google-ads#setup-guide">docs</a>
+        string client_id = 2;
+        // Client Secret
+        // 
+        // The Client Secret of your Google Ads developer application. More instruction on
+        // how to find this value in our <a
+        // href="https://docs.airbyte.com/integrations/sources/google-ads#setup-guide">docs</a>
+        string client_secret = 3 [(sensitive) = true];
+        // Access Token
+        // 
+        // Access Token for making authenticated requests. More instruction on how to find
+        // this value in our <a
+        // href="https://docs.airbyte.com/integrations/sources/google-ads#setup-guide">docs</a>
+        string access_token = 4 [(sensitive) = true];
+        // Refresh Token
+        // 
+        // The token for obtaining a new access token. More instruction on how to find this
+        // value in our <a
+        // href="https://docs.airbyte.com/integrations/sources/google-ads#setup-guide">docs</a>
+        string refresh_token = 5 [(sensitive) = true];
+    }
+    Credentials credentials = 7;
+    // Customer ID(s)
+    // 
+    // Comma separated list of (client) customer IDs. Each customer ID must be
+    // specified as a 10-digit number without dashes. More instruction on how to find
+    // this value in our <a
+    // href="https://docs.airbyte.com/integrations/sources/google-ads#setup-guide">docs</a>.
+    // Metrics streams like AdGroupAdReport cannot be requested for a manager account.
+    // Example: 6783948572,5839201945
+    string customer_id = 1;
+    // Start Date
+    // 
+    // UTC date and time in the format 2017-01-25. Any data before this date will not
+    // be replicated. Example: 2017-01-25
+    string start_date = 2;
+    // End Date
+    // 
+    // UTC date and time in the format 2017-01-25. Any data before this date will not
+    // be replicated. Example: 2017-01-25
+    string end_date = 3;
+    // Custom GAQL Queries (Optional)
+    repeated CustomQuery custom_queries = 4;
+    // Login Customer ID for Managed Accounts (Optional)
+    // 
+    // If your access to the customer account is through a manager account, this field
+    // is required and must be set to the customer ID of the manager account (10-digit
+    // number without dashes). More information about this field you can see <a
+    // href="https://developers.google.com/google-ads/api/docs/concepts/call-structure#cid">here</a>.
+    // Example: 7349206847
+    string login_customer_id = 5;
+    // Conversion Window (Optional)
+    // 
+    // A conversion window is the period of time after an ad interaction (such as an ad
+    // click or video view) during which a conversion, such as a purchase, is recorded
+    // in Google Ads.
+    double conversion_window_days = 6;
+}

@@ -1,0 +1,164 @@
+permissions:
+  audit-trails.trails.create:
+    description: Create trail
+    stage: AUDIT_TRAILS_ALPHA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+    resourceType: resource-manager.folder
+  audit-trails.trails.update:
+    description: Update trail
+    stage: AUDIT_TRAILS_ALPHA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+    resourceType: audit-trails.trail
+  audit-trails.trails.delete:
+    description: Delete trail
+    stage: AUDIT_TRAILS_ALPHA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - ACTIVE
+          - BLOCKED_BY_BILLING
+          - DELETING
+    resourceType: audit-trails.trail
+  audit-trails.trails.get:
+    description: Get trail configuration
+    stage: AUDIT_TRAILS_ALPHA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+    resourceType: audit-trails.trail
+  audit-trails.trails.read:
+    description: Checks during event authorization on service account
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  # TODO remove '#' after https://st.yandex-team.ru/CLOUD-74157
+  # resourceType: "*"
+  audit-trails.trails.pause:
+    description: Pause trail
+    stage: AUDIT_TRAILS_ALPHA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+    resourceType: audit-trails.trail
+  audit-trails.trails.resume:
+    description: Resume trail after pause
+    stage: AUDIT_TRAILS_ALPHA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+    resourceType: audit-trails.trail
+  audit-trails.trails.listAccessBindings:
+    description: List access bindings of trail
+    stage: AUDIT_TRAILS_ALPHA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - ACTIVE
+    resourceType: audit-trails.trail
+  audit-trails.trails.updateAccessBindings:
+    description: Change access bindings of trail
+    stage: AUDIT_TRAILS_ALPHA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+    resourceType: audit-trails.trail
+  audit-trails.quotas.get:
+    description: Get audit trails quota
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+    resourceType: resource-manager.cloud
+  audit-trails.quotas.updateLimit:
+    description: Update audit trails quota limits
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - billSuspend
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+    resourceType: resource-manager.cloud
+  # For removal https://st.yandex-team.ru/CLOUD-74141
+  audit-trails.trails.list:
+    description: Get trails list
+    stage: AUDIT_TRAILS_ALPHA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+    resourceType: resource-manager.folder
+  audit-trails.events.write:
+    description: Write cloud events using Ingestion API
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  # TODO remove '#' after https://st.yandex-team.ru/CLOUD-74157
+  # resourceType: "*"

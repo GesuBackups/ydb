@@ -1,0 +1,52 @@
+role_groups:
+  saas:
+    name: Software as a Service roles
+  directory:
+    name: Yandex.Directory (Yandex.Connect) roles
+
+roles:
+
+  internal.saas.directory.userOrganizationsSync:
+    groups: [saas, directory]
+    name: 'Синхронизация списка организацией пользователей в Yandex.Directory (Yandex.Connect)'
+    visibility: internal
+    description: 'выдается на специальный сервисный аккаунт Коннекта'
+    permissions:
+      - organization-manager.organizations.listOrganizations
+
+  internal.saas.collab.userOrganizationsSync:
+    groups: [saas]
+    name: 'Синхронизация организацией пользователей в Я360 и Я.Орг'
+    visibility: internal
+    description: 'выдается на специальный сервисный аккаунт Коллабораций'
+    scopes:
+      - yc.organization-manager.groups.get
+      - yc.organization-manager.organizations.get
+      - yc.organization-manager.users.get
+    permissions:
+      - organization-manager.organizations.listOrganizations
+
+  internal.saas.directory.usersSync:
+    groups: [saas, directory]
+    name: 'Синхронизация пользователей в Yandex.Directory (Yandex.Connect)'
+    visibility: internal
+    description: 'выдается на специальный сервисный аккаунт Коннекта'
+    resourceType:
+      oneOf: [resource-manager.cloud, organization-manager.organization]
+    scopes:
+      - yc.organization-manager.users.get
+    permissions:
+      - iam.cloudUsers.list
+      - iam.cloudUsers.superList
+
+  internal.saas.agent:
+    groups: [saas]
+    name: 'SaaS agent'
+    visibility: internal
+    description: 'выдается на сервисные аккаунты svm с микросервисом для подключения saas к Облаку'
+    resourceType: resource-manager.cloud
+    permissions:
+      - iam.serviceAccounts.crossCloudBindings
+      - iam.accessBindings.update
+      - resource-manager.clouds.updateAccessBindings
+      - resource-manager.folders.updateAccessBindings

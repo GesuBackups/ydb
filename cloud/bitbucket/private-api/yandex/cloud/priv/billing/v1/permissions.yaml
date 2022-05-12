@@ -1,0 +1,919 @@
+permissions:
+  billing.accounts.acceptInvitation:
+    description: ''
+    stage: GA
+    visibility: public
+    resourceType: billing.account
+  billing.accounts.acceptMonetaryGrantOffer:
+    description: ''
+    stage: GA
+    visibility: public
+    resourceType: billing.account
+  billing.accounts.activateSubaccount:
+    description: ''
+    stage: GA
+    visibility: public
+  billing.accounts.bindCard:
+    description: ''
+    stage: GA
+    visibility: public
+  billing.accounts.bindCloud:
+    description: ''
+    stage: GA
+    visibility: public
+  billing.accounts.createBudget:
+    description: ''
+    stage: GA
+    visibility: public
+    resourceType: billing.account
+  billing.accounts.createCommittedUseDiscount:
+    description: 'Create committed use discount'
+    stage: GA
+    visibility: public
+    resourceType: billing.account
+  billing.accounts.createExporterTask:
+    description: ''
+    stage: GA
+    visibility: public
+    resourceType: billing.account
+  billing.accounts.activateReferralCode:
+    description: ''
+    stage: GA
+    visibility: public
+    resourceType: billing.account
+  billing.accounts.createReferralCode:
+    description: ''
+    stage: GA
+    visibility: public
+    resourceType: billing.account
+  billing.accounts.createSubaccount:
+    description: ''
+    stage: GA
+    visibility: public
+    resourceType: billing.account
+  billing.accounts.createYandexGrantProgram:
+    description: ''
+    stage: GA
+    visibility: public
+    resourceType: billing.account
+  billing.accounts.deleteBudget:
+    description: ''
+    stage: GA
+    visibility: public
+    resourceType: billing.account
+  billing.accounts.get:
+    description: ''
+    stage: GA
+    visibility: public
+    resourceType: billing.account
+  billing.accounts.getBudgetNotifications:
+    description: ''
+    stage: GA
+    visibility: public
+    resourceType: billing.account
+  billing.accounts.getBudget:
+    description: ''
+    stage: GA
+    visibility: public
+    resourceType: billing.account
+  billing.accounts.getDocuments:
+    description: ''
+    stage: GA
+    visibility: public
+    resourceType: billing.account
+  billing.accounts.getInvoice:
+    description: ''
+    stage: GA
+    visibility: public
+    resourceType: billing.account
+  billing.accounts.getOperation:
+    description: ''
+    stage: GA
+    visibility: public
+  billing.accounts.getReferrerStatus:
+    description: ''
+    stage: GA
+    visibility: public
+    resourceType: billing.account
+  billing.accounts.getReport:
+    description: ''
+    stage: GA
+    visibility: public
+    resourceType: billing.account
+  billing.accounts.getSkuCost:
+    description: ''
+    stage: GA
+    visibility: public
+  billing.accounts.getSkuOverride:
+    description: ''
+    stage: GA
+    visibility: public
+    resourceType: billing.account
+  billing.accounts.inactivate:
+    description: ''
+    stage: GA
+    visibility: public
+  billing.accounts.list:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+      cloud:
+        status:
+        - ACTIVE
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+  billing.accounts.listAccessBindings:
+    description: ''
+    stage: GA
+    visibility: public
+  billing.accounts.listBudgets:
+    description: ''
+    stage: GA
+    visibility: public
+    resourceType: billing.account
+  billing.accounts.listBudgetNotificationHistory:
+    description: ''
+    stage: GA
+    visibility: public
+    resourceType: billing.account
+  billing.accounts.listClouds:
+    description: ''
+    stage: GA
+    visibility: public
+    resourceType: billing.account
+  billing.accounts.listCommittedUseDiscount:
+    description: 'List committed use discount'
+    stage: GA
+    visibility: public
+    resourceType: billing.account
+  billing.accounts.listCommittedUseDiscountTemplates:
+    description: 'List committed use discount templates'
+    stage: GA
+    visibility: public
+    resourceType: billing.account
+  billing.accounts.listExporterTask:
+    description: ''
+    stage: GA
+    visibility: public
+    resourceType: billing.account
+  billing.accounts.listMonetaryGrants:
+    description: ''
+    stage: GA
+    visibility: public
+    resourceType: billing.account
+  billing.accounts.listReferralCodes:
+    description: ''
+    stage: GA
+    visibility: public
+    resourceType: billing.account
+  billing.accounts.listSubaccounts:
+    description: ''
+    stage: GA
+    visibility: public
+    resourceType: billing.account
+  billing.accounts.listSupportSubscriptions:
+    description: ''
+    stage: GA
+    visibility: public
+    resourceType: billing.account
+  billing.accounts.listTransactions:
+    description: ''
+    stage: GA
+    visibility: public
+    resourceType: billing.account
+  billing.accounts.listVolumeIncentive:
+    description: ''
+    stage: GA
+    visibility: public
+    resourceType: billing.account
+  billing.accounts.makeInvoicePayment:
+    description: ''
+    stage: GA
+    visibility: public
+    resourceType: billing.account
+  billing.accounts.makePayment:
+    description: ''
+    stage: GA
+    visibility: public
+    resourceType: billing.account
+  billing.accounts.rename:
+    description: ''
+    stage: GA
+    visibility: public
+    resourceType: billing.account
+  billing.accounts.setPaid:
+    description: ''
+    stage: GA
+    visibility: public
+    resourceType: billing.account
+  billing.accounts.setLabels:
+    description: ''
+    stage: GA
+    visibility: public
+    resourceType: billing.account
+  billing.accounts.suspendSubaccount:
+    description: ''
+    stage: GA
+    visibility: public
+  billing.accounts.updateAccessBindings:
+    description: ''
+    stage: GA
+    visibility: public
+  billing.accounts.updateBudget:
+    description: ''
+    stage: GA
+    visibility: public
+    resourceType: billing.account
+  billing.accounts.updateExporterTask:
+    description: ''
+    stage: GA
+    visibility: public
+    resourceType: billing.account
+  billing.accounts.updateReferralCode:
+    description: ''
+    stage: GA
+    visibility: public
+    resourceType: billing.account
+  billing.accounts.updateSupportSubscriptions:
+    description: ''
+    stage: GA
+    visibility: public
+  billing.accounts.updatePerson:
+    description: ''
+    stage: GA
+    visibility: public
+    resourceType: billing.account
+  billing.accounts.withdrawReferralReward:
+    description: ''
+    stage: GA
+    visibility: public
+  billing.organizationMeta.get:
+    description: ''
+    stage: GA
+    visibility: public
+  billing.organizationUsage.get:
+    description: ''
+    stage: GA
+    visibility: public
+  billing.clouds.bind:
+    description: Bind a cloud to a billing account
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+  billingInternal.accounts.acceptMonetaryGrantOffer:
+    description: ''
+    stage: GA
+    visibility: internal
+  billingInternal.accounts.getReferrerStatus:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.accounts.bindCloud:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.accounts.bindCloudDelayed:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.accounts.changeSkuOverride:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.accounts.changeVolumeIncentive:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.accounts.createCommittedUseDiscount:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.accounts.createBudget:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.accounts.createExporterTask:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.accounts.activateReferralCode:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.accounts.createReferralCode:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.accounts.createSkuOverride:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.accounts.createSubscription:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.accounts.createSubscriptionByTemplate:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.accounts.createVolumeIncentive:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.accounts.deleteBudget:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.accounts.get:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.accounts.getBudgetNotifications:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.accounts.getBudget:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.accounts.getDocuments:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.accounts.getHistory:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.accounts.getInvoice:
+    description: ''
+    stage: GA
+    visibility: internal
+  billingInternal.accounts.getReport:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.accounts.getSalesManager:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.accounts.getSkuCost:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.accounts.getSkuOverride:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.accounts.giveMonetaryGrants:
+    description: ''
+    stage: GA
+    visibility: internal
+  billingInternal.accounts.list:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.accounts.listAccessBindings:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.accounts.listBillingRecords:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.accounts.listBudgets:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.accounts.listBudgetNotificationHistory:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.accounts.listClouds:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.accounts.listCommittedUseDiscount:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.accounts.listCommittedUseDiscountTemplates:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.accounts.listExporterTask:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.accounts.listMonetaryGrants:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.accounts.listReferralCodes:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.accounts.listSubaccounts:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.accounts.listSubscription:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.accounts.listSupportSubscriptions:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.accounts.listTransactions:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.accounts.listVolumeIncentive:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.accounts.update:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.accounts.updateAccessBindings:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.accounts.updateBudget:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.accounts.updateExporterTask:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.accounts.updateReferralCode:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.accounts.updateSalesManager:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.accounts.updateSupportSubscriptions:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.accounts.varAdjustments.list:
+    description: ''
+    stage: GA
+    visibility: internal
+  billingInternal.accounts.varAdjustments.manage:
+    description: ''
+    stage: GA
+    visibility: internal
+  billingInternal.accounts.getVerificationScore:
+    description: ''
+    stage: GA
+    visibility: internal
+  billingInternal.clouds.bind:
+    description: ''
+    stage: GA
+    visibility: internal
+  billingInternal.committedUseDiscount.list:
+    description: ''
+    stage: GA
+    visibility: internal
+  billingInternal.committedUseDiscountTemplate.create:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.committedUseDiscountTemplate.list:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.committedUseDiscountTemplate.update:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.conversionRates.create:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.conversionRates.get:
+    description: ''
+    stage: GA
+    visibility: internal
+  billingInternal.grantPolicies.create:
+    description: ''
+    stage: GA
+    visibility: internal
+  billingInternal.grantPolicies.delete:
+    description: ''
+    stage: GA
+    visibility: internal
+  billingInternal.grantPolicies.get:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.grantPolicies.list:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.monetaryGrant.give:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.monetaryGrant.update:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.monetaryGrantOffers.create:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.monetaryGrantOffers.get:
+    description: ''
+    stage: GA
+    visibility: internal
+  billingInternal.monetaryGrantOffers.list:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.monetaryGrantOffers.update:
+    description: ''
+    stage: GA
+    visibility: internal
+  billingInternal.pastePost.create:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.pastePost.delete:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.pastePost.get:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.person.change:
+    description: ''
+    stage: GA
+    visibility: internal
+  billingInternal.person.get:
+    description: ''
+    stage: GA
+    visibility: internal
+  billingInternal.publisherAccount.create:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.publisherAccount.get:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.publisherAccount.update:
+    description: ''
+    stage: GA
+    visibility: internal
+  billingInternal.revenueReport.create:
+    description: ''
+    stage: GA
+    visibility: internal
+  billingInternal.revenueReport.get:
+    description: ''
+    stage: GA
+    visibility: internal
+  billingInternal.salesManager.list:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.service.create:
+    description: ''
+    stage: GA
+    visibility: internal
+  billingInternal.service.update:
+    description: ''
+    stage: GA
+    visibility: internal
+  billingInternal.sku.list:
+    description: ''
+    stage: GA
+    visibility: internal
+  billingInternal.sku.create:
+    description: ''
+    stage: GA
+    visibility: internal
+  billingInternal.sku.delete:
+    description: ''
+    stage: GA
+    visibility: internal
+  billingInternal.sku.update:
+    description: ''
+    stage: GA
+    visibility: internal
+  billingInternal.skuDraft.list:
+    description: ''
+    stage: GA
+    visibility: internal
+  billingInternal.skuDraft.create:
+    description: ''
+    stage: GA
+    visibility: internal
+  billingInternal.skuDraft.update:
+    description: ''
+    stage: GA
+    visibility: internal
+  billingInternal.skuDraft.reject:
+    description: ''
+    stage: GA
+    visibility: internal
+  billingInternal.skuDraft.accept:
+    description: ''
+    stage: GA
+    visibility: internal
+  billingInternal.skuOverride.list:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.subscription.list:
+    description: ''
+    stage: GA
+    visibility: internal
+  billingInternal.subscriptionTemplates.get:
+    description: ''
+    stage: GA
+    visibility: internal
+  billingInternal.subscriptionTemplates.list:
+    description: ''
+    stage: GA
+    visibility: internal
+  billingInternal.subscriptionTemplates.manage:
+    description: ''
+    stage: GA
+    visibility: internal
+  billingInternal.support.resolve:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.volumeIncentive.list:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billing.partners.list:
+    description: ''
+    stage: GA
+    visibility: public
+    resourceType: billing.account
+  billing.partners.view:
+    description: ''
+    stage: GA
+    visibility: public
+    resourceType: billing.account
+  billing.partners.edit:
+    description: ''
+    stage: GA
+    visibility: public
+    resourceType: billing.account
+  billing.publisherAccounts.create:
+    description: ''
+    stage: GA
+    visibility: public
+    resourceType: billing.account
+  billingInternal.partners.list:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.partners.view:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.partners.edit:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billing.partnerVersions.view:
+    description: ''
+    stage: GA
+    visibility: public
+    resourceType: billing.account
+  billing.partnerVersions.edit:
+    description: ''
+    stage: GA
+    visibility: public
+    resourceType: billing.account
+  billingInternal.partnerVersions.view:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.partnerVersions.edit:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billing.partnerProposals.view:
+    description: ''
+    stage: GA
+    visibility: public
+    resourceType: billing.account
+  billing.partnerProposals.reject:
+    description: ''
+    stage: GA
+    visibility: public
+    resourceType: billing.account
+  billing.partnerProposals.apply:
+    description: ''
+    stage: GA
+    visibility: public
+    resourceType: billing.account
+  billing.partnerProposals.delete:
+    description: ''
+    stage: GA
+    visibility: public
+    resourceType: billing.account
+  billingInternal.partnerProposals.view:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.partnerProposals.approve:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.partnerProposals.reject:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.partnerProposals.apply:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.partnerProposals.delete:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billing.partnerProducts.view:
+    description: ''
+    stage: GA
+    visibility: public
+    resourceType: billing.account
+  billingInternal.partnerProducts.view:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billing.partnerProducts.edit:
+    description: ''
+    stage: GA
+    visibility: public
+    resourceType: billing.account
+  billingInternal.partnerProducts.edit:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billing.partnerProductVersions.view:
+    description: ''
+    stage: GA
+    visibility: public
+    resourceType: billing.account
+  billing.partnerProductVersions.edit:
+    description: ''
+    stage: GA
+    visibility: public
+    resourceType: billing.account
+  billingInternal.partnerProductVersions.view:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.partnerProductVersions.edit:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billing.partnerProductProposals.view:
+    description: ''
+    stage: GA
+    visibility: public
+    resourceType: billing.account
+  billing.partnerProductProposals.reject:
+    description: ''
+    stage: GA
+    visibility: public
+    resourceType: billing.account
+  billing.partnerProductProposals.apply:
+    description: ''
+    stage: GA
+    visibility: public
+    resourceType: billing.account
+  billing.partnerProductProposals.delete:
+    description: ''
+    stage: GA
+    visibility: public
+    resourceType: billing.account
+  billingInternal.partnerProductProposals.view:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.partnerProductProposals.approve:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.partnerProductProposals.reject:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.partnerProductProposals.apply:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account
+  billingInternal.partnerProductProposals.delete:
+    description: ''
+    stage: GA
+    visibility: internal
+    resourceType: billing.account

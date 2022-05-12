@@ -1,0 +1,208 @@
+role_groups:
+  ylb:
+    name: Load balancer roles
+
+roles:
+  ## Remove after transitional period https://st.yandex-team.ru/CLOUD-50822
+  ylb.viewer:
+    groups: [ylb]
+    name: 'Obsolete, use load-balancer.viewer role instead'
+    description: ''
+    visibility: public
+    includedRoles:
+      - load-balancer.viewer
+
+  ylb.privateAdmin:
+    groups: [ylb]
+    name: 'Obsolete, use load-balancer.privateAdmin role instead'
+    description: ''
+    visibility: public
+    includedRoles:
+      - load-balancer.privateAdmin
+
+  ylb.admin:
+    groups: [ylb]
+    name: 'Obsolete, use load-balancer.admin role instead'
+    description: ''
+    visibility: public
+    includedRoles:
+      - load-balancer.admin
+
+  ylb.support:
+    groups: [ylb]
+    name: 'Obsolete, use load-balancer.support role instead'
+    description: ''
+    visibility: internal
+    includedRoles:
+      - load-balancer.support
+
+  ylb.supportAdmin:
+    groups: [ylb]
+    name: 'Obsolete, use load-balancer.supportAdmin role instead'
+    description: ''
+    visibility: internal
+    includedRoles:
+      - load-balancer.supportAdmin
+  ##
+
+  load-balancer.viewer:
+    groups: [ylb]
+    name: 'Пользователь Load Balancer с правами только на чтение'
+    description: ''
+    visibility: public
+    permissions:
+      - iam.folders.get
+      - ylb.quotas.get
+      - resource-manager.folders.get
+      - ylb.targetGroups.{get,list}
+      - ylb.targetGroupOperations.list
+      - ylb.networkLoadBalancers.{get,list}
+      - ylb.networkLoadBalancerOperations.list
+
+  load-balancer.privateAdmin:
+    groups: [ylb]
+    name: 'Администратор внутреннего балансировщика нагрузки'
+    description: ''
+    visibility: public
+    includedRoles:
+      - vpc.viewer
+      - load-balancer.viewer
+      - ylb.targetGroups.editor.pseudo
+      - ylb.networkLoadBalancers.privateEditor.pseudo
+    permissions:
+      - vpc.addresses.createInternal
+      - compute.operations.get # replace after migration to new backend
+
+  load-balancer.admin:
+    groups: [ylb]
+    name: 'Администратор внешнего балансировщика нагрузки'
+    description: ''
+    visibility: public
+    includedRoles:
+      - load-balancer.privateAdmin
+      - ylb.networkLoadBalancers.publicEditor.pseudo
+    permissions: []
+
+  ylb.targetGroups.editor.pseudo:
+    pseudorole: true
+    groups: [ylb]
+    name: "Псевдороль с правами на создание и изменение targetGroup"
+    description: ''
+    visibility: public
+    includedRoles:
+      - vpc.viewer
+    permissions:
+      - compute.operations.get # replace after migration to new backend
+      - ylb.targetGroups.{create,delete,update}
+
+  ylb.networkLoadBalancers.privateEditor.pseudo:
+    pseudorole: true
+    groups: [ylb]
+    name: "Псевдороль с правами на создание и изменение networkLoadBalancer"
+    description: ''
+    visibility: public
+    includedRoles:
+      - vpc.viewer
+    permissions:
+      - compute.operations.get # replace after migration to new backend
+      - vpc.subnets.use
+      - ylb.targetGroups.use
+      - ylb.networkLoadBalancers.{create,createInternal,createUdpListener,delete,update,start,stop}
+
+  ylb.networkLoadBalancers.publicEditor.pseudo:
+    pseudorole: true
+    groups: [ylb]
+    name: "Псевдороль с правами на создание и изменение networkLoadBalancer"
+    description: ''
+    visibility: public
+    includedRoles:
+      - ylb.networkLoadBalancers.privateEditor.pseudo
+    permissions:
+      - compute.operations.get # replace after migration to new backend
+      - vpc.addresses.use
+      - vpc.addresses.createExternal
+      - vpc.networks.configureExternalAccess
+      - ylb.networkLoadBalancers.{createExternal,updateExternal,deleteExternal,startExternal,stopExternal}
+
+  # Deprecated. Remove me.
+  internal.lbagent:
+    groups: [ylb]
+    name: (Внутренняя) Агент Load Balancer
+    visibility: internal
+    description: доступ к Compute Internal
+    permissions: []
+
+  load-balancer.support:
+    groups: [ylb, support]
+    name: Suport Load Balancer
+    description: Role for support engineers
+    visibility: internal
+    permissions:
+        # copy of lb.viewer
+      - ylb.quotas.get
+      - ylb.targetGroups.{get,list}
+      - ylb.targetGroupOperations.list
+      - ylb.networkLoadBalancers.{get,list}
+      - ylb.networkLoadBalancerOperations.list
+
+      - ylb.quotas.updateLimit
+
+  load-balancer.supportAdmin:
+    groups: [ylb, support]
+    name: Support Load Balancer Admin
+    description: Privileged operations for support engineers
+    visibility: internal
+    includedRoles:
+      - load-balancer.support
+    permissions:
+      - compute.operations.get # replace after migration to new backend
+      - ylb.networkLoadBalancers.list
+      - ylb.networkLoadBalancers.start
+      - ylb.networkLoadBalancers.stop
+
+  load-balancer.onCall:
+    groups: [ylb, support]
+    name: YLB on-call
+    visibility: internal
+    description: Privileged operations for on-call engineers
+    includedRoles:
+      - load-balancer.support
+    permissions:
+      - iam.folders.get # because may not have these two from anywhere else
+      - resource-manager.folders.get
+
+  internal.lb-ctrl.editor.pseudo:
+    pseudorole: true
+    groups: [ylb]
+    visibility: internal
+    name: (Внутренняя) lb-ctrl editor
+    description: Псевдороль для использования lb-ctrl
+    permissions:
+      - lbctrl.forwardingGroups.update
+      - lbctrl.forwardingGroups.delete
+
+  internal.lb-ctrl.agent:
+    groups: [ ylb ]
+    visibility: internal
+    name: (Внутренняя) Агент lb-ctrl
+    description: Роль для сервисного аккаунта lb-ctrl
+    permissions:
+      - hcctrl.healthCheckGroups.getHealth
+
+  internal.lb-node.agent:
+    groups: [ ylb ]
+    visibility: internal
+    name: (Внутренняя) Агент lb-node
+    description: Роль для сервисного аккаунта lb-node
+    permissions:
+      - lbctrlInternal.forwardingGroupsRules.get
+      - lbctrlInternal.peers.get
+
+  internal.load-balancer.e2e:
+    groups: [ ylb ]
+    visibility: internal
+    name: (Внутренняя) Балансерные e2e
+    description: Роль для балансерных e2e
+    includedRoles:
+      - internal.hcaas.editor.pseudo
+    permissions: []

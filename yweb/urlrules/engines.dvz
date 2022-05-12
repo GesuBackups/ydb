@@ -1,0 +1,103 @@
+group: phpbb
+gid: 223
+name: dv1 vers.2 viewtopic.php - phpbb
+token: FILE/viewtopic.php 
+token: QARG/t 
+keyphr-: /phpBB/
+
+group: vbulletin
+gid: 213
+name: vBulletin forum !
+token: QARG/postcount 
+token: FILE/showpost.php 
+token: FILE/showthread.php 
+keyphr-: \/vbulletin/ 
+
+group: shop_csid
+gid: 214
+name: osCsid_shop !
+token: QARG/osCsid
+token: QARG/products_id
+
+group: ipboard
+gid: 216
+name: IPBoard forum
+token: DIR/forum
+token: FILE/index.php
+token: QARG/showtopic
+token: QARG/mode
+
+group: phphone
+gid: 220
+name: ph_phone and ph_genre !
+token: QARG/ph_phone
+token: QARG/ph_genre
+
+group: ps_sess_id
+gid: 221
+name: ps_sess_id !
+token: QARG/ps_sess_id
+
+group: sus_page
+gid: 245
+name: suspended.page !
+token: DIR/suspended.page 
+
+group: koobi
+gid: 246
+name: koobi_  !
+comm: shop+forum+faq...
+token: QARG/koobi_jahr
+token: FILE/index.php
+
+group: spam
+gid: 296
+name: loveplanet !!!
+token: DIR/a-ljcmm
+keyphr: partner.loveplanet.ru
+
+group: spam
+gid: 238
+name: mamba !!!
+keyphr: mamba
+token: QARG/sold
+
+group: mainsite
+mgroup: makedating
+name: makedating+dating
+token: QARG/l
+token: FILE/view.php
+tokenOR: DOM2/makedating.com
+tokenOR: DOM2/dating.az
+mainsite: www.dating.az
+
+group: mainsite
+mgroup: baku
+token: DOM2/baku.ru
+token: DOM3/users
+mainsite: www.baku.ru
+
+group: mainsite
+mgroup: photosight
+mainsite: www.photosight.ru
+token: DOM2/photosight.ru
+
+group: spam
+mgroup: sexnarod
+token: DOM2/sexnarod.ru
+
+group: sotmarket
+mainsite: www.partner.sotmarket.ru
+token: QARG/mag_manufacter
+
+group: mainsite
+mgroup: pizdec
+mainsite: pizdec.net
+token: DOM2/pizdec.ru
+
+group: mainsite
+mgroup: flamber
+mainsite: flamber.ru
+token: DOM2/flamber.ru
+
+

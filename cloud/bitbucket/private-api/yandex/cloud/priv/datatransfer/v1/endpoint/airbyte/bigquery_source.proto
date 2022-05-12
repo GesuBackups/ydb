@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package yandex.cloud.priv.datatransfer.v1.endpoint.airbyte;
+
+option go_package = "a.yandex-team.ru/cloud/bitbucket/private-api/yandex/cloud/priv/datatransfer/v1/endpoint/airbyte;tm_server_airbyte_endpoint";
+
+import "yandex/cloud/priv/sensitive.proto";
+
+message BigQuerySource {
+    // Project ID
+    // 
+    // The GCP project ID for the project containing the target BigQuery dataset.
+    string project_id = 1;
+    // Default Dataset ID
+    // 
+    // The dataset ID to search for tables and views. If you are only loading data from
+    // one dataset, setting this option could result in much faster schema discovery.
+    string dataset_id = 2;
+    // Credentials JSON
+    // 
+    // The contents of your Service Account Key JSON file. See the <a
+    // href="https://docs.airbyte.io/integrations/sources/bigquery#setup-the-bigquery-source-in-airbyte">docs</a>
+    // for more information on how to obtain this key.
+    string credentials_json = 3 [(sensitive) = true];
+}

@@ -1,0 +1,12 @@
+role_groups:
+  BootstrapApi:
+    name: infra bootstrap api
+
+roles:
+  infra.bootstrapApi.user:
+    groups: [BootstrapApi]
+    name: 'role for access infra Bootstrap API'
+    visibility: internal
+    description: 'role for access infra Bootstrap API'
+    permissions:
+    - infra.bootstrapApi.use

@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package yandex.cloud.priv.datatransfer.v1.endpoint.airbyte;
+
+option go_package = "a.yandex-team.ru/cloud/bitbucket/private-api/yandex/cloud/priv/datatransfer/v1/endpoint/airbyte;tm_server_airbyte_endpoint";
+
+import "yandex/cloud/priv/sensitive.proto";
+
+message LinkedinAdsSource {
+    message Credentials {
+        message OAuth {
+            // Client ID
+            // 
+            // The Client ID of the LinkedIn Ads developer application.
+            string client_id = 1 [(sensitive) = true];
+            // Client Secret
+            // 
+            // The Client Secret the LinkedIn Ads developer application.
+            string client_secret = 2 [(sensitive) = true];
+            // Refresh Token
+            // 
+            // The key to refresh the expired Access Token.
+            string refresh_token = 3 [(sensitive) = true];
+        }
+        oneof credentials {
+            // OAuth2.0
+            OAuth oauth = 1;
+            // Access Token
+            string access_token = 2 [(sensitive) = true];
+        }
+    }
+    // Start Date
+    // 
+    // UTC date in the format 2020-09-17. Any data before this date will not be
+    // replicated. Example: 2021-05-17
+    string start_date = 1;
+    // Account IDs
+    // 
+    // Specify the Account IDs separated by space, to pull the data from. Leave empty,
+    // if you want to pull the data from all associated accounts.
+    repeated int64 account_ids = 2;
+    // Authorization Method
+    Credentials credentials = 3;
+}

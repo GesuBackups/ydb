@@ -1,0 +1,6 @@
+message TGeo {
+    optional string Aux = 1;
+    optional string Geo = 2;
+    optional string St = 3;
+    required uint32 Line = 4;
+}

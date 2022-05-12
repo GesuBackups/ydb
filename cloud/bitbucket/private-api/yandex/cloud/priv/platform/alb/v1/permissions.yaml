@@ -1,0 +1,409 @@
+permissions:
+
+# quotas
+  alb.quotas.set:
+    description: Set cloud limit
+    stage: GA
+    visibility: public
+  alb.quotas.get:
+    description: Get cloud limit
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+
+# backendGroups
+  alb.backendGroups.create:
+    description: Create a new backend group
+    stage: GA
+    visibility: public
+    resourceType: resource-manager.folder
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  alb.backendGroups.delete:
+    description: Delete a backend group
+    stage: GA
+    visibility: public
+    resourceType: alb.backendGroup
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - ACTIVE
+        - BLOCKED_BY_BILLING
+        - DELETING
+  alb.backendGroups.get:
+    description: View a backend group
+    stage: GA
+    visibility: public
+    resourceType: alb.backendGroup
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  alb.backendGroups.use:
+    description: Allows to reference a backend group
+    stage: GA
+    visibility: public
+    resourceType: alb.backendGroup
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  alb.backendGroups.list:
+    description: List a backend group
+    stage: GA
+    visibility: public
+    resourceType: alb.backendGroup
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  alb.backendGroups.update:
+    description: Update a backend group
+    stage: GA
+    visibility: public
+    resourceType: alb.backendGroup
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  alb.backendGroups.externalUse:
+    description: Allows to use backend group across clouds
+    stage: GA
+    visibility: internal
+    resourceType: alb.backendGroup
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+
+# targetGroups
+  alb.targetGroups.create:
+    description: Create a new target group
+    stage: GA
+    visibility: public
+    resourceType: resource-manager.folder
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  alb.targetGroups.delete:
+    description: Delete a target group
+    stage: GA
+    visibility: public
+    resourceType: alb.targetGroup
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - ACTIVE
+        - BLOCKED_BY_BILLING
+        - DELETING
+  alb.targetGroups.get:
+    description: View a target group
+    stage: GA
+    visibility: public
+    resourceType: alb.targetGroup
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  alb.targetGroups.use:
+    description: Allows to reference a target group
+    stage: GA
+    visibility: public
+    resourceType: alb.targetGroup
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  alb.targetGroups.list:
+    description: List a target group
+    stage: GA
+    visibility: public
+    resourceType: alb.targetGroup
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  alb.targetGroups.update:
+    description: Update a target group
+    stage: GA
+    visibility: public
+    resourceType: alb.targetGroup
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  alb.targetGroups.externalUse:
+    description: Allows to use target group across clouds
+    stage: GA
+    visibility: internal
+    resourceType: alb.targetGroup
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+
+# loadBalancers
+  alb.loadBalancers.create:
+    description: Create a new load balancer
+    stage: GA
+    visibility: public
+    resourceType: resource-manager.folder
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  alb.loadBalancers.delete:
+    description: Delete a load balancer
+    stage: GA
+    visibility: public
+    resourceType: alb.loadBalancer
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - ACTIVE
+        - BLOCKED_BY_BILLING
+        - DELETING
+  alb.loadBalancers.forceDelete:
+    description: Delete a load balancer ignoring deletion protection
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - ACTIVE
+          - DELETING
+  alb.loadBalancers.get:
+    description: View a load balancer
+    stage: GA
+    visibility: public
+    resourceType: alb.loadBalancer
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  alb.loadBalancers.use:
+    description: Use a load balancer
+    stage: GA
+    visibility: public
+    resourceType: alb.loadBalancer
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  alb.loadBalancers.list:
+    description: List a load balancer
+    stage: GA
+    visibility: public
+    resourceType: alb.loadBalancer
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  alb.loadBalancers.update:
+    description: Update a load balancer
+    stage: GA
+    visibility: public
+    resourceType: alb.loadBalancer
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+
+# routers
+  alb.routers.create:
+    description: Create a new router
+    stage: GA
+    visibility: public
+    resourceType: resource-manager.folder
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  alb.routers.delete:
+    description: Delete a router
+    stage: GA
+    visibility: public
+    resourceType: alb.httpRouter
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - ACTIVE
+        - BLOCKED_BY_BILLING
+        - DELETING
+  alb.routers.get:
+    description: View a router
+    stage: GA
+    visibility: public
+    resourceType: alb.httpRouter
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  alb.routers.use:
+    description: Allows to reference a router
+    stage: GA
+    visibility: public
+    resourceType: alb.httpRouter
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  alb.routers.list:
+    description: List routers
+    stage: GA
+    visibility: public
+    resourceType: alb.httpRouter
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  alb.routers.update:
+    description: Update a router
+    stage: GA
+    visibility: public
+    resourceType: alb.httpRouter
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  alb.routers.externalUse:
+    description: Allows to use http routers across clouds
+    stage: GA
+    visibility: internal
+    resourceType: alb.httpRouter
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+
+# virtualHosts
+  alb.virtualHosts.get:
+    description: View a virtual host
+    stage: GA
+    visibility: public
+    resourceType: alb.virutalHost
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  alb.virtualHosts.list:
+    description: List virtual hosts
+    stage: GA
+    visibility: public
+    resourceType: alb.virutalHost
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  alb.virtualHosts.update:
+    description: Update a virtual host
+    stage: GA
+    visibility: public
+    resourceType: alb.virutalHost
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE

@@ -1,0 +1,57 @@
+{
+    "test_fix.test_eng10_fixlist": {
+        "checksum": "da871d11b0b4da9fe78407899c24c8b2",
+        "size": 672,
+        "uri": "sbr://434161488/test_fix.test_eng10_fixlist/fix_eng.txt_lerng_b10_g1.out"
+    },
+    "test_fix.test_eng_fixlist": {
+        "checksum": "013e81de93f2f26c0e27d729b9576d33",
+        "size": 640,
+        "uri": "sbr://434161488/test_fix.test_eng_fixlist/fix_eng.txt_leng_b1_g1.out"
+    },
+    "test_fix.test_eng_nodetach_fixlist": {
+        "checksum": "013e81de93f2f26c0e27d729b9576d33",
+        "size": 640,
+        "uri": "sbr://434161488/test_fix.test_eng_nodetach_fixlist/fix_eng.txt_lerng_b1_g0.out"
+    },
+    "test_fix.test_rus10_fixlist": {
+        "checksum": "1eef6b9074e574455fa57ff92e802735",
+        "size": 21196,
+        "uri": "sbr://434161488/test_fix.test_rus10_fixlist/fix_rus.txt_lrus_b10_g1.out"
+    },
+    "test_fix.test_rus_fixlist": {
+        "checksum": "3352c4cda8aa4c0d5048b1cabbd2a89b",
+        "size": 20908,
+        "uri": "sbr://434161488/test_fix.test_rus_fixlist/fix_rus.txt_lrus_b1_g1.out"
+    },
+    "test_fix.test_rus_nodetach_fixlist": {
+        "checksum": "3352c4cda8aa4c0d5048b1cabbd2a89b",
+        "size": 20908,
+        "uri": "sbr://434161488/test_fix.test_rus_nodetach_fixlist/fix_rus.txt_lrus_b1_g0.out"
+    },
+    "test_fix.test_ukr10_fixlist": {
+        "checksum": "4ffbd2411fda0d60078775dae2c8ceb3",
+        "size": 8548,
+        "uri": "sbr://434161488/test_fix.test_ukr10_fixlist/fix_ukr.txt_lukr_b10_g1.out"
+    },
+    "test_fix.test_ukr_fixlist": {
+        "checksum": "c5d41e520f687df46e95825dc8061b52",
+        "size": 8156,
+        "uri": "sbr://434161488/test_fix.test_ukr_fixlist/fix_ukr.txt_lukr_b1_g1.out"
+    },
+    "test_fix.test_ukr_nodetach_fixlist": {
+        "checksum": "c5d41e520f687df46e95825dc8061b52",
+        "size": 8156,
+        "uri": "sbr://434161488/test_fix.test_ukr_nodetach_fixlist/fix_ukr.txt_lukr_b1_g0.out"
+    },
+    "test_main.test_eng": {
+        "checksum": "a11e211e53491e853692dc1b5d9cfe82",
+        "size": 1704028,
+        "uri": "sbr://434161488/test_main.test_eng/eng-lister.txt_leng_b200_g1.out"
+    },
+    "test_main.test_eng_proto": {
+        "checksum": "334d4183feb72c9fb86812c243b9ab1d",
+        "size": 1860991,
+        "uri": "https://storage.yandex-team.ru/get-devtools/1031349/89b820080483b9c4c054409d1be7714cd1491e67/resource.tar.gz#test_main.test_eng_proto/eng-lister.txt_leng_b200_g1.out"
+    }
+}

@@ -1,0 +1,8 @@
+package NAntispam;
+
+option optimize_for = SPEED;
+
+message TDedDataEntry {
+    required uint32 Revision = 1;
+    required bytes PackedData = 2;
+}

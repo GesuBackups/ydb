@@ -1,0 +1,4 @@
+com.ru
+net.ru
+org.ru
+pp.ru

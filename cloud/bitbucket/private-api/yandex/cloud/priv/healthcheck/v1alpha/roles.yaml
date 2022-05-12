@@ -1,0 +1,68 @@
+role_groups:
+  yhc:
+    name: Health check roles
+
+roles:
+  internal.hc-ctrl.agent:
+    groups: [ yhc ]
+    name: (Внутренняя) Агент hc-ctrl
+    visibility: internal
+    description: Роль для сервисного аккаунта hc-ctrl
+    includedRoles:
+      - internal.hcaas.agent.pseudo
+    permissions: [ ]
+
+  internal.hc-node.agent:
+    groups: [ yhc ]
+    name: (Внутренняя) Агент hc-node
+    visibility: internal
+    description: Роль для сервисного аккаунта hc-node
+    permissions:
+      - hcctrlInternal.healthCheckGroupTargets.updateStatus
+      - hcctrlInternal.healthCheckGroupTargets.get
+
+  internal.hcaas.agent.pseudo:
+    pseudorole: true
+    groups: [ yhc ]
+    name: (Внутренняя) hcaas editor
+    visibility: internal
+    description: Псевдороль для конфигурирования healt check из hcaas
+    permissions:
+      - hcctrl.healthCheckGroups.get
+      - hcctrl.healthCheckGroups.update
+      - hcctrl.healthCheckGroups.delete
+      - hcctrl.healthCheckGroups.getHealth
+      - lbctrl.forwardingGroups.get
+      - lbctrl.forwardingGroups.update
+
+  internal.hc-ctrl.editor.pseudo:
+    pseudorole: true
+    groups: [ ylb ]
+    name: (Внутренняя) hc-ctrl editor
+    visibility: internal
+    description: Псевдороль для использования hc-ctrl
+    permissions:
+      - hcctrl.healthCheckGroups.getHealth
+      - hcctrl.healthCheckGroups.update
+      - hcctrl.healthCheckGroups.delete
+
+  internal.hcaas.editor.pseudo:
+    pseudorole: true
+    groups: [ yhc ]
+    name: hcaas editor role
+    visibility: internal
+    description: Роль для использования hcaas
+    includedRoles:
+      - internal.hcaas.viewer
+    permissions:
+      - hcaas.healthCheckGroups.update
+      - hcaas.healthCheckGroups.delete
+
+  internal.hcaas.viewer:
+    groups: [ yhc ]
+    name: hcaas editor role
+    visibility: internal
+    description: Роль для доступа на чтение дежурными в hcaas
+    permissions:
+      - hcaas.healthCheckGroups.get
+      - hcaas.healthCheckGroups.getHealth

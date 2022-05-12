@@ -1,0 +1,16 @@
+0 ns.seonet.ru. # Фальшивые сайты музеев
+3 ns1.doorsense.net. # Большая спамерская сетка
+3 ns2.doorsense.net.
+2 ns1.poishi.com. # киберсквоттеры в основном
+2 ns2.poishi.com.
+3 ns1.suze.spb.su. # спам на бесплатных доменах
+3 ns2.erohot.com.ua.
+3 ns1.all.mn. # spam
+3 ns1.maxtorg.ru. # spam
+3 ns2.maxtorg.ru. # spam
+3 dns1.maxtorg.ru. # same
+3 dns2.maxtorg.ru. # same
+3 ns1.dsredirection.com. # csq spam
+3 ns2.dsredirection.com. # csq spam
+3 ns1.startpoisk.ru. # doorway
+3 ns2.startpoisk.ru. # doorway

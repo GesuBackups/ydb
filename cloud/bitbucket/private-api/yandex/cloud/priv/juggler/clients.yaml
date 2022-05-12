@@ -1,0 +1,7 @@
+oauth_clients:
+  yc.oauth.juggler:
+    name: 'Yandex.Cloud Juggler'
+    scopes: []
+    includedRoles:
+      - monitoring.admin
+

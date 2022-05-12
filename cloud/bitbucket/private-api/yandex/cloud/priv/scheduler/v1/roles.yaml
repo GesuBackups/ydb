@@ -1,0 +1,59 @@
+roles:
+  internal.scheduler.computeApi:
+    groups: [compute]
+    name: SA compute-api
+    visibility: internal
+    description: Роль для доступа к операциям с scheduler со стороны compute-api
+    includedRoles:
+      - internal.scheduler.userRW
+  scheduler.support:
+    groups: [compute, support]
+    name: Поддержка scheduler
+    visibility: internal
+    description: Доступ к операциям проверки ресурсов
+    includedRoles:
+      - internal.scheduler.userRO
+  scheduler.onCall:
+    groups: [compute]
+    name: Дежурный администратор scheduler
+    visibility: internal
+    description: Доступ ко всем операциям с scheduler
+    includedRoles:
+      - onCall
+      - internal.scheduler.userRW
+      - scheduler.admin
+
+  internal.scheduler.userRO:
+    groups: [compute]
+    name: Scheduler read-only user
+    visibility: internal
+    description: Доступ к читающим операциям с scheduler
+    permissions:
+      - scheduler.info.get
+      - scheduler.nodes.getInfo
+      - scheduler.nodes.getInfoByName
+      - scheduler.instances.dryRunAllocate
+      - scheduler.instances.getOutdated
+      - scheduler.resources.get
+  internal.scheduler.userRW:
+    groups: [compute]
+    name: Scheduler read-write user
+    visibility: internal
+    description: Доступ к читающим и пишущим операциям с scheduler
+    includedRoles:
+      - internal.scheduler.userRO
+    permissions:
+      - scheduler.instances.allocate
+      - scheduler.instances.gcAllocations
+      - scheduler.dedicatedHosts.replace
+      - scheduler.dedicatedHosts.unsetStatus
+      - scheduler.hostGroups.resize
+  scheduler.admin:
+    groups: [compute]
+    name: Scheduler admin
+    visibility: internal
+    description: Операции, доступные только администратору scheduler
+    permissions:
+      - scheduler.nodes.delete
+      - scheduler.dbSnapshots.save
+      - scheduler.daemon.restart

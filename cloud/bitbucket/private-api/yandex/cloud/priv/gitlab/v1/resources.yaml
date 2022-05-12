@@ -1,0 +1,3 @@
+resources:
+  gitlab.instance:
+    parents: [resource-manager.folder]

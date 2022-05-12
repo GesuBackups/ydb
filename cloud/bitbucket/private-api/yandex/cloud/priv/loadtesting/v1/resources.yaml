@@ -1,0 +1,9 @@
+resources:
+  loadtesting.instance:
+    parents: [resource-manager.folder]
+  loadtesting.generator:
+    parents: [resource-manager.folder, loadtesting.instance]
+  loadtesting.test:
+    parents: [resource-manager.folder, loadtesting.instance]
+  loadtesting.storage:
+    parents: [resource-manager.folder, loadtesting.instance]

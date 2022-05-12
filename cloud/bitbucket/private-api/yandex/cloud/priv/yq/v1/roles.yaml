@@ -1,0 +1,138 @@
+role_groups:
+  yq:
+    name: Yandex Query roles
+
+roles:
+  yc.yandex-team.ru.yq.admin:
+    groups: [yq]
+    visibility: internal
+    name: Администратор YQ
+    description: роль разрешает все действия
+    includedRoles:
+      - yq.admin
+
+  yc.yandex-team.ru.yq.internal.admin:
+    groups: [yq]
+    visibility: internal
+    name: Внутренний администратор YQ
+    description: роль разрешает все действия + внутренние возможности
+    includedRoles:
+      - yq.internal.admin
+
+  yc.yandex-team.ru.yq.invoker:
+    groups: [yq]
+    name: Роль для запуска запросов (для роботов)
+    visibility: internal
+    description: роль разрешает запуск запросов, получение результатов и статуса
+    includedRoles:
+      - yq.invoker
+
+  yc.yandex-team.ru.yq.viewer:
+    groups: [yq]
+    name: Роль только для чтения
+    visibility: internal
+    description: роль разрешает просмотр публично доступных запросов, запусков, соединений
+    includedRoles:
+      - yq.viewer
+
+  yc.yandex-team.ru.yq.editor:
+    groups: [yq]
+    name: Роль пользователя сервиса
+    visibility: internal
+    description: роль разрешает создание, редактирование соединений, биндингов, а также создание, запуск, остановку и модификацию запросов
+    includedRoles:
+      - yq.editor
+
+  yq.internal.admin:
+    groups: [yq]
+    name: Внутренний Администратор YQ
+    visibility: internal
+    description: роль разрешает все действия
+    includedRoles:
+      - yq.admin
+    permissions:
+      - yq.queries.viewAst
+
+  yq.admin:
+    groups: [yq]
+    name: Администратор YQ
+    visibility: public
+    description: роль разрешает все действия в YQ
+    includedRoles:
+      - yq.editor
+    permissions:
+      - resource-manager.folders.get
+      - yq.resources.viewPrivate
+      - yq.resources.managePrivate
+
+  yq.invoker:
+    groups: [yq]
+    name: Роль для запуска запросов (для роботов)
+    visibility: public
+    description: роль разрешает запуск запросов, получение результатов и статуса
+    permissions:
+      - resource-manager.folders.get
+      - yq.connections.use
+      - yq.bindings.use
+      - yq.queries.invoke
+      - yq.queries.create
+      - yq.queries.getData
+      - yq.queries.getStatus
+      - yq.queries.get
+
+  yq.viewer:
+    groups: [yq]
+    name: Роль только для чтения
+    visibility: public
+    description: роль разрешает просмотр публично доступных запросов, запусков, соединений
+    permissions:
+      - resource-manager.folders.get
+      - yq.connections.get
+      - yq.bindings.get
+      - yq.queries.get
+      - yq.queries.getData
+      - yq.jobs.get
+      - yq.resources.viewPublic
+
+  yq.editor:
+    groups: [yq]
+    name: Роль пользователя сервиса
+    visibility: public
+    description: роль разрешает создание, редактирование соединений, биндингов, а также создание, запуск, остановку и модификацию запросов
+    includedRoles:
+      - yq.invoker
+    permissions:
+      - resource-manager.folders.get
+      - yq.connections.create
+      - yq.connections.delete
+      - yq.connections.update
+      - yq.connections.get
+      - yq.connections.use
+      - yq.bindings.create
+      - yq.bindings.delete
+      - yq.bindings.update
+      - yq.bindings.get
+      - yq.bindings.use
+
+      - yq.queries.create
+      - yq.queries.delete
+      - yq.queries.update
+      - yq.queries.get
+      - yq.queries.getStatus
+      - yq.queries.getData
+      - yq.queries.invoke
+      - yq.queries.control
+
+      - yq.jobs.delete
+      - yq.jobs.get
+
+      - yq.resources.managePublic
+
+  #https://st.yandex-team.ru/CLOUD-88108
+  internal.yq.k8sClusterUser:
+    groups: [yq]
+    name: User of k8s cluster
+    visibility: internal
+    description: Manages k8s for YQ stands. Creates balancers, etc.
+    includedRoles:
+      - internal.vpc.address.yandexOnlyAdmin

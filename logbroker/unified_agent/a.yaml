@@ -1,0 +1,22 @@
+service: ya_agent
+title: Unified Agent
+arcanum:
+  auto_merge:
+    requirements:
+      - system: arcanum
+        type: approved
+        data:
+          min_approvers_count: 1
+          ignore_self_ship: false
+      - system: arcanum
+        type: comment_issues_closed
+      - system: arcanum
+        type: st_issue_linked
+      - system: ci
+        type: build
+      - system: ci
+        type: tests
+ci:
+  autocheck:
+    fast-targets:
+      - logbroker/unified_agent

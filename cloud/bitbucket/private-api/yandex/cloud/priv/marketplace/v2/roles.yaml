@@ -1,0 +1,255 @@
+role_groups:
+  marketplace:
+    name: Marketplace roles
+
+roles:
+  marketplace.viewer:
+    groups: [ marketplace ]
+    name: Marketplace viewer
+    visibility: public
+    pseudorole: true
+    description: ''
+    permissions:
+      - marketplace.agreementAcceptances.list
+      - marketplace.agreements.{get,list}
+      - marketplace.isvs.{get,list}
+      - marketplace.osProductFamilies.{get,list}
+      - marketplace.osProductFamilyVersions.list
+      - marketplace.osProducts.{get,list}
+      - marketplace.products.list
+      - marketplace.publishers.{get,list}
+      - marketplace.skus.{get,list}
+      - marketplace.vars.{get,list}
+
+  marketplace.editor:
+    groups: [ marketplace ]
+    name: Marketplace editor
+    visibility: public
+    pseudorole: true
+    description: ''
+    permissions:
+      - marketplace.agreements.accept
+      - marketplace.agreements.create
+      - marketplace.agreements.deprecate
+      - marketplace.avatar.create
+      - marketplace.isvs.{create,update}
+      - marketplace.osProductFamilies.deprecate
+      - marketplace.osProductFamilies.update
+      - marketplace.osProducts.deprecate
+      - marketplace.osProducts.{create,update}
+      - marketplace.partner.become
+      - marketplace.product.create
+      - marketplace.publishers.{create,update}
+      - marketplace.skus.{create,update}
+      - marketplace.vars.{create,update}
+
+  marketplace.meteringAgent:
+    groups: [ marketplace ]
+    name: Агент маркетплейса (биллинг)
+    visibility: public
+    description: Доступ к возможности регистрировать потребление продуктов маркетплейса
+    permissions:
+      - marketplace.productUsage.write
+
+  internal.marketplaceagent:
+    groups: [ marketplace ]
+    name: (Внутренняя) Агент Marketplace
+    visibility: internal
+    description: ' доступ к функциям получения образов из фолдеров пользователей'
+    includedRoles:
+      - compute.images.user
+      - internal.managed-kubernetes.marketplacePublisher
+    permissions:
+      - billingInternal.accounts.update
+      - billingInternal.accounts.{get,list,listSupportSubscriptions,listAccessBindings}
+      - billingInternal.grantPolicies.{create,delete}
+      - billingInternal.grantPolicies.{get,list}
+      - billingInternal.monetaryGrant.{give,update}
+      - billingInternal.monetaryGrantOffers.{get,list}
+      - billingInternal.publisherAccount.get
+      - billingInternal.publisherAccount.{create,update}
+      - billingInternal.revenueReport.{create,get}
+      - billingInternal.sku.{create,delete,update,list}
+      - computeInternal.images.get
+      - computeInternal.snapshots.get
+      - iam.clouds.get
+
+  internal.marketplacelicenseagent:
+    groups: [ marketplace ]
+    name: (Внутренняя) Сервис проверки лицензий в Marketplace
+    visibility: internal
+    description: 'API проверки лицензий на продукты'
+    permissions:
+      - iam.clouds.get
+      - iam.permissionStages.get
+      - billingInternal.accounts.get
+
+  internal.marketplacelicense:
+    groups: [ marketplace ]
+    name: (Внутренняя) Проверка лицензий в Marketplace
+    visibility: internal
+    description: 'доступ к API проверки лицензий на продукты'
+    permissions:
+      - marketplaceinternal.licenses.check
+
+  marketplace.publishers.member:
+    groups: [ marketplace ]
+    name: ''
+    visibility: internal
+    description: Marketplace Publisher Member
+    resourceType: marketplace.publisher
+    permissions:
+      - iam.resourceTypes.membership
+
+  marketplace.publishers.viewer:
+    groups: [ marketplace ]
+    name: 'Marketplace Publisher Viewer'
+    visibility: internal
+    description: Marketplace Publisher Viewer
+    resourceType: marketplace.publisher
+    includedRoles:
+      - marketplace.publishers.member
+    scopes:
+      - yc.support.tickets.manage
+    permissions:
+      - marketplacePartners.publishers.{get,list,listAccessBindings}
+      - marketplacePartners.publisherVersions.{get,list}
+      - marketplacePartners.publisherProposals.{get,list}
+
+  marketplace.product.creator:
+    groups: [ marketplace ]
+    name: 'Marketplace Product Creator'
+    visibility: internal
+    description: Role with permissions to create new Marketplace Products
+    resourceType: marketplace.publisher
+    permissions:
+      - marketplacePartners.products.{create,listAccessBindings,updateAccessBindings}
+
+  marketplace.product.admin:
+    groups: [ marketplace ]
+    name: 'Marketplace Product Admin'
+    visibility: internal
+    description: Marketplace Product Admin
+    resourceType: marketplace.product
+    permissions:
+      - marketplacePartners.products.{get,create,update,delete,deprecate,listAccessBindings,updateAccessBindings}
+      - marketplacePartners.productVersions.{create,get,list,update,delete}
+      - marketplacePartners.productProposals.{create,get,list,update,apply,delete}
+      - marketplacePartners.tariffs.{get,list,create,update,delete}
+      - marketplacePartners.categories.list
+      - marketplace.productVersions.get
+
+  marketplace.publishers.editor:
+    groups: [ marketplace ]
+    name: 'Marketplace Publisher Editor'
+    visibility: internal
+    description: Marketplace Publisher Editor
+    resourceType: marketplace.publisher
+    includedRoles:
+      - marketplace.publishers.viewer
+      - marketplace.product.admin
+    permissions:
+      - marketplacePartners.publishers.{get,list,listAccessBindings}
+      - marketplacePartners.publisherVersions.{create,get,list,update}
+      - marketplacePartners.publisherProposals.{create,update,get,list,apply}
+
+  marketplace.publishers.owner:
+    groups: [ marketplace ]
+    name: 'Marketplace Publisher Owner'
+    visibility: internal
+    description: Marketplace Publisher Owner
+    resourceType: marketplace.publisher
+    includedRoles:
+      - marketplace.publishers.member
+      - marketplace.publishers.editor
+    permissions:
+      - marketplacePartners.publishers.updateAccessBindings
+      - iam.accessBindings.manageOwners
+
+  marketplaceInternal.viewer:
+    groups: [ marketplace ]
+    name: ''
+    visibility: internal
+    description: Marketplace Admin
+    resourceType: marketplace.publisher
+    permissions:
+      # Publisher
+      - marketplaceInternal.publishers.{get,list,listAccessBindings}
+      - marketplaceInternal.publisherVersions.{get,list}
+      - marketplaceInternal.publisherProposals.{get,list}
+      # Product
+      - marketplaceInternal.products.{get,list,listAccessBindings}
+      - marketplaceInternal.productVersions.{get,list}
+      - marketplaceInternal.productProposals.{get,list}
+      - marketplaceInternal.tariffs.{get,list}
+      # General entities
+      - marketplaceInternal.categories.{get,list}
+      - marketplaceInternal.vendors.{get,list}
+      - marketplaceInternal.redirects.{get,list}
+
+  marketplaceInternal.admin:
+    groups: [ marketplace ]
+    name: ''
+    visibility: internal
+    description: Marketplace Admin
+    resourceType: marketplace.publisher
+    includedRoles:
+      - marketplaceInternal.viewer
+    permissions:
+      # Publisher
+      - marketplaceInternal.publishers.{create,update,updateAccessBindings}
+      - marketplaceInternal.publisherVersions.{create,update,delete}
+      - marketplaceInternal.publisherProposals.review
+      # Product
+      - marketplaceInternal.products.{deprecate,update,updateAccessBindings}
+      - marketplaceInternal.productVersions.{create,update,delete}
+      - marketplaceInternal.productProposals.{review,create,update,delete}
+      - marketplaceInternal.tariffs.{create,update,delete}
+      # General entities
+      - marketplaceInternal.categories.{create,update}
+      - marketplaceInternal.vendors.{create,update,delete}
+      - marketplaceInternal.redirects.{create,update,delete}
+
+  marketplaceInternal.factoryUser:
+    groups: [ marketplace ]
+    name: ''
+    visibility: internal
+    description: Marketplace Factory User
+    resourceType: marketplace.publisher
+    permissions:
+      - marketplaceInternal.blueprints.{get,list,create,update,delete}
+      - marketplaceInternal.builds.{get,list,create,update,delete}
+
+  marketplace.onCall:
+    groups: [ marketplace, staff ]
+    name: On-call Marketplace
+    visibility: internal
+    description: Role for Marketplace on-call engineers
+    includedRoles:
+      - onCall
+      - marketplaceInternal.viewer
+
+  marketplace.onCallAdmin:
+    groups: [ marketplace, staff ]
+    name: On-call Marketplace Admin
+    visibility: internal
+    description: Role for Marketplace on-call admins
+    includedRoles:
+      - onCall
+      - marketplaceInternal.admin
+
+  marketplace.support:
+    groups: [ marketplace, staff ]
+    name: Support Marketplace
+    visibility: internal
+    description: Role for support engineers
+    includedRoles:
+      - marketplaceInternal.viewer
+
+  marketplace.supportAdmin:
+    groups: [ marketplace, staff ]
+    name: Support Marketplace Admin
+    visibility: internal
+    description: Role for support admins
+    includedRoles:
+      - marketplace.support

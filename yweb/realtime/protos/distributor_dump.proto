@@ -1,0 +1,15 @@
+package NRealTime;
+
+message TDumpHeaderProto {
+    optional fixed64 Key1 = 1;
+    optional fixed64 Key2 = 2;
+    optional fixed64 FirstDocTime = 3;
+    optional fixed32 DocsCount = 4;
+}
+
+message TDumpMetaProto {
+    optional fixed64 MesKey = 1;
+    optional fixed64 DocTime = 2;
+    optional sint64 RelativeDocTime = 3;
+    repeated string Attrs = 4;
+}

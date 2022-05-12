@@ -1,0 +1,199 @@
+role_groups:
+  cic:
+    name: Cloud Interconnect (CiC) roles
+
+roles:
+  ##############################################################################
+  # Public roles
+  ##############################################################################
+  cic.viewer:
+    groups: [cic]
+    name: "CiC viewer"
+    description: "Роль на чтение объектов Cloud Interconnect"
+    visibility: public
+    permissions:
+      - resource-manager.folders.get
+      - resource-manager.clouds.get
+      - cic.quotas.get
+      - cic.trunkConnections.get
+      - cic.privateConnections.get
+      - cic.publicConnections.get
+      - cic.pointsOfPresence.get
+
+  cic.editor:
+    groups: [cic]
+    name: "CiC editor"
+    description: "Роль на редактирование объектов Cloud Interconnect"
+    visibility: public
+    includedRoles:
+      - cic.viewer
+    permissions:
+      - cic.trunkConnections.{create,update,delete}
+      - cic.privateConnections.{create,update,delete}
+      - cic.publicConnections.{create,update,delete}
+
+  cic.secretViewer:
+    groups: [cic]
+    name: "CiC secret viewer"
+    description: "Роль на чтение секретов Cloud Interconnect"
+    visibility: public
+    includedRoles:
+      - cic.viewer
+    permissions:
+      - cic.trunkConnections.viewSecrets
+      - cic.privateConnections.viewSecrets
+      - cic.publicConnections.viewSecrets
+
+  cic.secretEditor:
+    groups: [cic]
+    name: "CiC secret editor"
+    description: "Роль на редактирование секретов Cloud Interconnect"
+    visibility: public
+    includedRoles:
+      - cic.secretViewer
+    permissions:
+      - cic.trunkConnections.configureSecrets
+      - cic.privateConnections.configureSecrets
+      - cic.publicConnections.configureSecrets
+
+  ##############################################################################
+  # Partner roles
+  ##############################################################################
+  cic.partnerViewer:
+    groups: [cic]
+    name: "CiC partner viewer"
+    description: "Роль на чтение объектов Cloud Interconnect для партнеров"
+    visibility: public
+    permissions:
+      - resource-manager.folders.get
+      - resource-manager.clouds.get
+      - cic.quotas.get
+      - cic.partnerJoints.get
+      - cic.clientTrunks.get
+
+  cic.partnerEditor:
+    groups: [cic]
+    name: "CiC partner editor"
+    description: "Роль на редактирование объектов Cloud Interconnect для партнеров"
+    visibility: public
+    includedRoles:
+      - cic.partnerViewer
+    permissions:
+      - cic.clientTrunks.update
+
+  ##############################################################################
+  # Internal roles
+  ##############################################################################
+  internal.cic.internalViewer:
+    groups: [cic]
+    name: "CiC internal public resources viewer"
+    description: "Внутренняя роль на чтение публичных объектов Cloud Interconnect"
+    visibility: internal
+    includedRoles:
+      - cic.viewer
+      - cic.partnerViewer
+      - cic.secretViewer
+
+  internal.cic.internalEditor:
+    groups: [cic]
+    name: "CiC internal public resources editor"
+    description: "Внутренняя роль на редактирование публичных объектов Cloud Interconnect"
+    visibility: internal
+    includedRoles:
+      - internal.cic.internalViewer
+      - cic.editor
+      - cic.partnerEditor
+      - cic.secretEditor
+    permissions:
+      - cic.trunkConnections.internalConfigure
+      - cic.privateConnections.internalConfigure
+      - cic.publicConnections.internalConfigure
+      - cic.partnerJoints.{create,update,delete,internalConfigure}
+      - cic.clientTrunks.{create,update,delete,internalConfigure}
+
+  internal.cic.netinfraViewer:
+    groups: [cic]
+    name: "CiC internal resources viewer"
+    description: "Внутренняя роль на чтение внутренних объектов Cloud Interconnect"
+    visibility: internal
+    permissions:
+      - resource-manager.folders.get
+      - resource-manager.clouds.get
+      - cic.pointsOfPresence.get
+      - cic.clusterParams.get
+      - cic.routeTargetPools.get
+      - cic.agentConfigs.get
+
+  internal.cic.netinfraEditor:
+    groups: [cic]
+    name: "CiC internal resources editor"
+    description: "Внутренняя роль на редактирование публичных объектов Cloud Interconnect"
+    visibility: internal
+    includedRoles:
+      - internal.cic.netinfraViewer
+    permissions:
+      - cic.pointsOfPresence.{create,update,delete}
+      - cic.clusterParams.{create,update,delete}
+      - cic.routeTargetPools.{create,update,delete}
+      - cic.agentConfigs.update
+
+  internal.cic.agent:
+    groups: [cic]
+    name: "CiC internal agent"
+    description: "Внутренняя роль агента Cloud Interconnect"
+    visibility: internal
+    permissions:
+      - cic.agentConfigs.{get,update,decryptSecrets}
+      - cic.clusterParams.get
+
+  internal.cic.routeTargetAllocator:
+    groups: [cic]
+    name: CiC route target allocator
+    visibility: internal
+    description: Role for route target allocation
+    includedRoles:
+      - internal.cic.internalViewer
+    permissions:
+      - cic.privateConnections.allocateRouteTarget
+
+  internal.cic.routeTargetDeallocator:
+    groups: [cic]
+    name: CiC route target deallocator
+    visibility: internal
+    description: Role for route target deallocation
+    includedRoles:
+      - internal.cic.internalViewer
+    permissions:
+      - cic.privateConnections.deallocateRouteTarget
+
+  ##############################################################################
+  # Other
+  ##############################################################################
+  cic.support:
+    groups: [cic, support]
+    name: Support CiC
+    visibility: internal
+    description: Role for support engineers
+    includedRoles:
+      - cic.viewer
+      - cic.partnerViewer
+    permissions:
+      - cic.quotas.updateLimit
+
+  cic.supportAdmin:
+    groups: [cic, support]
+    name: Support CiC Admin
+    visibility: internal
+    description: Privileged operations for support engineers
+    includedRoles:
+      - cic.support
+      - cic.editor
+      - cic.partnerEditor
+
+  cic.onCall:
+    groups: [cic, support]
+    name: CiC on-call
+    visibility: internal
+    description: Privileged operations for on-call engineers
+    includedRoles:
+      - cic.support

@@ -1,0 +1,7 @@
+resources:
+  container-registry.registry:
+    parents: [resource-manager.folder]
+    accessBindingsListingPermission: container-registry.registries.listAccessBindings
+  container-registry.repository:
+    parents: [container-registry.repository, container-registry.registry]
+    accessBindingsListingPermission: container-registry.repositories.listAccessBindings

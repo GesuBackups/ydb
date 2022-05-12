@@ -1,0 +1,38 @@
+package NZoraPb;
+
+import "zora/zora/proto/common/common.proto";
+
+// PDFetch options and result
+message TPDFetchOpts {
+
+    // insert additional info into Diag
+    message TDiagOptions {
+        optional bool   ZoraRequests           = 1 [default = false];  // insert zora requests
+        optional uint64 NumOfHTTPResponseBytes = 2 [default = 0];      // insert the head of response body
+        optional bool   DebugLog               = 3 [default = false];  // insert debug log from emit
+    };
+
+    optional string                 ProcId          = 1;
+
+    optional TDiagOptions           DiagOpts        = 2;
+
+    optional string      /*UDFInput*/Params          = 30;
+    optional EDataFormat /*UDFInput*/ParamsFormat     = 31; // see comments in zora/zora/proto/calc/calc.proto 
+    optional EJsonStringTransform /*UDFInput*/JsonStringTransform = 32;
+
+    extensions 1000 to 1999; // additional user arguments for pdfetch procedure
+}
+
+//////////////////////////////////
+// TODO: move to video code
+//////////////////////////////////
+
+message TVideoParseResult {
+    optional bytes      VProcResult = 1;
+
+    optional bytes      VideoContent = 2;
+    optional bytes      AudioContent = 3;
+
+    optional uint32     JobStatus    = 10;
+}
+

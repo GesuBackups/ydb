@@ -1,0 +1,32 @@
+package NZoraPb;
+
+
+enum EDataFormat {
+    EDF_UNSPECIFIED = 0;
+    EDF_JSON        = 1;
+    EDF_PROTO_BIN   = 2;
+    EDF_PROTO_TEXT  = 3;
+}
+enum EJsonStringTransform {
+    JST_NONE            = 0; // strings and bytes (even invalid utf8) are outputed as-is (may cause some parsers to fail)
+    JST_BASE64          = 1; // strings fields are outputted as-is, bytes fields are base64-encoded
+    //JST_BASE64_ALL      = 2; // strings and bytes are base64-encoded (the most safe way)
+}
+
+message TSslCertPolicy {
+   enum TPeerVerifyMode {
+                               /// Asks OpenSSL to    Downloads CA issuer certificates        Checks peer certificates chain
+                               /// Request peer's     according to the extension (rfc3280)    and, in case of error, closes
+                               ///  certificates      authorityInfoAccess -> caIssuers ->     the SSL connection to a peer
+                               ///                    -> AccessLocation
+       /// None          = 10  ///     false                         false                              false
+       /// <removed>     = 20  ///
+       /// QueryDownload = 30, ///     true                          true                               false
+       /// Verify        = 40  ///     true                          true                               true
+
+      None           = 10;
+      QueryDownload  = 30;
+      Verify         = 40;
+   };
+   optional TPeerVerifyMode PeerVerifyMode = 10 [ default = QueryDownload ];
+}

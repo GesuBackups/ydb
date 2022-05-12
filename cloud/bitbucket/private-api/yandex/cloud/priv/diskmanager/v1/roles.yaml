@@ -1,0 +1,56 @@
+role_groups:
+  disk-manager:
+    name: Disk Manager roles
+
+roles:
+  internal.disk-manager.admin:
+    groups: [disk-manager]
+    name: Администратор Disk Manager
+    visibility: internal
+    description: Полный доступ к Disk Manager (внутренняя)
+    permissions:
+    - disk-manager.disks.{create,delete,update}
+    - disk-manager.disks.{get,list}
+    - disk-manager.disks.{read,write}
+    - disk-manager.images.{create,delete,update}
+    - disk-manager.images.{get,list}
+    - disk-manager.images.{read,write}
+    - disk-manager.operations.{create,delete,update}
+    - disk-manager.operations.{get,list}
+    - disk-manager.operations.{read,write}
+    - disk-manager.snapshots.{create,delete,update}
+    - disk-manager.snapshots.{get,list}
+    - disk-manager.snapshots.{read,write}
+    - disk-manager.filesystems.{create,delete,update}
+
+  internal.disk-manager.user:
+    groups: [disk-manager]
+    name: Пользователь Disk Manager
+    visibility: internal
+    description: Доступ к основному API Disk Manager (внутренняя)
+    permissions:
+    - disk-manager.disks.{get,list,create,delete,update}
+    - disk-manager.images.{get,list,create,delete}
+    - disk-manager.operations.{get,list,update}
+    - disk-manager.snapshots.{get,list,create,delete}
+    - disk-manager.filesystems.{create,delete,update}
+
+  disk-manager.support:
+    groups: [disk-manager, support]
+    name: Support role for Disk manager
+    visibility: internal
+    description: Access to metadata for support engineers
+    permissions:
+      - disk-manager.disks.{get,list}
+      - disk-manager.images.{get,list}
+      - disk-manager.operations.{get,list}
+      - disk-manager.snapshots.{get,list}
+
+  disk-manager.supportAdmin:
+    groups: [disk-manager, support]
+    name: Support Admin role for Disk manager
+    visibility: internal
+    description: Access to metadata and ability to remove resources
+    includedRoles:
+      - disk-manager.support
+    permissions: []

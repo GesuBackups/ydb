@@ -1,0 +1,1152 @@
+permissions:
+
+  marketplace.productUsage.write:
+    description: Write marketplace product usage
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  marketplace.productVersions.get:
+    description: Get marketplace product version
+    stage: GA
+    visibility: public
+    resourceType: marketplace.product
+  #  to be deleted
+  marketplace.agreementAcceptances.list:
+    description: List accepted agreements
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  marketplace.agreements.accept:
+    description: Accept agreement
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  marketplace.agreements.create:
+    description: Create license agreement
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  marketplace.agreements.deprecate:
+    description: Deprecate own license agreement
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  marketplace.agreements.get:
+    description: Get own agreements
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  marketplace.agreements.list:
+    description: List own agreements
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  marketplace.avatar.create:
+    description: Upload avatar for publisher or product
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  marketplace.isvs.create:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  marketplace.isvs.get:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  marketplace.isvs.list:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  marketplace.isvs.update:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  marketplace.osProductFamilies.deprecate:
+    description: Deprecate OS product family
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  marketplace.osProductFamilies.get:
+    description: Get own OS product family
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  marketplace.osProductFamilies.list:
+    description: List own OS product familes
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  marketplace.osProductFamilies.update:
+    description: Update OS product family
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  marketplace.osProductFamilyVersions.list:
+    description: List own OS product family versions
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  marketplace.osProducts.create:
+    description: Create OS product
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  marketplace.osProducts.deprecate:
+    description: Deprecate OS product
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  marketplace.osProducts.get:
+    description: Get own OS product
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  marketplace.osProducts.list:
+    description: List own OS products
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  marketplace.osProducts.update:
+    description: Update OS product
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  marketplace.partner.become:
+    description: Become Marketplace partner
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  marketplace.product.create:
+    description: Create Marketplace product
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  marketplace.products.list:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  marketplace.publishers.create:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  marketplace.publishers.get:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  marketplace.publishers.list:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  marketplace.publishers.update:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  marketplace.skus.create:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  marketplace.skus.get:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  marketplace.skus.list:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  marketplace.skus.update:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  marketplace.vars.create:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  marketplace.vars.get:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  marketplace.vars.list:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  marketplace.vars.update:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  marketplaceinternal.categories.create:
+    description: Marketplace internal role
+    stage: GA
+    visibility: internal
+  marketplaceinternal.categories.update:
+    description: Marketplace internal role
+    stage: GA
+    visibility: internal
+  marketplaceinternal.osProductFamilyVersions.setStatus:
+    description: Marketplace internal role
+    stage: GA
+    visibility: internal
+  marketplaceinternal.publishers.setStatus:
+    description: Marketplace internal role
+    stage: GA
+    visibility: internal
+  marketplaceinternal.licenses.check:
+    description: Check product license
+    stage: GA
+    visibility: internal
+  marketplacepublic.agreements.get:
+    description: Get public agreement
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  marketplacepublic.agreements.list:
+    description: List public agreements
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  marketplacepublic.avatars.get:
+    description: Get public avatar
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  marketplacepublic.categories.get:
+    description: Get public category
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  marketplacepublic.categories.list:
+    description: List public categories
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  marketplacepublic.osProductFamilies.get:
+    description: Get public marketplace OS product family
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  marketplacepublic.osProductFamilies.list:
+    description: List public marketplace OS product families
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  marketplacepublic.osProducts.get:
+    description: Get public marketplace OS product
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  marketplacepublic.osProducts.list:
+    description: List public marketplace OS products
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  marketplacepublic.publishers.get:
+    description: Get public publisher
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  marketplacepublic.publishers.list:
+    description: List public publishers
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  marketplaceInternal.osProductFamilyVersions.setStatus:
+    description: Marketplace internal role
+    stage: GA
+    visibility: internal
+  marketplaceInternal.publishers.setStatus:
+    description: Marketplace internal role
+    stage: GA
+    visibility: internal
+
+  #  to be deleted
+
+  marketplacePartners.publishers.get:
+    description: 'Partners portal: get publisher'
+    stage: GA
+    visibility: public
+    resourceType: marketplace.publisher
+
+  marketplacePartners.publishers.list:
+    description: 'Partners portal: list publishers'
+    stage: GA
+    visibility: public
+    resourceType: marketplace.publisher
+
+  marketplacePartners.publishers.listAccessBindings:
+    description: 'Partners portal: list publisher access bindings'
+    stage: GA
+    visibility: public
+    resourceType: marketplace.publisher
+
+  marketplacePartners.publishers.updateAccessBindings:
+    description: 'Partners portal: update publisher access bindings'
+    stage: GA
+    visibility: public
+    resourceType: marketplace.publisher
+
+  marketplacePartners.publisherVersions.create:
+    description: 'Partners portal: create new publisher version'
+    stage: GA
+    visibility: public
+    resourceType: marketplace.publisher
+
+  marketplacePartners.publisherVersions.get:
+    description: 'Partners portal: get publisher version'
+    stage: GA
+    visibility: public
+    resourceType: marketplace.publisher
+
+  marketplacePartners.publisherVersions.list:
+    description: 'Partners portal: list publisher versions'
+    stage: GA
+    visibility: public
+    resourceType: marketplace.publisher
+
+  marketplacePartners.publisherVersions.update:
+    description: 'Partners portal: update publisher version'
+    stage: GA
+    visibility: public
+    resourceType: marketplace.publisher
+
+  marketplacePartners.publisherProposals.create:
+    description: 'Partners portal: create publisher proposal'
+    stage: GA
+    visibility: public
+    resourceType: marketplace.publisher
+
+  marketplacePartners.publisherProposals.update:
+    description: 'Partners portal: update publisher proposal'
+    stage: GA
+    visibility: public
+    resourceType: marketplace.publisher
+
+  marketplacePartners.publisherProposals.get:
+    description: 'Partners portal: get publisher proposal'
+    stage: GA
+    visibility: public
+    resourceType: marketplace.publisher
+
+  marketplacePartners.publisherProposals.list:
+    description: 'Partners portal: list publisher proposals'
+    stage: GA
+    visibility: public
+    resourceType: marketplace.publisher
+
+  marketplacePartners.publisherProposals.apply:
+    description: 'Partners portal: apply publisher proposal'
+    stage: GA
+    visibility: public
+    resourceType: marketplace.publisher
+
+  marketplaceInternal.publishers.list:
+    description: 'Backoffice: list all publishers'
+    stage: GA
+    visibility: internal
+    resourceType: marketplace.publisher
+
+  marketplaceInternal.publishers.get:
+    description: 'Backoffice: get publisher'
+    stage: GA
+    visibility: internal
+    resourceType: marketplace.publisher
+
+  marketplaceInternal.publishers.create:
+    description: 'Backoffice: create publisher'
+    stage: GA
+    visibility: internal
+    resourceType: marketplace.publisher
+
+  marketplaceInternal.publishers.update:
+    description: 'Backoffice: update publisher'
+    stage: GA
+    visibility: internal
+    resourceType: marketplace.publisher
+
+  marketplaceInternal.publishers.listAccessBindings:
+    description: 'Backoffice: list access bindings of publisher'
+    stage: GA
+    visibility: internal
+    resourceType: marketplace.publisher
+
+  marketplaceInternal.publishers.updateAccessBindings:
+    description: 'Backoffice: update access bindings of publisher'
+    stage: GA
+    visibility: internal
+    resourceType: marketplace.publisher
+
+  marketplaceInternal.publisherVersions.create:
+    description: 'Backoffice: create publisher version'
+    stage: GA
+    visibility: internal
+    resourceType: marketplace.publisher
+
+  marketplaceInternal.publisherVersions.get:
+    description: 'Backoffice: get publisher version'
+    stage: GA
+    visibility: internal
+    resourceType: marketplace.publisher
+
+  marketplaceInternal.publisherVersions.list:
+    description: 'Backoffice: list publisher version'
+    stage: GA
+    visibility: internal
+    resourceType: marketplace.publisher
+
+  marketplaceInternal.publisherVersions.update:
+    description: 'Backoffice: update publisher version'
+    stage: GA
+    visibility: internal
+    resourceType: marketplace.publisher
+
+  marketplaceInternal.publisherVersions.delete:
+    description: 'Backoffice: delete publisher version'
+    stage: GA
+    visibility: internal
+    resourceType: marketplace.publisher
+
+  marketplaceInternal.publisherProposals.get:
+    description: 'Backoffice: list all publisher proposals'
+    stage: GA
+    visibility: internal
+    resourceType: marketplace.publisher
+
+  marketplaceInternal.publisherProposals.list:
+    description: 'Backoffice: list all publisher proposals'
+    stage: GA
+    visibility: internal
+    resourceType: marketplace.publisher
+
+  marketplaceInternal.publisherProposals.review:
+    description: 'Backoffice: review publisher proposal'
+    stage: GA
+    visibility: internal
+    resourceType: marketplace.publisher
+
+  marketplacePartners.products.get:
+    description: 'Partners portal: get product'
+    stage: GA
+    visibility: public
+    resourceType: marketplace.product
+  marketplacePartners.products.create:
+    description: 'Partners portal: create product'
+    stage: GA
+    visibility: public
+    resourceType: marketplace.product
+  marketplacePartners.products.update:
+    description: 'Partners portal: update product'
+    stage: GA
+    visibility: public
+    resourceType: marketplace.product
+  marketplacePartners.products.delete:
+    description: 'Partners portal: delete product'
+    stage: GA
+    visibility: public
+    resourceType: marketplace.product
+  marketplacePartners.products.deprecate:
+    description: 'Partners portal: deprecate product'
+    stage: GA
+    visibility: public
+    resourceType: marketplace.product
+  marketplacePartners.products.listAccessBindings:
+    description: 'Partners portal: list access bindings of product'
+    stage: GA
+    visibility: public
+    resourceType: marketplace.product
+  marketplacePartners.products.updateAccessBindings:
+    description: 'Partners portal: update access bindings of product'
+    stage: GA
+    visibility: public
+    resourceType: marketplace.product
+  marketplacePartners.productVersions.create:
+    description: 'Partners portal: create product version'
+    stage: GA
+    visibility: public
+    resourceType: marketplace.product
+  marketplacePartners.productVersions.get:
+    description: 'Partners portal: get product version'
+    stage: GA
+    visibility: public
+    resourceType: marketplace.product
+  marketplacePartners.productVersions.list:
+    description: 'Partners portal: list versions of a product'
+    stage: GA
+    visibility: public
+    resourceType: marketplace.product
+  marketplacePartners.productVersions.update:
+    description: 'Partners portal: update product version'
+    stage: GA
+    visibility: public
+    resourceType: marketplace.product
+  marketplacePartners.productVersions.delete:
+    description: 'Partners portal: delete product version'
+    stage: GA
+    visibility: public
+    resourceType: marketplace.product
+  marketplacePartners.productProposals.create:
+    description: 'Partners portal: create product proposal'
+    stage: GA
+    visibility: public
+    resourceType: marketplace.product
+  marketplacePartners.productProposals.get:
+    description: 'Partners portal: get product proposal'
+    stage: GA
+    visibility: public
+    resourceType: marketplace.product
+  marketplacePartners.productProposals.list:
+    description: 'Partners portal: list product proposals'
+    stage: GA
+    visibility: public
+    resourceType: marketplace.product
+  marketplacePartners.productProposals.update:
+    description: 'Partners portal: update product proposal'
+    stage: GA
+    visibility: public
+    resourceType: marketplace.product
+  marketplacePartners.productProposals.apply:
+    description: 'Partners portal: apply product proposal'
+    stage: GA
+    visibility: public
+    resourceType: marketplace.product
+  marketplacePartners.productProposals.delete:
+    description: 'Partners portal: delete product proposal'
+    stage: GA
+    visibility: public
+    resourceType: marketplace.product
+
+  marketplaceInternal.products.get:
+    description: 'Backoffice: get product'
+    stage: GA
+    visibility: internal
+    resourceType: marketplace.product
+
+  marketplaceInternal.products.list:
+    description: 'Backoffice: list products'
+    stage: GA
+    visibility: internal
+    resourceType: marketplace.product
+
+  marketplaceInternal.products.update:
+    description: 'Backoffice: update products'
+    stage: GA
+    visibility: internal
+    resourceType: marketplace.product
+
+  marketplaceInternal.products.deprecate:
+    description: 'Backoffice: deprecate product'
+    stage: GA
+    visibility: internal
+    resourceType: marketplace.product
+
+  marketplaceInternal.products.delete:
+    description: 'Backoffice: delete product'
+    stage: GA
+    visibility: internal
+    resourceType: marketplace.product
+
+  marketplaceInternal.products.listAccessBindings:
+    description: 'Backoffice: list access bindings of product'
+    stage: GA
+    visibility: internal
+    resourceType: marketplace.product
+
+  marketplaceInternal.products.updateAccessBindings:
+    description: 'Backoffice: update access bindings of product'
+    stage: GA
+    visibility: internal
+    resourceType: marketplace.product
+
+  marketplaceInternal.productVersions.create:
+    description: 'Backoffice: create product version'
+    stage: GA
+    visibility: internal
+    resourceType: marketplace.product
+
+  marketplaceInternal.productVersions.get:
+    description: 'Backoffice: get product version'
+    stage: GA
+    visibility: internal
+    resourceType: marketplace.product
+
+  marketplaceInternal.productVersions.list:
+    description: 'Backoffice: list product version'
+    stage: GA
+    visibility: internal
+    resourceType: marketplace.product
+
+  marketplaceInternal.productVersions.update:
+    description: 'Backoffice: update product version'
+    stage: GA
+    visibility: internal
+    resourceType: marketplace.product
+
+  marketplaceInternal.productVersions.delete:
+    description: 'Backoffice: delete product version'
+    stage: GA
+    visibility: internal
+    resourceType: marketplace.product
+
+  marketplaceInternal.productProposals.create:
+    description: 'Backoffice: update product proposal'
+    stage: GA
+    visibility: internal
+    resourceType: marketplace.product
+
+  marketplaceInternal.productProposals.update:
+    description: 'Backoffice: update product proposal'
+    stage: GA
+    visibility: internal
+    resourceType: marketplace.product
+  marketplaceInternal.productProposals.delete:
+    description: 'Backoffice: delete product proposal'
+    stage: GA
+    visibility: internal
+    resourceType: marketplace.product
+  marketplaceInternal.productProposals.apply:
+    description: 'Backoffice: apply product proposal'
+    stage: GA
+    visibility: internal
+    resourceType: marketplace.product
+  marketplaceInternal.productProposals.review:
+    description: 'Backoffice: review product proposal'
+    stage: GA
+    visibility: internal
+    resourceType: marketplace.product
+  marketplaceInternal.productProposals.get:
+    description: 'Backoffice: get product proposal'
+    stage: GA
+    visibility: internal
+    resourceType: marketplace.product
+  marketplaceInternal.productProposals.list:
+    description: 'Backoffice: list product proposals'
+    stage: GA
+    visibility: internal
+    resourceType: marketplace.product
+
+  marketplacePartners.tariffs.get:
+    description: 'Partners portal: get tariff'
+    stage: GA
+    visibility: public
+    resourceType: marketplace.product
+  marketplacePartners.tariffs.list:
+    description: 'Partners portal: list tariff'
+    stage: GA
+    visibility: public
+    resourceType: marketplace.product
+  marketplacePartners.tariffs.create:
+    description: 'Partners portal: create tariff'
+    stage: GA
+    visibility: public
+    resourceType: marketplace.product
+  marketplacePartners.tariffs.update:
+    description: 'Partners portal: update tariff'
+    stage: GA
+    visibility: public
+    resourceType: marketplace.product
+  marketplacePartners.tariffs.delete:
+    description: 'Partners portal: delete tariff'
+    stage: GA
+    visibility: public
+    resourceType: marketplace.product
+
+  marketplaceInternal.vendors.get:
+    description: 'Backoffice: get vendor'
+    stage: GA
+    visibility: internal
+
+  marketplaceInternal.vendors.list:
+    description: 'Backoffice: list vendors'
+    stage: GA
+    visibility: internal
+
+  marketplaceInternal.vendors.create:
+    description: 'Backoffice: create vendor'
+    stage: GA
+    visibility: internal
+
+  marketplaceInternal.vendors.update:
+    description: 'Backoffice: update vendor'
+    stage: GA
+    visibility: internal
+
+  marketplaceInternal.vendors.delete:
+    description: 'Backoffice: delete vendor'
+    stage: GA
+    visibility: internal
+
+  marketplaceInternal.redirects.get:
+    description: 'Backoffice: get redirect'
+    stage: GA
+    visibility: internal
+
+  marketplaceInternal.redirects.list:
+    description: 'Backoffice: list redirects'
+    stage: GA
+    visibility: internal
+
+  marketplaceInternal.redirects.create:
+    description: 'Backoffice: create redirect'
+    stage: GA
+    visibility: internal
+
+  marketplaceInternal.redirects.update:
+    description: 'Backoffice: update redirect'
+    stage: GA
+    visibility: internal
+
+  marketplaceInternal.redirects.delete:
+    description: 'Backoffice: delete redirect'
+    stage: GA
+    visibility: internal
+
+  marketplacePartners.categories.list:
+    description: 'Partners portal: list categories'
+    stage: GA
+    visibility: internal
+    resourceType: marketplace.product
+
+  marketplaceInternal.categories.get:
+    description: "Backoffice: get product category"
+    stage: GA
+    visibility: internal
+  marketplaceInternal.categories.list:
+    description: "Backoffice: list product category"
+    stage: GA
+    visibility: internal
+  marketplaceInternal.categories.create:
+    description: "Backoffice: create product category"
+    stage: GA
+    visibility: internal
+  marketplaceInternal.categories.update:
+    description: "Backoffice: update product category"
+    stage: GA
+    visibility: internal
+
+  marketplaceInternal.tariffs.get:
+    description: 'Backoffice: get tariff'
+    stage: GA
+    visibility: internal
+    resourceType: marketplace.product
+  marketplaceInternal.tariffs.list:
+    description: 'Backoffice: list tariff'
+    stage: GA
+    visibility: internal
+    resourceType: marketplace.product
+  marketplaceInternal.tariffs.create:
+    description: 'Backoffice: create tariff'
+    stage: GA
+    visibility: internal
+    resourceType: marketplace.product
+  marketplaceInternal.tariffs.update:
+    description: 'Backoffice: update tariff'
+    stage: GA
+    visibility: internal
+    resourceType: marketplace.product
+  marketplaceInternal.tariffs.delete:
+    description: 'Backoffice: delete tariff'
+    stage: GA
+    visibility: internal
+    resourceType: marketplace.product
+
+  marketplaceInternal.licenses.check:
+    description: Check product license
+    stage: GA
+    visibility: internal
+
+  marketplaceInternal.blueprints.get:
+    description: 'Backoffice: get blueprints'
+    stage: GA
+    visibility: internal
+  marketplaceInternal.blueprints.list:
+    description: 'Backoffice: list blueprints'
+    stage: GA
+    visibility: internal
+  marketplaceInternal.blueprints.create:
+    description: 'Backoffice: create blueprints'
+    stage: GA
+    visibility: internal
+  marketplaceInternal.blueprints.update:
+    description: 'Backoffice: update blueprints'
+    stage: GA
+    visibility: internal
+  marketplaceInternal.blueprints.delete:
+    description: 'Backoffice: delete blueprints'
+    stage: GA
+    visibility: internal
+
+  marketplaceInternal.builds.get:
+    description: 'Backoffice: get build'
+    stage: GA
+    visibility: internal
+  marketplaceInternal.builds.list:
+    description: 'Backoffice: list builds'
+    stage: GA
+    visibility: internal
+  marketplaceInternal.builds.create:
+    description: 'Backoffice: create build'
+    stage: GA
+    visibility: internal
+  marketplaceInternal.builds.update:
+    description: 'Backoffice: update build'
+    stage: GA
+    visibility: internal
+  marketplaceInternal.builds.delete:
+    description: 'Backoffice: delete build'
+    stage: GA
+    visibility: internal

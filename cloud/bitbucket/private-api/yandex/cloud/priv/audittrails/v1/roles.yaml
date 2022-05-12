@@ -1,0 +1,110 @@
+role_groups:
+  trail:
+    name: Audit trails roles
+
+roles:
+
+  audit-trails.configViewer:
+    groups: [trail]
+    name: Audit Trails Config Viewer
+    visibility: public
+    description: Viewing trail configs.
+    permissions:
+      - audit-trails.trails.get
+      - audit-trails.trails.list # TODO: https://st.yandex-team.ru/CLOUD-74141
+      - audit-trails.quotas.get
+      - iam.folders.get
+      - resource-manager.folders.get
+
+  audit-trails.viewer:
+    groups: [trail]
+    name: Audit Trails Viewer
+    visibility: public
+    description: Viewing trail configs and authorizing events on service account
+    includedRoles:
+      - audit-trails.configViewer
+    permissions:
+      - audit-trails.trails.read
+
+  audit-trails.editor:
+    groups: [trail]
+    name: Audit Trails Editor
+    visibility: public
+    description: Чтение и запись в Audit Trails
+    includedRoles:
+      - audit-trails.viewer
+    permissions:
+      - audit-trails.trails.{create,delete,update,pause,resume}
+
+  audit-trails.admin:
+    groups: [trail]
+    name: Администратор Audit Trails
+    visibility: public
+    description: Чтение, запись и управление доступом в Audit Trails
+    includedRoles:
+      - audit-trails.editor
+    permissions:
+      - audit-trails.trails.{listAccessBindings,updateAccessBindings}
+
+  audit-trails.support:
+    groups: [trail, support]
+    name: Support Audit Trails
+    description: Role for support engineers
+    visibility: internal
+    permissions:
+      - audit-trails.trails.{get,list}
+      - audit-trails.quotas.{get,updateLimit}
+
+  audit-trails.supportAdmin:
+    groups: [trail, support]
+    name: Support Audit Trails
+    description: Role for support engineers
+    visibility: internal
+    includedRoles:
+      - audit-trails.support
+    permissions: []
+
+  audit-trails.onCall:
+    groups: [trail, staff]
+    name: OnCall Audit Trails
+    description: Role for on-call engineers
+    visibility: internal
+    includedRoles:
+      - onCall
+      - audit-trails.configViewer
+    permissions:
+      - audit-trails.trails.listAccessBindings
+
+  audit-trails.onCallAdmin:
+    groups: [trail, support]
+    name: On-call Audit Trails Admin
+    description: Role for on-call admins
+    visibility: internal
+    includedRoles:
+      - audit-trails.onCall
+    permissions:
+      - audit-trails.quotas.updateLimit
+
+  internal.audit-trails.eventEnricher:
+    groups: [trail]
+    name: Event Enricher Audit Trails
+    description: Role for resolving folder name/cloud name/subject name by his id.
+    visibility: internal
+    scopes:
+      - yc.resource-manager.clouds.get
+      - yc.resource-manager.folders.get
+      - yc.iam.serviceAccounts.get
+    permissions:
+      - iam.userAccounts.get
+      - iam.federations.get
+      - organization-manager.federations.get
+      - organization-manager.organizations.get
+
+  internal.audit-trails.eventWriter:
+    groups: [trail]
+    name: Event Writer Audit Trails
+    visibility: internal
+    description: Role to write cloud events using Ingestion API
+    permissions:
+      - audit-trails.events.write
+

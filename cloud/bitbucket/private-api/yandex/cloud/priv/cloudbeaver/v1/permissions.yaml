@@ -1,0 +1,42 @@
+permissions:
+  cloudbeaver.connections.get:
+    description: Use database connection
+    stage: CLOUD_BEAVER_ALPHA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+
+  cloudbeaver.connections.create:
+    description: Create database connection
+    stage: CLOUD_BEAVER_ALPHA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+
+  cloudbeaver.connections.update:
+    description: Modify database connection
+    stage: CLOUD_BEAVER_ALPHA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+
+  cloudbeaver.connections.delete:
+    description: Delete database connection
+    stage: CLOUD_BEAVER_ALPHA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - ACTIVE
+          - BLOCKED_BY_BILLING
+          - DELETING

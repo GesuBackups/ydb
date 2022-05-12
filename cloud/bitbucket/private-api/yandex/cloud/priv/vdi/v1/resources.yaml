@@ -1,0 +1,6 @@
+resources:
+  vdi.desktopGroup:
+    parents: [ resource-manager.folder ]
+    accessBindingsListingPermission: vdi.desktopGroups.listAccessBindings
+  vdi.desktop:
+    parents: [ vdi.desktopGroup ]

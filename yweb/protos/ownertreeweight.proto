@@ -1,0 +1,13 @@
+package NRobot;
+
+option optimize_for = SPEED;
+
+message TUrlWeight {
+    required string Url = 1;
+    required float Weight = 2;
+}
+
+message TOwnerTreeWeight {
+    repeated TUrlWeight TreeWeight = 1;
+}
+

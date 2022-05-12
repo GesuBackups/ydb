@@ -1,0 +1,9 @@
+permissions:
+  maintenance.read:
+    description: 'Permission to perform maintenance READ operations'
+    stage: GA
+    visibility: internal
+  maintenance.write:
+    description: 'Permission to perform maintenance WRITE operations'
+    stage: GA
+    visibility: internal

@@ -1,0 +1,9 @@
+blogs.mail.ru/bk/               [a-zA-Z0-9\.\-_]+
+blogs.mail.ru/inbox/            [a-zA-Z0-9\.\-_]+
+blogs.mail.ru/list/             [a-zA-Z0-9\.\-_]+
+blogs.mail.ru/mail/             [a-zA-Z0-9\.\-_]+
+www.liveinternet.ru/users/      [a-zA-Z0-9\.\-_]+
+blogs.privet.ru/user/           [a-zA-Z0-9\.\-_]+
+blogs.privet.ru/community/      [a-zA-Z0-9\.\-_]+
+users.livejournal.com/          [a-zA-Z0-9\.\-_]+
+community.livejournal.com/      [a-zA-Z0-9\.\-_]+

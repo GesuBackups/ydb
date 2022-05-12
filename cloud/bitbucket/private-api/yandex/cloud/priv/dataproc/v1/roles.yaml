@@ -1,0 +1,113 @@
+role_groups:
+  dataproc:
+    name: Dataproc roles
+
+roles:
+  dataproc.viewer:
+    groups: [dataproc]
+    name: Data Proc Viewer
+    visibility: public
+    description: доступ к функциям Data Proc на чтение
+    permissions:
+      - dataproc.clusters.get
+      - dataproc.jobs.get
+
+  dataproc.user:
+    groups: [dataproc]
+    name: Data Proc User
+    visibility: public
+    description: доступ к веб интерфейсам компонент Data Proc
+    includedRoles:
+      - dataproc.viewer
+      # TODO remove mdb.viewer after implementation of https://st.yandex-team.ru/MDB-9074
+      - mdb.viewer
+    permissions:
+      - dataproc.clusters.accessUi
+      - dataproc.jobs.create
+
+  dataproc.editor:
+    groups: [dataproc]
+    name: Data Proc Editor
+    visibility: public
+    description: доступ ко всем функциям Data Proc в режиме чтения и записи
+    includedRoles:
+      - dataproc.user
+    permissions:
+      - dataproc.clusters.{create,update,delete}
+
+  dataproc.admin:
+    groups: [dataproc]
+    name: Data Proc Editor
+    visibility: public
+    description: доступ ко всем функциям Data Proc в режиме чтения и записи
+    includedRoles:
+      - dataproc.editor
+
+  dataproc.agent:
+    groups: [mdb]
+    name: (Внешняя) Агент Dataproc
+    visibility: public
+    description: доступ к API в MDB Control plane для отправки отчетов и получения
+      заданий
+    permissions:
+      # TODO remove permissions mdb.dataproc.* after implementation of https://st.yandex-team.ru/MDB-9074
+      - mdb.dataproc.agentOperations
+      - mdb.dataproc.agentReport
+      - dataproc.agent.reportHealth
+      - dataproc.agent.manageJobs
+      - dataproc.agent.proxyUi
+      - monitoring.data.writeDataProc
+      - logging.groups.get
+      - logging.records.write
+
+  dataproc.provisioner:
+    groups: [mdb]
+    name: (Внешняя) Dataproc Provisioner
+    visibility: public
+    description: доступ к API в Control plane Облака для создания, изменения и удаления объектов кластера
+    includedRoles:
+      - compute.instanceGroups.editor
+      - compute.editor
+      - dns.editor
+      - vpc.user
+      - logging.viewer
+      - iam.serviceAccounts.user
+      - monitoring.viewer
+
+  mdb.dataproc.agent:
+    groups: [mdb]
+    name: (Внешняя) Агент Dataproc
+    visibility: public
+    description: доступ к API в MDB Control plane для отправки отчетов и получения
+      заданий
+    includedRoles:
+      - dataproc.agent
+
+  dataproc.onCall:
+    groups: [mdb, staff]
+    name: On-call Data Proc
+    visibility: internal
+    description: Role for Data Proc on-call engineers
+    includedRoles:
+      - onCall
+      - dataproc.viewer
+      - dataproc.user
+      - logging.reader # https://st.yandex-team.ru/MDB-17254
+
+  dataproc.onCallAdmin:
+    groups: [mdb, staff]
+    name: On-call Data Proc Admin
+    visibility: internal
+    description: Role for Data Proc on-call admins
+    includedRoles:
+      - dataproc.onCall
+      - dataproc.editor
+
+  internal.dataproc.manager:
+    groups: [mdb]
+    name: (Внутренняя) Dataproc Manager
+    description: Role for service account of Dataproc Manager
+    visibility: internal
+    includedRoles:
+      - iam.serviceAccounts.tokenCreator
+      - compute.viewer

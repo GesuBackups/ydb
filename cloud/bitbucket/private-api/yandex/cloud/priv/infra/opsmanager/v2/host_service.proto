@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package yandex.cloud.priv.infra.opsmanager.v2;
+
+import "yandex/cloud/api/operation.proto";
+import "yandex/cloud/api/tools/options.proto";
+import "yandex/cloud/priv/operation/operation.proto";
+import "yandex/cloud/priv/validation.proto";
+
+option go_package = "a.yandex-team.ru/cloud/bitbucket/private-api/yandex/cloud/priv/infra/opsmanager/v2;opsmanager";
+option java_outer_classname = "OPSMHS";
+
+enum Reason {
+  option (cloud.api.tools.enumeration).lint_skip.unspecified_value = true;
+  CUSTOM = 0;
+}
+
+message DisableHostRequest {
+  string fqdn = 1 [(required) = true, (length) = "<=256"];
+  Reason reason = 2 [(required) = true];
+  string comment = 3 [(length) = "<=1024"];
+}
+
+message DisableHostMetadata {
+  string fqdn = 1;
+}
+
+service HostService {
+  rpc Disable (DisableHostRequest) returns (operation.Operation) {
+    option (yandex.cloud.api.operation) = {
+      metadata: "DisableHostMetadata"
+      response: "google.protobuf.Empty"
+    };
+  }
+}

@@ -1,0 +1,5 @@
+resources:
+  yq.query:
+    parents: [resource-manager.folder]
+  yq.connection:
+    parents: [resource-manager.folder]

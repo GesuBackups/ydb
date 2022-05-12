@@ -1,0 +1,158 @@
+role_groups:
+  monitoring:
+    name: Monitoring roles
+
+roles:
+
+  monitoring.viewer:
+    groups: [monitoring]
+    name: Пользователь Monitoring с правами на чтение
+    visibility: public
+    description: роль позволят просматривать данные в Monitoring
+    permissions:
+      - monitoring.configs.{get,list}
+      - monitoring.mutes.get
+      - monitoring.data.read
+      - monitoring.sensorLabels.get
+      - monitoring.sensorNames.get
+      - monitoring.sensors.get
+      - monitoring.quota.get
+      - iam.folders.get
+      - resource-manager.folders.get
+
+  monitoring.muter:
+    groups: [monitoring]
+    name: Пользователь Monitoring с правами на чтение только Control-Plane сущностей, а также управление Мьютами
+    visibility: public
+    description: роль разрешает читать данные в Monitoring, а также управлять Мьютами
+    permissions:
+      - monitoring.configs.{get,list}
+      - monitoring.mutes.get
+      - monitoring.mutes.create
+      - monitoring.mutes.delete
+      - monitoring.mutes.update
+
+  monitoring.editor:
+    groups: [monitoring]
+    name: Пользователь Monitoring с правами на чтение и запись
+    visibility: public
+    description: роль разрешает читать и записывать данные в Monitoring
+    includedRoles:
+      - monitoring.viewer
+      - monitoring.muter
+    permissions:
+      - monitoring.configs.create
+      - monitoring.configs.delete
+      - monitoring.configs.update
+      - monitoring.data.write
+
+  monitoring.admin:
+    groups: [monitoring]
+    name: Администратор Monitoring
+    visibility: public
+    description: роль разрешает все действия в Monitoring
+    includedRoles:
+      - monitoring.editor
+    permissions: []
+
+  internal.monitoringagent:
+    groups: [monitoring]
+    name: ''
+    visibility: internal
+    description: Monitoring agent
+    permissions:
+    - monitoring.data.write
+
+  internal.monitoringfetcher:
+    groups: [monitoring]
+    name: (Внутренняя) Solomon запрашивает состав Instance Groups
+    visibility: internal
+    description: ''
+    includedRoles:
+      - compute.instanceGroups.viewer
+    permissions: []
+
+  internal.solomonindexer:
+    groups: [monitoring]
+    name: ''
+    visibility: internal
+    description: (Внутренняя) Соломон ходит за списком ресурсов в другие сервисы
+    permissions:
+    - compute.resources.list
+    - computeInternal.resources.list
+
+  internal.monitoringServiceProviderAlertEditor:
+    groups: [monitoring]
+    name: Monitoring service provider alert editor
+    visibility: internal
+    description: Role for Monitoring service provider alert editor
+    permissions:
+      - monitoring.alerts.update
+
+  internal.monitoringServiceProviderAdmin:
+    groups: [monitoring]
+    name: Monitoring service provider admin
+    visibility: internal
+    includedRoles:
+      - internal.monitoringServiceProviderAlertEditor
+    description: Role for Monitoring service provider admin
+    permissions:
+      - monitoring.alertTemplates.update
+
+  monitoring.support:
+    groups: [monitoring, support]
+    name: Support Monitoring
+    description: Role for support engineers
+    visibility: internal
+    permissions:
+      - monitoring.configs.{get,list}
+      - monitoring.data.read
+      - monitoring.sensorLabels.get
+      - monitoring.sensorNames.get
+      - monitoring.sensors.get
+      - monitoring.quota.get
+      - monitoring.quota.update
+
+  monitoring.supportAdmin:
+    groups: [monitoring, support]
+    name: Support Monitoring Admin
+    description: Privileged operations for support engineers
+    visibility: internal
+    includedRoles:
+      - monitoring.support
+    permissions:
+      - monitoring.configs.updateInternals
+
+  monitoring.onCall:
+    groups: [monitoring, staff]
+    name: On-call Monitoring
+    description: Role for Monitoring on-call engineers
+    visibility: internal
+    includedRoles:
+      - onCall
+    permissions:
+      - monitoring.configs.{get,list}
+      - monitoring.data.read
+      - monitoring.sensorLabels.get
+      - monitoring.sensorNames.get
+      - monitoring.sensors.get
+      - monitoring.quota.get
+      - monitoring.quota.update
+      - monitoring.configs.updateInternals
+      - monitoring.mutes.get
+
+  monitoring.onCallAdmin:
+    groups: [monitoring, staff]
+    name: On-call Monitoring Admin
+    description: Privileged Operations in Monitoring for on-call engineers
+    visibility: internal
+    includedRoles:
+      - monitoring.onCall
+    permissions:
+      - monitoring.configs.create
+      - monitoring.configs.delete
+      - monitoring.configs.update
+      - monitoring.data.write
+      - monitoring.mutes.create
+      - monitoring.mutes.delete
+      - monitoring.mutes.update

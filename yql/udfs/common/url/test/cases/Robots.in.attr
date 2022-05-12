@@ -1,0 +1,13 @@
+{
+    "schema" = <"strict" = %true; "unique_keys" = %false>
+    [
+        {
+            "name" = "Host";
+            "type" = "string"
+        };
+        {
+            "name" = "Robots";
+            "type" = "string"
+        };
+    ]
+}

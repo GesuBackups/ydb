@@ -1,0 +1,23 @@
+package NOrangeData;
+
+// %%
+// %% {{a name="TMetricRequest"}} **~Metric request** %%
+message TMetricRequest {
+        optional string Name = 1; // the name of the metric
+}
+// %% {{a name="TMetricValue"}} **~Metric value** %%
+message TMetricValue {
+        optional string Name = 1;     // metric name
+        optional fixed64 Value = 2;   // current metric value
+        optional double AvgRate = 3;  // average rate over past 60 secs
+        optional double MinRate = 4;  // min rate over past 60 secs
+        optional double MaxRate = 5;  // max rate over past 60 secs
+        optional uint64 Time = 6;    // time the metric rate was computed
+}
+// %%   
+// %% {{a name="TMetricResponse"}} **~Metric response** %%
+message TMetricResponse {
+        repeated TMetricValue Metric = 1;
+}
+// %%
+

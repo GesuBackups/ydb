@@ -1,0 +1,4 @@
+resources:
+  smart-captcha.captcha:
+    parents: [root]
+    accessBindingsListingPermission: smart-captcha.captchas.listAccessBindings

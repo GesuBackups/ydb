@@ -1,0 +1,125 @@
+permissions:
+  mdb.all.create:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  mdb.all.delete:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  mdb.all.forceDelete:
+    description: 'Delete mdb cluster ignoring deletion protection'
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  mdb.all.modify:
+    description: Container for all mdb write actions
+    stage: GA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  mdb.all.read:
+    description: Container for all mdb read actions
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+  mdb.all.support:
+    description: Container for all mdb support roles actions
+    stage: GA
+    visibility: public
+  mdb.clusters.getSecret:
+    description: Container for datacloud secret read actions (e.g. retrive user password)
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+  mdb.clusters.getLogs:
+    description: Access to logs of clusters
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+  mdb.clusterInfo.read:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+  mdb.quotas.read:
+    description: ''
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+  mdb.internal.deploy:
+    description: ''
+    stage: GA
+    visibility: internal
+  mdb.internal.mlock:
+    description: ''
+    stage: GA
+    visibility: internal
+  mdb.internal.secrets:
+    description: 'can use mdb secrets'
+    stage: GA
+    visibility: internal
+  mdb.internal.cms:
+    description: 'can use mdb CMS'
+    stage: GA
+    visibility: internal

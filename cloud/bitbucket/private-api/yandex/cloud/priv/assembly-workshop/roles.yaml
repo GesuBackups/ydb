@@ -1,0 +1,64 @@
+role_groups:
+  assembly-workshop:
+    name: Assembly Workshop roles
+
+roles:
+  internal.assembly-workshop.viewer:
+    groups: [assembly-workshop]
+    name: (Внутренняя) Пользователь Сборочного Цеха
+    visibility: internal
+    description: Роль для пользователя СЦ - дает доступ к просмотру ресурсов bench
+    includedRoles:
+      - viewer # to open folder in console
+      - container-registry.viewer
+      - storage.viewer
+      - compute.viewer
+      - lockbox.viewer
+
+  internal.assembly-workshop.editor:
+    groups: [assembly-workshop]
+    name: (Внутренняя) Пользователь Сборочного Цеха
+    visibility: internal
+    description: Роль для пользователя СЦ - дает доступ к ресурсам bench
+    includedRoles:
+      - internal.assembly-workshop.viewer
+      - compute.images.user
+      - iam.viewer
+      - kms.keys.encrypterDecrypter # encrypt bundles for skm
+      - lockbox.admin
+    permissions:
+      - compute.instances.delete
+      - compute.disks.delete
+      - compute.images.delete
+
+  internal.assembly-workshop.admin:
+    groups: [assembly-workshop]
+    name: (Внутренняя) Пользователь Сборочного Цеха
+    visibility: internal
+    description: Роль для пользователя СЦ - дает доступ к ресурсам bench
+    includedRoles:
+      - internal.assembly-workshop.editor
+
+  internal.assembly-workshop.agent:
+    groups: [assembly-workshop]
+    name: (Внутренняя) builder-sa Сборочного Цеха
+    visibility: internal
+    description: Роль для sa из bench СЦ - имеет расширенный доступ к ресурсам bench
+    includedRoles:
+      - internal.assembly-workshop.editor
+      - compute.editor.withoutVpc.pseudo
+      - container-registry.editor
+      - iam.editor # for creating iam keys (movers go to s3)
+      - storage.uploader
+
+  internal.hopper.runner:
+    groups: [ assembly-workshop ]
+    name: (Внутренняя) hopper
+    visibility: internal
+    description: Роль для hopper - имеет ограниченные привилегии в СЦ
+    includedRoles:
+      - compute.images.user
+      - compute.viewer
+      - storage.uploader
+    permissions:
+      - compute.images.delete

@@ -1,0 +1,7 @@
+resources:
+  resource-manager.cloud:
+    parents: [root, organization-manager.organization]
+    accessBindingsListingPermission: resource-manager.clouds.listAccessBindings
+  resource-manager.folder:
+    parents: [resource-manager.cloud]
+    accessBindingsListingPermission: resource-manager.folders.listAccessBindings

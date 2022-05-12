@@ -1,0 +1,48 @@
+role_groups:
+  ipmiproxy:
+    name: IPMIProxy roles
+
+roles:
+  ipmiproxy.viewer:
+    name: 'IPMIProxy Viewer'
+    groups: [ipmiproxy]
+    visibility: internal
+    description: 'read-only actions'
+    permissions:
+     - ipmiproxy.ipmi.get
+
+  ipmiproxy.editor:
+    name: 'IPMIProxy Executer'
+    groups: [ipmiproxy]
+    visibility: internal
+    description: 'read-only and management'
+    includedRoles:
+     - ipmiproxy.viewer
+    permissions:
+     - ipmiproxy.ipmi.use
+
+  ipmiproxy.admin:
+    name: 'IPMIProxy Admin'
+    groups: [ipmiproxy]
+    visibility: internal
+    description: 'read-only, management and console'
+    includedRoles:
+     - ipmiproxy.editor
+    permissions:
+     - ipmiproxy.kvms.use
+
+  ipmiproxy.onCall:
+    name: 'Read-only support'
+    groups: [ipmiproxy]
+    visibility: internal
+    description: ''
+    includedRoles:
+     - ipmiproxy.viewer
+
+  ipmiproxy.onCallAdmin:
+    name: 'Admin support'
+    groups: [ipmiproxy]
+    visibility: internal
+    description: ''
+    includedRoles:
+     - ipmiproxy.admin

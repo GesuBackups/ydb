@@ -1,0 +1,19 @@
+role_groups:
+  microcosm:
+    name: Microcosm roles
+
+roles:
+
+  ##############################################################################
+  # Internal Roles
+  ##############################################################################
+
+  internal.microcosm.agent:
+    groups: [microcosm]
+    name: (Внутренняя) Агент Microcosm
+    visibility: internal
+    description: 'Роль для служебных аккаунтов сервиса Microcosm'
+    permissions:
+      - iam.folders.get
+      - iam.serviceAccounts.issueToken
+      - resource-manager.folders.get

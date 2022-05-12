@@ -1,0 +1,460 @@
+permissions:
+  ##############################################################################
+  # Common
+  ##############################################################################
+  cic.quotas.get:
+    description: Get cloud limit
+    stage: GA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  cic.quotas.updateLimit:
+    description: Set cloud limit
+    stage: GA
+    visibility: internal
+    allowedWhen:
+      restrictions:
+        - billSuspend
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  ##############################################################################
+  # TrunkConnection
+  ##############################################################################
+  cic.trunkConnections.get:
+    description: Get trunk connection
+    stage: CIC_ALPHA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  cic.trunkConnections.create:
+    description: Create trunk connection
+    stage: CIC_ALPHA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  cic.trunkConnections.update:
+    description: Update trunk connection
+    stage: CIC_ALPHA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  cic.trunkConnections.delete:
+    description: Delete trunk connection
+    stage: CIC_ALPHA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - ACTIVE
+          - BLOCKED_BY_BILLING
+          - DELETING
+  cic.trunkConnections.viewSecrets:
+    description: View secrets of a trunk connection
+    stage: CIC_ALPHA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  cic.trunkConnections.configureSecrets:
+    description: Modify secrets of a trunk connection
+    stage: CIC_ALPHA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  cic.trunkConnections.internalConfigure:
+    description: Configure internal parameters
+    stage: CIC_ALPHA
+    visibility: internal
+  ##############################################################################
+  # PrivateConnection
+  ##############################################################################
+  cic.privateConnections.get:
+    description: Get private connection
+    stage: CIC_ALPHA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  cic.privateConnections.create:
+    description: Create private connection
+    stage: CIC_ALPHA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  cic.privateConnections.update:
+    description: Update private connection
+    stage: CIC_ALPHA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  cic.privateConnections.allocateRouteTarget:
+    description: Allocate route target for private connection
+    stage: CIC_ALPHA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  cic.privateConnections.deallocateRouteTarget:
+    description: Deallocate route target for private connection
+    stage: CIC_ALPHA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  cic.privateConnections.delete:
+    description: Delete private connection
+    stage: CIC_ALPHA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - ACTIVE
+          - BLOCKED_BY_BILLING
+          - DELETING
+  cic.privateConnections.viewSecrets:
+    description: View secrets of a private connection
+    stage: CIC_ALPHA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  cic.privateConnections.configureSecrets:
+    description: Modify secrets of a private connection
+    stage: CIC_ALPHA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  cic.privateConnections.internalConfigure:
+    description: Configure internal parameters
+    stage: CIC_ALPHA
+    visibility: internal
+  ##############################################################################
+  # PublicConnection
+  ##############################################################################
+  cic.publicConnections.get:
+    description: Get public connection
+    stage: CIC_ALPHA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  cic.publicConnections.create:
+    description: Create public connection
+    stage: CIC_ALPHA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  cic.publicConnections.update:
+    description: Update public connection
+    stage: CIC_ALPHA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  cic.publicConnections.delete:
+    description: Delete public connection
+    stage: CIC_ALPHA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - ACTIVE
+          - BLOCKED_BY_BILLING
+          - DELETING
+  cic.publicConnections.viewSecrets:
+    description: View secrets of a public connection
+    stage: CIC_ALPHA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  cic.publicConnections.configureSecrets:
+    description: Modify secrets of a public connection
+    stage: CIC_ALPHA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  cic.publicConnections.internalConfigure:
+    description: Configure internal parameters
+    stage: CIC_ALPHA
+    visibility: internal
+  ##############################################################################
+  # PartnerJoins
+  ##############################################################################
+  cic.partnerJoints.get:
+    description: Get partner joint
+    stage: CIC_ALPHA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  cic.partnerJoints.create:
+    description: Create partner joint
+    stage: CIC_ALPHA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  cic.partnerJoints.update:
+    description: Update partner joint
+    stage: CIC_ALPHA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  cic.partnerJoints.delete:
+    description: Delete partner joint
+    stage: CIC_ALPHA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - ACTIVE
+          - BLOCKED_BY_BILLING
+          - DELETING
+  cic.partnerJoints.internalConfigure:
+    description: Configure internal parameters
+    stage: CIC_ALPHA
+    visibility: internal
+  ##############################################################################
+  # ClientTrunk
+  ##############################################################################
+  cic.clientTrunks.get:
+    description: Get pseudo trunk
+    stage: CIC_ALPHA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+        - BLOCKED
+        - BLOCKED_BY_BILLING
+        - ACTIVE
+        - DELETING
+  cic.clientTrunks.create:
+    description: Create pseudo trunk
+    stage: CIC_ALPHA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+        - ACTIVE
+  cic.clientTrunks.update:
+    description: Update pseudo trunk
+    stage: CIC_ALPHA
+    visibility: public
+    allowedWhen:
+      cloud:
+        status:
+          - ACTIVE
+  cic.clientTrunks.delete:
+    description: Delete pseudo trunk
+    stage: CIC_ALPHA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - ACTIVE
+          - BLOCKED_BY_BILLING
+          - DELETING
+  cic.clientTrunks.internalConfigure:
+    description: Configure internal parameters
+    stage: CIC_ALPHA
+    visibility: internal
+  ##############################################################################
+  # PointOfPresence
+  ##############################################################################
+  cic.pointsOfPresence.get:
+    description: Get point of presence
+    stage: CIC_ALPHA
+    visibility: public
+    allowedWhen:
+      restrictions:
+        - billSuspend
+        - fraud
+        - deletingContainer
+      cloud:
+        status:
+          - BLOCKED
+          - BLOCKED_BY_BILLING
+          - ACTIVE
+          - DELETING
+  cic.pointsOfPresence.create:
+    description: Create point of presence
+    stage: GA
+    visibility: internal
+  cic.pointsOfPresence.update:
+    description: Update point of presence
+    stage: GA
+    visibility: internal
+  cic.pointsOfPresence.delete:
+    description: Delete point of presence
+    stage: GA
+    visibility: internal
+  ##############################################################################
+  # ClusterParams
+  ##############################################################################
+  cic.clusterParams.get:
+    description: Get cluster params
+    stage: GA
+    visibility: internal
+  cic.clusterParams.create:
+    description: Create cluster params
+    stage: GA
+    visibility: internal
+  cic.clusterParams.update:
+    description: Update cluster params
+    stage: GA
+    visibility: internal
+  cic.clusterParams.delete:
+    description: Delete cluster params
+    stage: GA
+    visibility: internal
+  ##############################################################################
+  # RouteTargetPool
+  ##############################################################################
+  cic.routeTargetPools.get:
+    description: Get route target pools
+    stage: GA
+    visibility: internal
+  cic.routeTargetPools.create:
+    description: Create route target pools
+    stage: GA
+    visibility: internal
+  cic.routeTargetPools.update:
+    description: Update route target pools
+    stage: GA
+    visibility: internal
+  cic.routeTargetPools.delete:
+    description: Delete route target pools
+    stage: GA
+    visibility: internal
+  ##############################################################################
+  # AgentConfig
+  ##############################################################################
+  cic.agentConfigs.get:
+    description: Get agent config
+    stage: GA
+    visibility: internal
+  cic.agentConfigs.decryptSecrets:
+    description: Decrypt secrets
+    stage: GA
+    visibility: internal
+  cic.agentConfigs.update:
+    description: Update agent config
+    stage: GA
+    visibility: internal

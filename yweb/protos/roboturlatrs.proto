@@ -1,0 +1,14 @@
+import "yweb/protos/spider.proto";
+
+package NRobotScheeme;
+
+message TInputUrlAttrs {
+    optional string CrawlPolicy = 1;
+    optional string CPMode = 2;
+    optional int32 CPRank = 3;
+}
+
+message TUrlAttrs {
+    optional TInputUrlAttrs InputUrlAttrs = 1;
+    optional NFetcherMsg.TDiagInfo DiagInfo = 2;
+}

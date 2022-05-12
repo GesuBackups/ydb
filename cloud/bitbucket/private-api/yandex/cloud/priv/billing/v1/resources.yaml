@@ -1,0 +1,4 @@
+resources:
+  billing.account:
+    parents: [root]
+    accessBindingsListingPermission: billing.accounts.listAccessBindings
