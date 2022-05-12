@@ -1,3 +1,0 @@
-quotas:
-  - container-registry.registries.count
-  - container-registry.parallelScans.count

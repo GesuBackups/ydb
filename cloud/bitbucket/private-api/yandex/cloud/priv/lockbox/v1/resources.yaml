@@ -1,4 +1,0 @@
-resources:
-  lockbox.secret:
-    parents: [resource-manager.folder]
-    accessBindingsListingPermission: lockbox.secrets.listAccessBindings

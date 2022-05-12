@@ -1,4 +1,0 @@
-resources:
-  audit-trails.trail:
-    parents: [resource-manager.folder]
-    accessBindingsListingPermission: audit-trails.trails.listAccessBindings

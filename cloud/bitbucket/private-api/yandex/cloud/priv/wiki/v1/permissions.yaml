@@ -1,5 +1,0 @@
-permissions:
-  wiki.all.manage:
-    description: container for all admin rights in yandex wiki
-    stage: GA
-    visibility: public

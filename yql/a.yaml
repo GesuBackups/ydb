@@ -1,6 +1,0 @@
-service: yql
-title: YQL
-ci:
-  autocheck:
-    fast-targets:
-      yql

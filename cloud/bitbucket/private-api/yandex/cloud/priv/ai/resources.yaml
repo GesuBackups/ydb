@@ -1,5 +1,0 @@
-resources:
-  cloudai.project:
-    parents: [resource-manager.folder]
-  cloudai.resource:
-    parents: [resource-manager.folder]

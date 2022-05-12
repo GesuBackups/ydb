@@ -1,3 +1,0 @@
-quotas:
-  - storage.buckets.count
-  - storage.volume.size

@@ -1,6 +1,0 @@
-permissions:
-  bastion.ssh.login:
-    description: ''
-    stage: GA
-    visibility: internal
-    resourceType: resource-manager.folder

@@ -1,5 +1,0 @@
-resources:
-  ylb.networkLoadBalancer:
-    parents: [resource-manager.folder]
-  ylb.targetGroup:
-    parents: [resource-manager.folder]

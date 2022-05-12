@@ -1,6 +1,0 @@
-permissions:
-  iap.webService.access:
-    description: ''
-    stage: GA
-    visibility: internal
-    resourceType: resource-manager.folder

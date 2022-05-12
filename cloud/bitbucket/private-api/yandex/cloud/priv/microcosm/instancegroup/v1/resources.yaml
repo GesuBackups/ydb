@@ -1,4 +1,0 @@
-resources:
-  compute.instanceGroup:
-    parents: [resource-manager.folder]
-    accessBindingsListingPermission: compute.instanceGroups.listAccessBindings

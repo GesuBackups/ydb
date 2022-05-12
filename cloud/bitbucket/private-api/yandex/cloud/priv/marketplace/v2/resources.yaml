@@ -1,7 +1,0 @@
-resources:
-  marketplace.publisher:
-    parents: [root]
-    accessBindingsListingPermission: marketplacePartners.publishers.listAccessBindings
-  marketplace.product:
-    parents: [marketplace.publisher]
-    accessBindingsListingPermission: marketplacePartners.products.listAccessBindings

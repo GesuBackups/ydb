@@ -1,3 +1,0 @@
-quotas:
-  - certificate-manager.certificates.count
-  - certificate-manager.domains.count

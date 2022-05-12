@@ -1,6 +1,0 @@
-package NRealTime;
-
-message TOption {
-    required string Name    = 1;
-    required string Value   = 2;
-}

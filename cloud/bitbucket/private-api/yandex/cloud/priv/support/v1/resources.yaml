@@ -1,3 +1,0 @@
-resources:
-  support.ticket:
-    parents: [root]

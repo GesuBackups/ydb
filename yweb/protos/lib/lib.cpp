@@ -1,5 +1,0 @@
-#include "fetcherproto.h"
-#include "indexedproto.h"
-#include "indexmanagerproto.h"
-#include "logmessageproto.h"
-#include "metric.h"

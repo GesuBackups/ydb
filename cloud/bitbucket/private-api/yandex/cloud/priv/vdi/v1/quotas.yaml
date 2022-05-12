@@ -1,4 +1,0 @@
-quotas:
-  - vdi.desktops.count
-  - vdi.desktopCores.count
-  - vdi.desktopMemory.size

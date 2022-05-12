@@ -1,4 +1,0 @@
-quotas:
-- logging.groups.count # only custom user-created groups
-- logging.read.rate    # public api, amount of messages allowed to read per second
-- logging.write.rate   # public api, amount of messages allowed to write per second

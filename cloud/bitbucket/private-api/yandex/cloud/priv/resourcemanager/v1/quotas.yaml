@@ -1,3 +1,0 @@
-quotas:
-  - resource-manager.clouds.count
-  - resource-manager.folders.count

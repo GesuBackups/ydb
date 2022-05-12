@@ -1,9 +1,0 @@
-resources:
-  certificate-manager.certificate:
-    parents: [resource-manager.folder]
-    accessBindingsListingPermission: certificate-manager.certificates.listAccessBindings
-  certificate-manager.domain:
-    parents: [resource-manager.folder]
-    accessBindingsListingPermission: certificate-manager.domains.listAccessBindings
-  certificate-manager.provider:
-    parents: [resource-manager.folder]

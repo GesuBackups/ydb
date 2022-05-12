@@ -1,3 +1,0 @@
-quotas:
-  - compute.instanceGroups.count
-  - compute.instanceGroupsMaxSize.count

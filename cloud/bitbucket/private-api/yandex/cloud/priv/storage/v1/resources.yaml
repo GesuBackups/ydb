@@ -1,8 +1,0 @@
-resources:
-  # TODO migrate s3.bucket usages to storage.bucket
-  s3.bucket:
-    parents: [resource-manager.folder]
-    accessBindingsListingPermission: s3.buckets.listAccessBindings
-  storage.bucket:
-    parents: [resource-manager.folder]
-    accessBindingsListingPermission: s3.buckets.listAccessBindings

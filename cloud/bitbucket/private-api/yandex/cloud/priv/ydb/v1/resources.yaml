@@ -1,7 +1,0 @@
-resources:
-  ydb.database:
-    parents: [resource-manager.folder]
-    accessBindingsListingPermission: ydb.databases.listAccessBindings
-  ydb.backup:
-    parents: [resource-manager.folder]
-    accessBindingsListingPermission: ydb.backups.listAccessBindings

@@ -1,5 +1,0 @@
-permissions:
-  tracker.all.manage:
-    description: container for all admin rights in yandex tracker
-    stage: GA
-    visibility: public

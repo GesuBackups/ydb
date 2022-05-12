@@ -1,7 +1,0 @@
-package NRobot;
-
-option optimize_for = SPEED;
-
-message TOwnerBanMasks {
-      repeated string Masks = 1;
-}

@@ -1,6 +1,0 @@
-permissions:
-  infra.bootstrapApi.use:
-    description: ''
-    stage: GA
-    visibility: internal
-    resourceType: iam.gizmo

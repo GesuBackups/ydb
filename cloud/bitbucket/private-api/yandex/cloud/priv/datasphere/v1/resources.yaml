@@ -1,5 +1,0 @@
-resources:
-  datasphere.project:
-    parents: [resource-manager.folder]
-  datasphere.node:
-    parents: [datasphere.project]
